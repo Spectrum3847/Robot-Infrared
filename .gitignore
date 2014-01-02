@@ -1,0 +1,11 @@
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+/Infrared/nbproject/project.bak.xml
+/Infrared/nbproject/project.xml
+/Infrared/nbproject/private/
+/Infrared/build/
