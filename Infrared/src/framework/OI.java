@@ -1,7 +1,5 @@
 package framework;
 
-import commands.shoot.FrontShooterDec;
-import commands.shoot.FrontShooterInc;
 import driver.Gamepad;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -28,32 +26,15 @@ public class OI {
     public static final Gamepad gamepad = new Gamepad(HW.usbPort_one);
     public static final Gamepad gamepad_aux = new Gamepad(HW.usbPort_two);
     
-    public static final Button flick = new JoystickButton(gamepad_aux.getGamepad(), Gamepad.RIGHT_BUMPER);
-    
-    public static final Button dashboard_shoot = new JoystickButton(gamepad_aux.getGamepad(), Gamepad.LEFT_BUMPER);
-    public static final Button dashboard_collect = new JoystickButton(gamepad_aux.getGamepad(), Gamepad.A_BUTTON);
-
-    public static final Button all_shoot = new JoystickButton(gamepad_aux.getGamepad(), Gamepad.Y_BUTTON);
-
-    public static final Button front_inc = new JoystickButton(gamepad_aux.getGamepad(), Gamepad.B_BUTTON);
-    public static final Button front_dec = new JoystickButton(gamepad_aux.getGamepad(), Gamepad.X_BUTTON);
-    
-    public static final Button hooks = new JoystickButton(gamepad.getGamepad(), Gamepad.A_BUTTON);
-
-    public static final Button brakes = new JoystickButton(gamepad.getGamepad(), Gamepad.LEFT_CLICK);
+    public static final Button holo_drive_toggle = new JoystickButton(gamepad.getGamepad(), gamepad.A_BUTTON);
+    public static final Button buttery_drive_toggle = new JoystickButton(gamepad.getGamepad(), gamepad.B_BUTTON);
+    public static final Button gyro_reset = new JoystickButton(gamepad.getGamepad(), gamepad.Y_BUTTON);
 
     
     //Use this constructor to setup up button schedulers for commands
     public OI() {
-        flick.whenPressed(Init.flick);
-        
-        dashboard_shoot.toggleWhenPressed(Init.dashboardShoot);
-        dashboard_collect.whileHeld(Init.dashboardCollect);
-        all_shoot.toggleWhenPressed(Init.fireall);
-        
-        front_inc.whenPressed(Init.inc);
-        front_dec.whenPressed(Init.dec);
-        
-        hooks.toggleWhenPressed(Init.deployHooks);
+        buttery_drive_toggle.toggleWhenPressed(Init.butteryflydrive);
+        holo_drive_toggle.toggleWhenPressed(Init.holodrive);
+        gyro_reset.whenPressed(Init.gryoreset);
     }
 }

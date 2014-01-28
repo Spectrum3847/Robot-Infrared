@@ -2,8 +2,10 @@ package commands.driving;
 
 import commands.CommandBase;
 import driver.Gamepad;
+import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import framework.Dashboard;
+import framework.Init;
 import framework.OI;
 import framework.Utilities;
 
@@ -19,10 +21,10 @@ public class CheesyDrive extends CommandBase {
     
     // Called just before this Command runs the first time
     protected void initialize() {
-     drivebase.disableTurnController();
-     drivebase.getLeftEncoder().start();
-     drivebase.getRightEncoder().start();
-     drivebase.getLeftEncoder().setReverseDirection(false);
+        Init.driveselect.setDefaultDriveMode(this);
+        pneumatics.engageCheesy();
+        drivebase.disableTurnController();
+        System.out.println("Cheesydrive, GO!");
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -33,10 +35,10 @@ public class CheesyDrive extends CommandBase {
         
         drivebase.setCheesySensetivity(SmartDashboard.getNumber(Dashboard.CHEESY_SENSITIVITY_KEY));
         
-        double quickTurnTriggers = OI.gamepad.getTriggers();
+        double quickTurnTriggers = -OI.gamepad.getTriggers();
+        
         if (quickTurnTriggers != 0){
-            drivebase.setCheesyDrive(0, -1 * quickTurnTriggers, true);
-            quickturn = true;
+            drivebase.setCheesyDrive(0, quickTurnTriggers, true);
         } else{
             drivebase.setCheesyDrive(throttle, wheel,quickturn);
         }
@@ -50,8 +52,6 @@ public class CheesyDrive extends CommandBase {
     // Called once after isFinished returns true
     protected void end() {
         drivebase.setArcade(0, 0);
-        drivebase.getLeftEncoder().stop();
-        drivebase.getRightEncoder().stop();
     }
 
     // Called when another command which requires one or more of the same

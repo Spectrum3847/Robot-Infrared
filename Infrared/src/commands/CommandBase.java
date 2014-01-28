@@ -13,11 +13,7 @@ public abstract class CommandBase extends Command {
 
     public static OI oi;
     public static DriveBase drivebase = new DriveBase();
-    public static Shooter shooter = new Shooter();
-    public static Lift lift = new Lift();
-    public static Flicker flicker = new Flicker();
     public static Pneumatics pneumatics = new Pneumatics();
-    public static Lights lights = new Lights();
     
     // Create a single static instance of all of your subsystems
 

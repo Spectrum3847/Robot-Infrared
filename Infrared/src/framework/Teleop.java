@@ -10,14 +10,9 @@ public class Teleop {
     public static void init()
     {
         Autonomous.cancel();
-        Init.cheesydrive.start();
-        Init.liftcontrol.start();
-        Init.test.start();
-        Init.dashboardShootCollect.start();
-        Init.runCompressor.start();
+        Init.runcompressor.start();
+        Init.driveselect.start();
     }
-
-    static int number = 0;
 
     public static void periodic()
     {

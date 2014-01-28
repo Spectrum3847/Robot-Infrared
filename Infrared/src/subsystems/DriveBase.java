@@ -2,10 +2,10 @@ package subsystems;
 
 import driver.SpectrumDrive;
 import edu.wpi.first.wpilibj.AnalogChannel;
-import edu.wpi.first.wpilibj.CounterBase;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
@@ -41,15 +41,11 @@ public class DriveBase extends PIDSubsystem {
 
     
      public DriveBase(){
-         super(HW.SKEW_KP,HW.SKEW_KI,HW.SKEW_KD);
+         super(HW.STRAIGHT_KP,HW.STRAIGHT_KI,HW.STRAIGHT_KD);
          setVictors();
          spectrumDrive = new SpectrumDrive(vic_1, vic_2, vic_3, vic_4);
          spectrumDrive.setMaxOutput(1.0);
-         left_encoder = new Encoder(HW.LDRIVE_ENCODER_A,HW.LDRIVE_ENCODER_B,true,CounterBase.EncodingType.k1X);
-         left_encoder.setDistancePerPulse(HW.DRIVEBASE_PULSE);
-         right_encoder = new Encoder(HW.RDRIVE_ENCODER_A,HW.RDRIVE_ENCODER_B,true,CounterBase.EncodingType.k1X);
-         right_encoder.setDistancePerPulse(HW.DRIVEBASE_PULSE);
-         x_gyro_raw = new AnalogChannel(HW.GYRO_CHANNEL);
+         x_gyro_raw = new AnalogChannel(HW.GYRO);
          x_gyro_raw.setAverageBits(2); //Get 4 samples of gyro data and average them for the raw output
          x_gyro = new Gyro(x_gyro_raw);
          this.getPIDController().setOutputRange(-1, 1);
@@ -64,12 +60,13 @@ public class DriveBase extends PIDSubsystem {
       * re-enabled after breaking or turning.
       */
     public void initDefaultCommand(){
-        setDefaultCommand(Init.cheesydrive);   // set default command
+        setDefaultCommand(Init.driveselect);   // set default command
     }
     
     /**
      * This defines the input to the PID controller, in this case the gyro
      * angle for the turn controller PID loop
+     * @return 
      */
     public double returnPIDInput(){
         return getAngle();
@@ -77,6 +74,7 @@ public class DriveBase extends PIDSubsystem {
     
     /**
      * Code that takes the output from the PID controller when it's running
+     * @param output
      */
     public void usePIDOutput(double output){
         turnControllerOut = output;
@@ -217,6 +215,16 @@ public class DriveBase extends PIDSubsystem {
         spectrumDrive.arcadeDrive(straight_speed, turn_speed, true);
     }
     
+    public void setHoloPolar(double mag, double dir, double rot){
+        spectrumDrive.mecanumDrive_Polar(mag, dir+x_gyro.getAngle(), rot);
+        System.out.println(x_gyro.getAngle());
+        //spectrumDrive.holonomicDrive(mag, dir, rot, x_gyro);
+    }
+    
+    public void setHoloCartesian(double x, double y, double rot){
+        spectrumDrive.mecanumDrive_Cartesian(x, y, rot, x_gyro.getAngle());
+        System.out.println(x_gyro.getAngle());
+    }
     public void setCheesyDrive(double throttle, double wheel, boolean quickTurn){
         spectrumDrive.Cheesydrive(throttle,-1* wheel, quickTurn);
     }
@@ -257,5 +265,24 @@ public class DriveBase extends PIDSubsystem {
     
     public Victor[] getVicArr(){
         return vic_arr;
+    }
+    
+    public void setStandardInversion(boolean b) {
+        spectrumDrive.setInvertedMotor(RobotDrive.MotorType.kFrontRight, false || !b);
+        spectrumDrive.setInvertedMotor(RobotDrive.MotorType.kRearRight, false || !b);
+        spectrumDrive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, false || !b);
+        spectrumDrive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, false || !b);
+        
+    }
+    
+    public void setHoloInversion(boolean b) {
+        spectrumDrive.setInvertedMotor(RobotDrive.MotorType.kFrontRight, false || !b);
+        spectrumDrive.setInvertedMotor(RobotDrive.MotorType.kRearRight, false || !b);
+        spectrumDrive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true && b);
+        spectrumDrive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true && b);
+    }
+    
+    public SpectrumDrive getDrive() {
+        return spectrumDrive;
     }
 }

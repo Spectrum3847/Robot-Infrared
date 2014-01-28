@@ -46,12 +46,4 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Teleop.periodic();
     }
-    
-    public void testInit() {
-        Test.init();
-    }
-    
-    public void testPeriodic() {
-        Test.periodic();
-    }
 }

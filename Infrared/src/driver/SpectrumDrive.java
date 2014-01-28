@@ -1,5 +1,6 @@
 package driver;
 
+import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Victor;
 import framework.Utilities;
@@ -134,5 +135,62 @@ public class SpectrumDrive extends RobotDrive{
         leftMotorSpeed = Utilities.deadBand(leftMotorSpeed, DEADBAND_VALUE);
         rightMotorSpeed = Utilities.deadBand (rightMotorSpeed, DEADBAND_VALUE);
         setLeftRightMotorOutputs(leftMotorSpeed, rightMotorSpeed);
+    }
+    
+        /**
+     * Holonomic Drive method for omni wheel robots
+     *
+     * This is a modified version of the WPILIB Mecannum code. The formula works but
+     * there is no need to invert the rotations because you rotate but increasing the speed of every wheel
+     *
+     * @param magnitude The speed that the robot should drive in a given direction.  [-1.0..1.0]
+     * @param direction The direction the robot should drive. The direction and maginitute are
+     * independent of the rotation rate.
+     * @param rotation The rate of rotation for the robot that is completely independent of
+     * the magnitude or direction.  [-1.0..1.0]
+     */
+    public void holonomicDrive(double magnitude, double direction, double rotation) {
+        // Normalized for full power along the Cartesian axes.
+        magnitude = limit(magnitude) * Math.sqrt(2.0);
+        // The rollers are at 45 degree angles.
+        double dirInRad = (direction + 45.0) * 3.14159 / 180.0;
+        double cosD = Math.cos(dirInRad);
+        double sinD = Math.cos(dirInRad);
+
+        double wheelSpeeds[] = new double[kMaxNumberOfMotors];
+        wheelSpeeds[MotorType.kFrontLeft.value] = (sinD * magnitude + rotation);
+        wheelSpeeds[MotorType.kRearRight.value] = (sinD * magnitude - rotation);
+        wheelSpeeds[MotorType.kFrontRight.value] = (cosD * magnitude + rotation);
+        wheelSpeeds[MotorType.kRearLeft.value] = (cosD * magnitude - rotation);
+
+
+
+
+        normalize(wheelSpeeds);
+
+        byte syncGroup = (byte) 0x80;
+
+        m_frontLeftMotor.set(wheelSpeeds[MotorType.kFrontLeft.value] * m_invertedMotors[MotorType.kFrontLeft.value] * m_maxOutput, syncGroup);
+        m_frontRightMotor.set(wheelSpeeds[MotorType.kFrontRight.value] * m_invertedMotors[MotorType.kFrontRight.value] * m_maxOutput, syncGroup);
+        m_rearLeftMotor.set(wheelSpeeds[MotorType.kRearLeft.value] * m_invertedMotors[MotorType.kRearLeft.value] * m_maxOutput, syncGroup);
+        m_rearRightMotor.set(wheelSpeeds[MotorType.kRearRight.value] * m_invertedMotors[MotorType.kRearRight.value] * m_maxOutput, syncGroup);
+
+        if (m_safetyHelper != null) {
+            m_safetyHelper.feed();
+        }
+    }
+
+    /**
+     * This class should be used for field centeric control of the robot.
+     * It adds the gyro angle to the direction of the robot.
+     * Ensure that the gyro angle is at zero when the robot is driving away from
+     * the driver.
+     * @param magnitude
+     * @param direction
+     * @param rotation
+     * @param gyro
+     */
+    public void holonomicDrive(double magnitude, double direction, double rotation, Gyro gyro) {
+        holonomicDrive(magnitude, direction + gyro.getAngle(), rotation);
     }
 }
