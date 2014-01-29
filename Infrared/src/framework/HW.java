@@ -10,14 +10,17 @@ public class HW {
     /**DRIVEBASE MOTOR ASSIGNMENTS (PWM)**/
     public static final int FRONT_RDRIVE_MOTOR = 2;
     public static final int REAR_RDRIVE_MOTOR = 1;
-    public static final int FRONT_LDRIVE_MOTOR = 10;
-    public static final int REAR_LDRIVE_MOTOR = 9;
+    public static final int FRONT_LDRIVE_MOTOR = 9;
+    public static final int REAR_LDRIVE_MOTOR = 10;
     
     /**NON-DRIVEBASE MOTOR ASSIGNMENTS (PWM)**/
     public static final int SHOOTER_MOTOR_1 = 3;
     public static final int SHOOTER_MOTOR_2 = 4;
     public static final int SHOOTER_MOTOR_3 = 5;
     public static final int SHOOTER_MOTOR_4 = 6;
+    
+    public static final int COLLECTOR_RIGHT = 7;
+    public static final int COLLECTOR_LEFT = 8;
     
     /**DIGITAL SENSOR ALLOCATIONS**/   
     /**Pneumatics**/
@@ -32,6 +35,8 @@ public class HW {
    
     /**SOLENOID ALLOCATIONS**/
     public static final int OCTOCANUM = 1;
+    public static final int SIPPINGBIRD_DOWN = 3;
+    public static final int SIPPINGBIRD_UP = 4;
     
     
     /**PID CONSTANTS**/

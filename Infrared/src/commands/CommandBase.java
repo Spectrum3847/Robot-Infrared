@@ -14,6 +14,7 @@ public abstract class CommandBase extends Command {
     public static OI oi;
     public static DriveBase drivebase = new DriveBase();
     public static Pneumatics pneumatics = new Pneumatics();
+    public static SippingBird sippingbird = new SippingBird();
     
     // Create a single static instance of all of your subsystems
 

@@ -216,13 +216,14 @@ public class DriveBase extends PIDSubsystem {
     }
     
     public void setHoloPolar(double mag, double dir, double rot){
-        spectrumDrive.mecanumDrive_Polar(mag, dir+x_gyro.getAngle(), rot);
+        //spectrumDrive.mecanumDrive_Polar(mag, dir+x_gyro.getAngle(), rot);
+        spectrumDrive.mecanumDrive_Polar(mag, dir, rot);
         System.out.println(x_gyro.getAngle());
         //spectrumDrive.holonomicDrive(mag, dir, rot, x_gyro);
     }
     
     public void setHoloCartesian(double x, double y, double rot){
-        spectrumDrive.mecanumDrive_Cartesian(x, y, rot, x_gyro.getAngle());
+        spectrumDrive.mecanumDrive_Cartesian(x, y, rot, 0);//x_gyro.getAngle());
         System.out.println(x_gyro.getAngle());
     }
     public void setCheesyDrive(double throttle, double wheel, boolean quickTurn){

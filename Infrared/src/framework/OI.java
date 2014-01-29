@@ -1,5 +1,7 @@
 package framework;
 
+import commands.SippingBirdCollect;
+import commands.SippingBirdEject;
 import driver.Gamepad;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -29,12 +31,15 @@ public class OI {
     public static final Button holo_drive_toggle = new JoystickButton(gamepad.getGamepad(), gamepad.A_BUTTON);
     public static final Button buttery_drive_toggle = new JoystickButton(gamepad.getGamepad(), gamepad.B_BUTTON);
     public static final Button gyro_reset = new JoystickButton(gamepad.getGamepad(), gamepad.Y_BUTTON);
-
+    public static final Button sbCollector = new JoystickButton(gamepad.getGamepad(), gamepad.LEFT_BUMPER);
+    public static final Button sbEject = new JoystickButton(gamepad.getGamepad(), gamepad.RIGHT_BUMPER);
     
     //Use this constructor to setup up button schedulers for commands
     public OI() {
         buttery_drive_toggle.toggleWhenPressed(Init.butteryflydrive);
         holo_drive_toggle.toggleWhenPressed(Init.holodrive);
         gyro_reset.whenPressed(Init.gryoreset);
+        sbCollector.whileHeld(new SippingBirdCollect());
+        sbEject.whileHeld(new SippingBirdEject());
     }
 }

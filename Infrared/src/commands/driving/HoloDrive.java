@@ -26,20 +26,21 @@ public class HoloDrive extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        double y = Utilities.haloDeadBand(OI.gamepad.getLeftY(), OI.gamepad.getLeftX(), .1, .13);
-        double x = Utilities.haloDeadBand(OI.gamepad.getLeftX(), OI.gamepad.getLeftY(), .1, .13);
+        double y = Utilities.haloDeadBand(OI.gamepad.getLeftY(), OI.gamepad.getLeftX(), .2, .25);
+        double x = Utilities.haloDeadBand(OI.gamepad.getLeftX(), OI.gamepad.getLeftY(), .2, .25);
         
         int sign = (int)(Utilities.abs(y)/y);
         double magnitude = sign*Math.sqrt(x*x+y*y);
         double angle = MathUtils.atan2(x,y);
         double rotation = OI.gamepad.getTriggers();
         
-        if (rotation != 0){
-            drivebase.setHoloPolar(0, 0, rotation);
-        } else{
+        //if (rotation != 0){
+          //  drivebase.setHoloPolar(0, 0, rotation);
+        //} else{
             //drivebase.setHolo(magnitude, angle, 0);
-            drivebase.setHoloCartesian(x, y, 0);
-        }
+            drivebase.setHoloCartesian(x, y, rotation);
+        //}
+        System.out.println("x = " + x + " y = " + y + " triggers = " + rotation);
     }
 
     // Make this return true when this Command no longer needs to run execute()
