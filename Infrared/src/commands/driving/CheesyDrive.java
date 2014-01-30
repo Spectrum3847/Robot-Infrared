@@ -21,7 +21,6 @@ public class CheesyDrive extends CommandBase {
     
     // Called just before this Command runs the first time
     protected void initialize() {
-        Init.driveselect.setDefaultDriveMode(this);
         pneumatics.engageCheesy();
         drivebase.disableTurnController();
         System.out.println("Cheesydrive, GO!");

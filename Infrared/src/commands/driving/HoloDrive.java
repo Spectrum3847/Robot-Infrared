@@ -38,9 +38,9 @@ public class HoloDrive extends CommandBase {
           //  drivebase.setHoloPolar(0, 0, rotation);
         //} else{
             //drivebase.setHolo(magnitude, angle, 0);
-            drivebase.setHoloCartesian(x, y, rotation);
+            drivebase.setHoloCartesian(x, y, rotation * -1);
         //}
-        System.out.println("x = " + x + " y = " + y + " triggers = " + rotation);
+        System.out.println("x = " + x + " y = " + y + " triggers = " + rotation * -1);
     }
 
     // Make this return true when this Command no longer needs to run execute()

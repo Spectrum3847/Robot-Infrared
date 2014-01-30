@@ -10,7 +10,7 @@ import framework.Init;
  */
 public class DriveSelect extends CommandBase {   
     
-    private Command defaultDriveMode = Init.cheesydrive;
+    private Command defaultDriveMode = Init.holodrive;
     
     public DriveSelect() {
         // Use requires() here to declare subsystem dependencies
@@ -40,8 +40,8 @@ public class DriveSelect extends CommandBase {
         if (defaultDriveMode != null && defaultDriveMode.doesRequire(drivebase)){
             defaultDriveMode.start();
         } else {
-            Init.cheesydrive.start();        //This is the standard drive mode in case defaultDriveMode gets corrupt or unset
-            defaultDriveMode = Init.cheesydrive;
+            Init.holodrive.start();        //This is the standard drive mode in case defaultDriveMode gets corrupt or unset
+            defaultDriveMode = Init.holodrive;
         }
     }
 
