@@ -1,5 +1,6 @@
 package subsystems;
 
+import driver.IMU;
 import driver.SpectrumDrive;
 import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.Encoder;
@@ -9,6 +10,7 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.visa.VisaException;
 import framework.HW;
 import framework.Init;
 
@@ -21,7 +23,7 @@ public class DriveBase extends PIDSubsystem {
      //Drive Motor Controller
      private Victor vic_1,vic_2,vic_3,vic_4;
      private Victor[] vic_arr;
-     private SpectrumDrive spectrumDrive;
+     private final SpectrumDrive spectrumDrive;
      
      //Drive Encoders
      private Encoder left_encoder;
@@ -32,10 +34,11 @@ public class DriveBase extends PIDSubsystem {
      private double rightOldDistance = 0;
      
      //Drive X Gyro
-     private AnalogChannel x_gyro_raw;
-     private Gyro x_gyro;
+     private final AnalogChannel x_gyro_raw;
+     private final Gyro x_gyro;
+     private IMU imu;
      private double turnControllerOut = 0;
-     private double tolerance = 1; //Percentage of error that the turn controller can be off and still be onTarget()
+     private final double tolerance = 1; //Percentage of error that the turn controller can be off and still be onTarget()
      
      
 
@@ -48,6 +51,9 @@ public class DriveBase extends PIDSubsystem {
          x_gyro_raw = new AnalogChannel(HW.GYRO);
          x_gyro_raw.setAverageBits(2); //Get 4 samples of gyro data and average them for the raw output
          x_gyro = new Gyro(x_gyro_raw);
+         try {
+             imu = new IMU();
+         } catch (VisaException ex) {}
          this.getPIDController().setOutputRange(-1, 1);
          this.getPIDController().setInputRange(-360, 360);
          this.getPIDController().setAbsoluteTolerance(tolerance);
@@ -139,6 +145,9 @@ public class DriveBase extends PIDSubsystem {
         return x_gyro;
     }
     
+    public IMU getIMU(){
+        return imu;
+    }
     //Return the rawGyro AnalogChannel
     public AnalogChannel getRawGyro(){
         return x_gyro_raw;
@@ -152,6 +161,10 @@ public class DriveBase extends PIDSubsystem {
     //Get the current gyro angle
     public double getAngle(){
         return x_gyro.getAngle();
+    }
+    
+    public double getIMUAngle(){
+        return imu.getAngle();
     }
     
     public Encoder getRightEncoder(){

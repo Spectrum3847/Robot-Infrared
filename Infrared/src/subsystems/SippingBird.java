@@ -22,8 +22,8 @@ public class SippingBird extends Subsystem{
     }
     
     public void collectorFWD(){
-        leftMotor.set(1);
-        rightMotor.set(1);
+        leftMotor.set(.7);
+        rightMotor.set(.7);
     }
     
     public void collectorOFF(){       
