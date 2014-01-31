@@ -2,7 +2,6 @@ package commands.driving;
 
 import com.sun.squawk.util.MathUtils;
 import commands.CommandBase;
-import edu.wpi.first.wpilibj.RobotDrive;
 import framework.OI;
 import framework.Utilities;
 
@@ -21,6 +20,7 @@ public class HoloDrive extends CommandBase {
         pneumatics.engageHolo();
         drivebase.disableTurnController();
         drivebase.setHoloInversion(true);
+        drivebase.getIMU().init();
         System.out.println("Holodrive, GO!");
     }
 
@@ -29,18 +29,14 @@ public class HoloDrive extends CommandBase {
         double y = Utilities.haloDeadBand(OI.gamepad.getLeftY(), OI.gamepad.getLeftX(), .2, .25);
         double x = Utilities.haloDeadBand(OI.gamepad.getLeftX(), OI.gamepad.getLeftY(), .2, .25);
         
-        int sign = (int)(Utilities.abs(y)/y);
-        double magnitude = sign*Math.sqrt(x*x+y*y);
-        double angle = MathUtils.atan2(x,y);
         double rotation = OI.gamepad.getTriggers();
         
-        //if (rotation != 0){
-          //  drivebase.setHoloPolar(0, 0, rotation);
-        //} else{
-            //drivebase.setHolo(magnitude, angle, 0);
+        if (rotation != 0){
+            drivebase.setHoloPolar(0, 0, rotation);
+        } else{
             drivebase.setHoloCartesian(x, y, rotation);
-        //}
-        System.out.println("x = " + x + " y = " + y + " triggers = " + rotation);
+        }
+        System.out.println("x = " + x + " y = " + y + " triggers = " + rotation + " angle = " + drivebase.getIMUAngle());
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -50,6 +46,7 @@ public class HoloDrive extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
+        drivebase.getIMU().end();
         drivebase.setArcade(0, 0);
         drivebase.setStandardInversion(true);
     }
