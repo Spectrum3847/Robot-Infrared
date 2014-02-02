@@ -22,7 +22,9 @@ public class HW {
     public static final int COLLECTOR_RIGHT = 7;
     public static final int COLLECTOR_LEFT = 8;
     
-    /**DIGITAL SENSOR ALLOCATIONS**/   
+    /**DIGITAL SENSOR ALLOCATIONS**/
+    /**IMU**/
+    public static final int IMU_PORT = 1;
     /**Pneumatics**/
     public static final int PRESSURE_SENSOR = 5;
     
@@ -35,15 +37,15 @@ public class HW {
    
     /**SOLENOID ALLOCATIONS**/
     public static final int OCTOCANUM = 1;
-    public static final int SIPPINGBIRD_DOWN = 3;
-    public static final int SIPPINGBIRD_UP = 4;
+    public static final int SIPPINGBIRD = 3;
+    public static final int WINGS = 5;
     
     
     /**PID CONSTANTS**/
-    /**Turn Controller PID - Straight**/
-    public static final double STRAIGHT_KP = 0.0;
-    public static final double STRAIGHT_KI = 0.0;
-    public static final double STRAIGHT_KD = 0.0;
+    /**Turn Controller PID - Turn**/
+    public static final double TURN_KP = 0.0;
+    public static final double TURN_KI = 0.0;
+    public static final double TURN_KD = 0.0;
     
     /**JOYSTICKS/GAMEPAD ASSIGNMENTS**/
     public static final int usbPort_one = 1;

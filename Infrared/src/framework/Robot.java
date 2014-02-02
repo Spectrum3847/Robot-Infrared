@@ -1,6 +1,5 @@
 package framework;
 
-
 import edu.wpi.first.wpilibj.IterativeRobot;
 
 /**
@@ -11,6 +10,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
  * directory.
  */
 public class Robot extends IterativeRobot {
+
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -18,21 +18,21 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
         Init.init();
     }
-    
-    public void disabledInit(){
+
+    public void disabledInit() {
         Disabled.init();
     }
-    
-    public void disabledPeriodic(){
+
+    public void disabledPeriodic() {
         Disabled.periodic();
     }
-    
-    public void disabledContinuous(){
+
+    public void disabledContinuous() {
         Disabled.continuous();
     }
-    
+
     public void autonomousInit() {
-       Autonomous.init();
+        Autonomous.init();
     }
 
     public void autonomousPeriodic() {

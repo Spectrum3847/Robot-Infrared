@@ -1,11 +1,14 @@
 package framework;
 
 import commands.CommandBase;
+import commands.collection.SippingBirdCollect;
+import commands.collection.SippingBirdEject;
 import commands.driving.ButteryflyDrive;
 import commands.driving.CheesyDrive;
 import commands.driving.DriveSelect;
-import commands.driving.GyroReset;
 import commands.driving.HoloDrive;
+import commands.launching.LauncherFWD;
+import commands.launching.SippingBirdLaunchReady;
 import commands.pneumatics.RunCompressor;
 
 /**
@@ -19,11 +22,14 @@ public class Init {
     public static ButteryflyDrive butteryflydrive = new ButteryflyDrive();
     public static DriveSelect driveselect = new DriveSelect();
     public static RunCompressor runcompressor = new RunCompressor();
-    public static GyroReset gryoreset = new GyroReset();
+    public static SippingBirdCollect sippingbirdcollect = new SippingBirdCollect();
+    public static SippingBirdEject sippingbirdeject = new SippingBirdEject();
+    public static SippingBirdLaunchReady launchready = new SippingBirdLaunchReady();
+    public static LauncherFWD launcherfwd = new LauncherFWD();
 
     public static void init() {
         CommandBase.init();
-        
+
         Dashboard.intializeDashboard();
     }
 
