@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package commands.pneumatics;
 
 import commands.CommandBase;
@@ -11,7 +7,7 @@ import commands.CommandBase;
  * @author JAG
  */
 public class RunCompressor extends CommandBase {
-    
+
     public RunCompressor() {
     }
 

@@ -2,10 +2,6 @@ package commands.driving;
 
 import commands.CommandBase;
 import driver.Gamepad;
-import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import framework.Dashboard;
-import framework.Init;
 import framework.OI;
 import framework.Utilities;
 
@@ -14,11 +10,11 @@ import framework.Utilities;
  * @author Matthew
  */
 public class CheesyDrive extends CommandBase {
-    public CheesyDrive()
-    {
+
+    public CheesyDrive() {
         requires(CommandBase.drivebase);
     }
-    
+
     // Called just before this Command runs the first time
     protected void initialize() {
         pneumatics.engageCheesy();
@@ -31,15 +27,15 @@ public class CheesyDrive extends CommandBase {
         double throttle = Utilities.haloDeadBand(OI.gamepad.getLeftY(), OI.gamepad.getRightX(), .1, .13);
         double wheel = Utilities.haloDeadBand(OI.gamepad.getRightX(), OI.gamepad.getLeftY(), .1, .13);
         boolean quickturn = OI.gamepad.getButton(Gamepad.RIGHT_CLICK);
-        
-        drivebase.setCheesySensetivity(SmartDashboard.getNumber(Dashboard.CHEESY_SENSITIVITY_KEY));
-        
+
+        drivebase.setCheesySensetivity(1.32);
+
         double quickTurnTriggers = -OI.gamepad.getTriggers();
-        
-        if (quickTurnTriggers != 0){
+
+        if (quickTurnTriggers != 0) {
             drivebase.setCheesyDrive(0, quickTurnTriggers, true);
-        } else{
-            drivebase.setCheesyDrive(throttle, wheel,quickturn);
+        } else {
+            drivebase.setCheesyDrive(throttle, wheel, quickturn);
         }
     }
 

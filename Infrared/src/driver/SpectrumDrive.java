@@ -9,18 +9,19 @@ import framework.Utilities;
  *
  * @author JAG
  */
-public class SpectrumDrive extends RobotDrive{
-    
+public class SpectrumDrive extends RobotDrive {
+
     public static double tSens = 1.5;
     public static final double DEADBAND_VALUE = .10;
-    
-    public SpectrumDrive(Victor vic1, Victor vic2, Victor vic3, Victor vic4){
+
+    public SpectrumDrive(Victor vic1, Victor vic2, Victor vic3, Victor vic4) {
         super(vic1, vic2, vic3, vic4);
     }
-    
-     /**
-     * Provide tank steering using the stored robot configuration.
-     * This function lets you directly provide joystick values from any source.
+
+    /**
+     * Provide tank steering using the stored robot configuration. This function
+     * lets you directly provide joystick values from any source.
+     *
      * @param leftValue The value of the left stick.
      * @param rightValue The value of the right stick.
      */
@@ -29,10 +30,9 @@ public class SpectrumDrive extends RobotDrive{
         rightValue = limit(rightValue);
 
         leftValue = Utilities.deadBand(leftValue, DEADBAND_VALUE);
-        rightValue = Utilities.deadBand (rightValue, DEADBAND_VALUE);
+        rightValue = Utilities.deadBand(rightValue, DEADBAND_VALUE);
         setLeftRightMotorOutputs(leftValue, rightValue);
     }
-
 
     // Cheesy Drive - Thanks to Austin Schuh and Teams 254/971. Yeah Buddy!
     // It would not be possible to control a fast drive without this
@@ -44,12 +44,11 @@ public class SpectrumDrive extends RobotDrive{
         double rPower = 0.0;
         double lPower = 0.0;
 
-        if(quickTurn) {
+        if (quickTurn) {
             overPower = 1.0;
             sensitivity = 1.0;
             angular_power = wheel;
-        }
-        else {
+        } else {
             overPower = 0.0;
             angular_power = Math.abs(throttle) * wheel * sensitivity;
         }
@@ -58,41 +57,37 @@ public class SpectrumDrive extends RobotDrive{
         lPower += angular_power;
         rPower -= angular_power;
 
-        if(lPower > 1.0) {
+        if (lPower > 1.0) {
             rPower -= overPower * (lPower - 1.0);
             lPower = 1.0;
-        }
-        else if(rPower > 1.0) {
+        } else if (rPower > 1.0) {
             lPower -= overPower * (rPower - 1.0);
             rPower = 1.0;
-        }
-        else if(lPower < -1.0) {
+        } else if (lPower < -1.0) {
             rPower += overPower * (-1.0 - lPower);
             lPower = -1.0;
-        }
-        else if(rPower < -1.0) {
+        } else if (rPower < -1.0) {
             lPower += overPower * (-1.0 - rPower);
             rPower = -1.0;
         }
 
-        
         lPower = Utilities.deadBand(lPower, DEADBAND_VALUE);
-        rPower = Utilities.deadBand (rPower, DEADBAND_VALUE);
+        rPower = Utilities.deadBand(rPower, DEADBAND_VALUE);
         setLeftRightMotorOutputs(lPower, rPower);
     }
-    
-    public void setSensitivity(double sensitivity){
+
+    public void setSensitivity(double sensitivity) {
         tSens = sensitivity;
     }
-    
+
     /**
-     * Arcade drive implements single stick driving.
-     * This function lets you directly provide joystick values from any source.
+     * Arcade drive implements single stick driving. This function lets you
+     * directly provide joystick values from any source.
+     *
      * @param moveValue The value to use for forwards/backwards
      * @param rotateValue The value to use for the rotate right/left
      * @param squaredInputs If set, increases the sensitivity at low speeds
      */
-    
     public void arcadeDrive(double moveValue, double rotateValue, boolean squaredInputs) {
         // local variables to hold the computed PWM values for the motors
         double leftMotorSpeed;
@@ -133,21 +128,23 @@ public class SpectrumDrive extends RobotDrive{
             }
         }
         leftMotorSpeed = Utilities.deadBand(leftMotorSpeed, DEADBAND_VALUE);
-        rightMotorSpeed = Utilities.deadBand (rightMotorSpeed, DEADBAND_VALUE);
+        rightMotorSpeed = Utilities.deadBand(rightMotorSpeed, DEADBAND_VALUE);
         setLeftRightMotorOutputs(leftMotorSpeed, rightMotorSpeed);
     }
-    
-        /**
+
+    /**
      * Holonomic Drive method for omni wheel robots
      *
-     * This is a modified version of the WPILIB Mecannum code. The formula works but
-     * there is no need to invert the rotations because you rotate but increasing the speed of every wheel
+     * This is a modified version of the WPILIB Mecannum code. The formula works
+     * but there is no need to invert the rotations because you rotate but
+     * increasing the speed of every wheel
      *
-     * @param magnitude The speed that the robot should drive in a given direction.  [-1.0..1.0]
-     * @param direction The direction the robot should drive. The direction and maginitute are
-     * independent of the rotation rate.
-     * @param rotation The rate of rotation for the robot that is completely independent of
-     * the magnitude or direction.  [-1.0..1.0]
+     * @param magnitude The speed that the robot should drive in a given
+     * direction. [-1.0..1.0]
+     * @param direction The direction the robot should drive. The direction and
+     * maginitute are independent of the rotation rate.
+     * @param rotation The rate of rotation for the robot that is completely
+     * independent of the magnitude or direction. [-1.0..1.0]
      */
     public void holonomicDrive(double magnitude, double direction, double rotation) {
         // Normalized for full power along the Cartesian axes.
@@ -162,9 +159,6 @@ public class SpectrumDrive extends RobotDrive{
         wheelSpeeds[MotorType.kRearRight.value] = (sinD * magnitude - rotation);
         wheelSpeeds[MotorType.kFrontRight.value] = (cosD * magnitude + rotation);
         wheelSpeeds[MotorType.kRearLeft.value] = (cosD * magnitude - rotation);
-
-
-
 
         normalize(wheelSpeeds);
 
@@ -181,10 +175,10 @@ public class SpectrumDrive extends RobotDrive{
     }
 
     /**
-     * This class should be used for field centeric control of the robot.
-     * It adds the gyro angle to the direction of the robot.
-     * Ensure that the gyro angle is at zero when the robot is driving away from
-     * the driver.
+     * This class should be used for field centric control of the robot. It
+     * adds the gyro angle to the direction of the robot. Ensure that the gyro
+     * angle is at zero when the robot is driving away from the driver.
+     *
      * @param magnitude
      * @param direction
      * @param rotation

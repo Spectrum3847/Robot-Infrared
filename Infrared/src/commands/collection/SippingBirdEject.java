@@ -1,23 +1,27 @@
-package commands;
+package commands.collection;
+
+import commands.CommandBase;
 
 
 /*
  * @author Matthew
  */
-public class LauncherFWD extends CommandBase {
-    public LauncherFWD()
-    {
-        requires(CommandBase.shooter);
+public class SippingBirdEject extends CommandBase {
+
+    public SippingBirdEject() {
+        requires(CommandBase.sippingbird);
     }
-    
+
     // Called just before this Command runs the first time
     protected void initialize() {
-        System.out.println("SHOOOT!");
+        pneumatics.collectorRetract();
+        pneumatics.wingsOpen();
+        System.out.println("SippingBird, Eject!");
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        shooter.fastLauncher();
+        sippingbird.collectorREV();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -27,7 +31,8 @@ public class LauncherFWD extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
-        shooter.stopLauncher();
+        sippingbird.collectorOFF();
+        pneumatics.collectorRetract();
     }
 
     // Called when another command which requires one or more of the same

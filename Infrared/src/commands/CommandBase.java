@@ -16,9 +16,8 @@ public abstract class CommandBase extends Command {
     public static Pneumatics pneumatics = new Pneumatics();
     public static SippingBird sippingbird = new SippingBird();
     public static Shooter shooter = new Shooter();
-    
-    // Create a single static instance of all of your subsystems
 
+    // Create a single static instance of all of your subsystems
     public static void init() {
         // This MUST be here. If the OI creates Commands (which it very likely
         // will), constructing it during the construction of CommandBase (from
@@ -28,7 +27,6 @@ public abstract class CommandBase extends Command {
         oi = new OI();
 
         // Show what command your subsystem is running on the SmartDashboard
-
         //SmartDashboard.putData(null);
     }
 

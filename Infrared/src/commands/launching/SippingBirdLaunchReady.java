@@ -1,18 +1,20 @@
-package commands;
+package commands.launching;
+
+import commands.CommandBase;
 
 
 /*
  * @author Matthew
  */
 public class SippingBirdLaunchReady extends CommandBase {
-    public SippingBirdLaunchReady()
-    {
+
+    public SippingBirdLaunchReady() {
         requires(CommandBase.sippingbird);
     }
-    
+
     // Called just before this Command runs the first time
     protected void initialize() {
-        sippingbird.collectorDeploy();
+        pneumatics.collectorDeploy();
         sippingbird.collectorOFF();
         System.out.println("SippingBird, LAUNCH READY!");
     }
@@ -28,8 +30,8 @@ public class SippingBirdLaunchReady extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
+        pneumatics.collectorRetract();
         sippingbird.collectorOFF();
-        sippingbird.collectorRetract();
     }
 
     // Called when another command which requires one or more of the same

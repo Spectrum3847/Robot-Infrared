@@ -1,5 +1,6 @@
-package commands;
+package commands.launching;
 
+import commands.CommandBase;
 import framework.OI;
 import framework.Utilities;
 
@@ -8,11 +9,11 @@ import framework.Utilities;
  * @author Matthew
  */
 public class LauncherManual extends CommandBase {
-    public LauncherManual()
-    {
+
+    public LauncherManual() {
         requires(CommandBase.shooter);
     }
-    
+
     // Called just before this Command runs the first time
     protected void initialize() {
         System.out.println("Joystick Shooter Control");
@@ -22,7 +23,7 @@ public class LauncherManual extends CommandBase {
     protected void execute() {
         double speed = OI.gamepad_aux.getLeftY();
         speed = Utilities.deadBand(speed, 0.2);
-        if(speed < 0){
+        if (speed < 0) {
             speed = speed * .5;
         }
         shooter.setLauncherSpeed(speed);

@@ -1,35 +1,39 @@
-package commands;
+package commands.launching;
+
+import commands.CommandBase;
+import framework.Init;
 
 
 /*
  * @author Matthew
  */
-public class SippingBirdEject extends CommandBase {
-    public SippingBirdEject()
-    {
-        requires(CommandBase.sippingbird);
+public class LauncherFWD extends CommandBase {
+
+    public LauncherFWD() {
+        requires(CommandBase.shooter);
     }
-    
+
     // Called just before this Command runs the first time
     protected void initialize() {
-        sippingbird.collectorRetract();
-        System.out.println("SippingBird, Eject!");
+        System.out.println("SHOOOT!");
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        sippingbird.collectorREV();
+        if(Init.launchready.isRunning())
+            shooter.fastLauncher();
+        else
+            shooter.stopLauncher();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return !Init.launchready.isRunning();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        sippingbird.collectorOFF();
-        sippingbird.collectorRetract();
+        shooter.stopLauncher();
     }
 
     // Called when another command which requires one or more of the same
