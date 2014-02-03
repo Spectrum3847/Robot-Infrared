@@ -8,18 +8,19 @@ import edu.wpi.first.wpilibj.AnalogChannel;
  */
 public class Potentiometer extends AnalogChannel {
 
-    public Potentiometer(int channel) {
-        super(channel);
-    }
+    public final double MAX_ANGLE;
 
-    public Potentiometer(int moduleNumber, int channel) {
-        super(moduleNumber, channel);
+    public Potentiometer(int channel, double angle) {
+        super(channel);
+        MAX_ANGLE = angle;
+    }
+    public Potentiometer(int channel) {
+        this(channel, 360);
     }
 
     //PLACEHOLDER: TO BE IMPLEMENTED LATER
     public double getAngle() {
-        //return getAverageVoltage() / 0.013746 - 0.08;
-        return 45.0 + ((getAverageVoltage() - 2.762) * 72.87);
+        return getAverageVoltage() / 5.00 * MAX_ANGLE;
     }
 
 }

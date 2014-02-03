@@ -7,6 +7,7 @@ import commands.driving.ButteryflyDrive;
 import commands.driving.CheesyDrive;
 import commands.driving.DriveSelect;
 import commands.driving.HoloDrive;
+import commands.launching.LauncherDashboardFWD;
 import commands.launching.LauncherFWD;
 import commands.launching.SippingBirdLaunchReady;
 import commands.pneumatics.RunCompressor;
@@ -26,6 +27,7 @@ public class Init {
     public static SippingBirdEject sippingbirdeject = new SippingBirdEject();
     public static SippingBirdLaunchReady launchready = new SippingBirdLaunchReady();
     public static LauncherFWD launcherfwd = new LauncherFWD();
+    public static LauncherDashboardFWD launcherdashboardfwd = new LauncherDashboardFWD();
 
     public static void init() {
         CommandBase.init();

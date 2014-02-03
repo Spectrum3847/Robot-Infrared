@@ -31,6 +31,8 @@ public class HW {
     /**ANALOG SENSOR ALLOCATIONS**/ 
     /**Gyroscope**/
     public static final int GYRO = 1;
+    /**Potentiometers**/
+    public static final int SHOOTER_POT = 2;
     
     /**RELAY ALLOCATIONS**/
     public static final int COMPRESSOR = 1;

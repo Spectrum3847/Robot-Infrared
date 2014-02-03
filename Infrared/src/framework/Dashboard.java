@@ -14,21 +14,21 @@ public class Dashboard {
     static double shortOldTime = 0.0;
     static final double LONG_DELAY = 2;
     static double longOldTime = 0.0;
-
+    
+    public static String SHOOTER_ANGLE = "Shooting Angle";
+    
     public static void intializeDashboard() {
         if (ENABLE_SPECTRUM_DASHBOARD) {
-            SmartDashboard.putData(CommandBase.drivebase);
+            //SmartDashboard.putData(CommandBase.drivebase);
+            SmartDashboard.putNumber(SHOOTER_ANGLE, 90.0);
         }
     }
 
     public static void updateDashboard() {
-
         if (ENABLE_SPECTRUM_DASHBOARD) {
-
             if ((Timer.getFPGATimestamp() - shortOldTime) > SHORT_DELAY) {
                 shortOldTime = Timer.getFPGATimestamp();
             }
-
             if ((Timer.getFPGATimestamp() - longOldTime) > LONG_DELAY) {
                 //Thing that should be updated every LONG_DELAY
                 //SmartDashboard.putData(Scheduler.getInstance());

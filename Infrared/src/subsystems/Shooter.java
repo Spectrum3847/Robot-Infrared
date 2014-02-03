@@ -1,6 +1,7 @@
 package subsystems;
 
 import commands.launching.LauncherManual;
+import driver.Potentiometer;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import framework.HW;
@@ -13,11 +14,13 @@ public class Shooter extends Subsystem {
 
     private Victor v1, v2, v3, v4;
     private int invert1 = 1, invert2 = 1, invert3 = 1, invert4 = 1;
+    private Potentiometer pot;
 
     public Shooter() {
         super();
         this.setInvert2(true);
         this.setInvert3(true);
+        pot = new Potentiometer(HW.SHOOTER_POT);
     }
 
     protected void initDefaultCommand() {
@@ -62,5 +65,8 @@ public class Shooter extends Subsystem {
     public void slowLauncher() {
         setLauncherSpeed(-0.2);
     }
-
+    
+    public double getAngle() {
+        return (15.0/26.0)*(280.0 - pot.getAngle());
+    }
 }

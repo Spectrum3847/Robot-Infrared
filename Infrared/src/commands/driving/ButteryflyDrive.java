@@ -2,6 +2,7 @@ package commands.driving;
 
 import commands.CommandBase;
 import driver.Gamepad;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import framework.OI;
 import framework.Utilities;
 
@@ -37,6 +38,8 @@ public class ButteryflyDrive extends CommandBase {
         } else {
             drivebase.setCheesyDrive(throttle, wheel, quickturn);
         }
+        
+        SmartDashboard.putNumber("Current Shooter Angle", shooter.getAngle());
     }
 
     // Make this return true when this Command no longer needs to run execute()

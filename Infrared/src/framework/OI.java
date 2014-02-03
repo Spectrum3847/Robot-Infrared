@@ -17,8 +17,10 @@ public class OI {
     public static final Button buttery_drive_toggle = new JoystickButton(gamepad.getGamepad(), Gamepad.B_BUTTON);
     public static final Button collect = new JoystickButton(gamepad.getGamepad(), Gamepad.LEFT_BUMPER);
     public static final Button eject = new JoystickButton(gamepad.getGamepad(), Gamepad.RIGHT_BUMPER);
+    
     public static final Button launch = new JoystickButton(gamepad_aux.getGamepad(), Gamepad.A_BUTTON);
     public static final Button launch_ready = new JoystickButton(gamepad_aux.getGamepad(), Gamepad.LEFT_BUMPER);
+    public static final Button degree_launch = new JoystickButton(gamepad_aux.getGamepad(), Gamepad.B_BUTTON);
 
     //Use this constructor to setup up button schedulers for commands
     public OI() {
@@ -27,6 +29,7 @@ public class OI {
         collect.whileHeld(Init.sippingbirdcollect);
         eject.whileHeld(Init.sippingbirdeject);
         launch.whileHeld(Init.launcherfwd);
+        degree_launch.whileHeld(Init.launcherdashboardfwd);
         launch_ready.toggleWhenPressed(Init.launchready);
     }
 }
