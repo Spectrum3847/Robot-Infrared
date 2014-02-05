@@ -22,7 +22,6 @@ public class DriveBase extends PIDSubsystem {
     private Victor[] vic_arr;
     private final SpectrumDrive spectrumDrive;
 
-    //Drive X Gyro
     private final Gyro gyro;
     private final IMU imu;
     private double turnControllerOut = 0;

@@ -8,8 +8,8 @@ package framework;
  */
 public class HW {
     /**DRIVEBASE MOTOR ASSIGNMENTS (PWM)**/
-    public static final int FRONT_RDRIVE_MOTOR = 2;
     public static final int REAR_RDRIVE_MOTOR = 1;
+    public static final int FRONT_RDRIVE_MOTOR = 2;
     public static final int FRONT_LDRIVE_MOTOR = 9;
     public static final int REAR_LDRIVE_MOTOR = 10;
     
@@ -25,6 +25,9 @@ public class HW {
     /**DIGITAL SENSOR ALLOCATIONS**/
     /**IMU**/
     public static final int IMU_PORT = 1;
+    /**Drivebase Encoders**/
+    /**Shooter Encoder**/
+    public static final int SHOOTER_ENCODER = 2;
     /**Pneumatics**/
     public static final int PRESSURE_SENSOR = 5;
     
@@ -44,10 +47,14 @@ public class HW {
     
     
     /**PID CONSTANTS**/
-    /**Turn Controller PID - Turn**/
+    /**Turn Controller PID**/
     public static final double TURN_KP = 0.0;
     public static final double TURN_KI = 0.0;
     public static final double TURN_KD = 0.0;
+    /**Shooter Velocity PID**/
+    public static final double SHOOTER_KP = 0.0;
+    public static final double SHOOTER_KI = 0.0;
+    public static final double SHOOTER_KD = 0.0;
     
     /**JOYSTICKS/GAMEPAD ASSIGNMENTS**/
     public static final int usbPort_one = 1;

@@ -21,6 +21,7 @@ public class OI {
     public static final Button launch = new JoystickButton(gamepad_aux.getGamepad(), Gamepad.A_BUTTON);
     public static final Button launch_ready = new JoystickButton(gamepad_aux.getGamepad(), Gamepad.LEFT_BUMPER);
     public static final Button degree_launch = new JoystickButton(gamepad_aux.getGamepad(), Gamepad.B_BUTTON);
+    public static final Button PID_launch = new JoystickButton(gamepad_aux.getGamepad(), Gamepad.Y_BUTTON);
 
     //Use this constructor to setup up button schedulers for commands
     public OI() {
@@ -31,5 +32,6 @@ public class OI {
         launch.whileHeld(Init.launcherfwd);
         degree_launch.whileHeld(Init.launcherdashboardfwd);
         launch_ready.toggleWhenPressed(Init.launchready);
+        PID_launch.whileHeld(Init.pidlauncherdashboardfwd);
     }
 }

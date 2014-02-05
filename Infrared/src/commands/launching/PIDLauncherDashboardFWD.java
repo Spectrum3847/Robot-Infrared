@@ -9,25 +9,26 @@ import framework.Init;
 /*
  * @author Matthew
  */
-public class LauncherDashboardFWD extends CommandBase {
+public class PIDLauncherDashboardFWD extends CommandBase {
 
-    public LauncherDashboardFWD() {
+    public PIDLauncherDashboardFWD() {
         requires(CommandBase.shooter);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
         System.out.println("SHOOOT!");
+        shooter.enablePID();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        /*
-        if(Init.launchready.isRunning() && shooter.getAngle() > SmartDashboard.getNumber(Dashboard.SHOOTER_ANGLE, 90.0))
-            shooter.stopLauncher();
-        else
-            shooter.fastLauncher();
-                */
+        //if(Init.launchready.isRunning() && shooter.getAngle() > SmartDashboard.getNumber(Dashboard.SHOOTER_ANGLE, 90.0))
+        //    shooter.stopLauncher();
+        //else
+        shooter.setVelocity(SmartDashboard.getNumber(Dashboard.SHOOTER_VELOCITY));
+        shooter.setPID(SmartDashboard.getNumber(Dashboard.SHOOTER_KP), SmartDashboard.getNumber(Dashboard.SHOOTER_KI), SmartDashboard.getNumber(Dashboard.SHOOTER_KD));
+        shooter.PIDLauncher();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -38,6 +39,7 @@ public class LauncherDashboardFWD extends CommandBase {
     // Called once after isFinished returns true
     protected void end() {
         shooter.stopLauncher();
+        shooter.disablePID();
     }
 
     // Called when another command which requires one or more of the same

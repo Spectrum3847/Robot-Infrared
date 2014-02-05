@@ -9,6 +9,7 @@ import commands.driving.DriveSelect;
 import commands.driving.HoloDrive;
 import commands.launching.LauncherDashboardFWD;
 import commands.launching.LauncherFWD;
+import commands.launching.PIDLauncherDashboardFWD;
 import commands.launching.SippingBirdLaunchReady;
 import commands.pneumatics.RunCompressor;
 
@@ -28,7 +29,8 @@ public class Init {
     public static SippingBirdLaunchReady launchready = new SippingBirdLaunchReady();
     public static LauncherFWD launcherfwd = new LauncherFWD();
     public static LauncherDashboardFWD launcherdashboardfwd = new LauncherDashboardFWD();
-
+    public static PIDLauncherDashboardFWD pidlauncherdashboardfwd = new PIDLauncherDashboardFWD();
+    
     public static void init() {
         CommandBase.init();
 

@@ -2,32 +2,40 @@ package subsystems;
 
 import commands.launching.LauncherManual;
 import driver.Potentiometer;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Victor;
-import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import framework.HW;
 
 /**
  *
  * @author matthew
  */
-public class Shooter extends Subsystem {
+public final class Shooter extends PIDSubsystem {
 
-    private Victor v1, v2, v3, v4;
+    private final Victor v1, v2, v3, v4;
     private int invert1 = 1, invert2 = 1, invert3 = 1, invert4 = 1;
-    private Potentiometer pot;
+    private final Potentiometer pot;
+    private final Encoder enc;
+    
+    private double velocityControllerOut;
+    private final double tolerance = 1; //Percentage of error that the turn controller can be off and still be onTarget()
 
     public Shooter() {
-        super();
-        this.setInvert2(true);
-        this.setInvert3(true);
-        pot = new Potentiometer(HW.SHOOTER_POT);
-    }
-
-    protected void initDefaultCommand() {
+        super(HW.SHOOTER_KP, HW.SHOOTER_KI, HW.SHOOTER_KD);
         v1 = new Victor(HW.SHOOTER_MOTOR_1);
         v2 = new Victor(HW.SHOOTER_MOTOR_2);
         v3 = new Victor(HW.SHOOTER_MOTOR_3);
         v4 = new Victor(HW.SHOOTER_MOTOR_4);
+        setInvert2(true);
+        setInvert3(true);
+        pot = new Potentiometer(HW.SHOOTER_POT);
+        enc = new Encoder(HW.SHOOTER_ENCODER, HW.SHOOTER_ENCODER+1);
+        this.getPIDController().setOutputRange(0, 1);
+        this.getPIDController().setAbsoluteTolerance(tolerance);
+    }
+
+    protected void initDefaultCommand() {
         setDefaultCommand(new LauncherManual());
     }
 
@@ -38,19 +46,19 @@ public class Shooter extends Subsystem {
         v4.set(speed * invert4);
     }
 
-    public void setInvert1(boolean isInverted) {
+    public final void setInvert1(boolean isInverted) {
         invert1 = isInverted ? -1 : 1;
     }
 
-    public void setInvert2(boolean isInverted) {
+    public final void setInvert2(boolean isInverted) {
         invert2 = isInverted ? -1 : 1;
     }
 
-    public void setInvert3(boolean isInverted) {
+    public final void setInvert3(boolean isInverted) {
         invert3 = isInverted ? -1 : 1;
     }
 
-    public void setInvert4(boolean isInverted) {
+    public final void setInvert4(boolean isInverted) {
         invert4 = isInverted ? -1 : 1;
     }
 
@@ -66,7 +74,51 @@ public class Shooter extends Subsystem {
         setLauncherSpeed(-0.2);
     }
     
+    public void PIDLauncher() {
+        setLauncherSpeed(velocityControllerOut);
+    }
+    
     public double getAngle() {
         return (15.0/26.0)*(280.0 - pot.getAngle());
+    }
+    
+    public double getRate() {
+        return enc.getRate();
+    }
+
+    protected double returnPIDInput() {
+        return getRate();
+    }
+
+    protected void usePIDOutput(double d) {
+        velocityControllerOut = d;
+    }
+    
+    public void enableEncoder() {
+        enc.start();
+    }
+    
+    public void disableEncoder() {
+        enc.stop();
+    }
+    
+    public double getVelocityControllerOut() {
+        return velocityControllerOut;
+    }
+    
+    public void setVelocity(double v) {
+        this.getPIDController().setSetpoint(v);
+    }
+    
+    public void enablePID() {
+        this.getPIDController().enable();
+    }
+    
+    public void disablePID() {
+        this.getPIDController().disable();
+    }
+    
+    public void setPID(double p, double i, double d) {
+        this.getPIDController().setPID(p, i, d);
     }
 }
