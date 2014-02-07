@@ -12,7 +12,7 @@ import framework.Init;
 public class LauncherDashboardFWD extends CommandBase {
 
     public LauncherDashboardFWD() {
-        requires(CommandBase.shooter);
+        requires(shooter);
     }
 
     // Called just before this Command runs the first time
@@ -22,17 +22,15 @@ public class LauncherDashboardFWD extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        /*
-        if(Init.launchready.isRunning() && shooter.getAngle() > SmartDashboard.getNumber(Dashboard.SHOOTER_ANGLE, 90.0))
-            shooter.stopLauncher();
-        else
+        if(Init.launchready.isRunning() && shooter.getAngle() < SmartDashboard.getNumber(Dashboard.SHOOTER_ANGLE, 90.0))
             shooter.fastLauncher();
-                */
+        else
+            shooter.stopLauncher();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false; //!Init.launchready.isRunning();
+        return !Init.launchready.isRunning();
     }
 
     // Called once after isFinished returns true

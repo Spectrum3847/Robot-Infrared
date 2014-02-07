@@ -16,6 +16,7 @@ public class SippingBirdLaunchReady extends CommandBase {
     // Called just before this Command runs the first time
     protected void initialize() {
         pneumatics.collectorDeploy();
+        pneumatics.wingsOpen();
         sippingbird.collectorOFF();
         shooter.enableEncoder();
         System.out.println("SippingBird, LAUNCH READY!");
@@ -35,6 +36,7 @@ public class SippingBirdLaunchReady extends CommandBase {
     // Called once after isFinished returns true
     protected void end() {
         pneumatics.collectorRetract();
+        pneumatics.wingsClose();
         shooter.disableEncoder();
         sippingbird.collectorOFF();
     }

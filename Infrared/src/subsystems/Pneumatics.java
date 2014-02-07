@@ -56,12 +56,10 @@ public class Pneumatics extends Subsystem {
 
     public void collectorDeploy() {
         collector.set(DoubleSolenoid.Value.kForward);
-        wingsOpen();
     }
 
     public void collectorRetract() {
         collector.set(DoubleSolenoid.Value.kReverse);
-        wingsClose();
     }
 
     public void wingsOpen() {

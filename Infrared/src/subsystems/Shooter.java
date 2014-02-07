@@ -3,6 +3,7 @@ package subsystems;
 import commands.launching.LauncherManual;
 import driver.Potentiometer;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import framework.HW;
@@ -18,6 +19,8 @@ public final class Shooter extends PIDSubsystem {
     private final Potentiometer pot;
     private final Encoder enc;
     
+    private final PIDController velocityPID;
+    
     private double velocityControllerOut;
     private final double tolerance = 1; //Percentage of error that the turn controller can be off and still be onTarget()
 
@@ -31,8 +34,9 @@ public final class Shooter extends PIDSubsystem {
         setInvert3(true);
         pot = new Potentiometer(HW.SHOOTER_POT);
         enc = new Encoder(HW.SHOOTER_ENCODER, HW.SHOOTER_ENCODER+1);
-        this.getPIDController().setOutputRange(0, 1);
-        this.getPIDController().setAbsoluteTolerance(tolerance);
+        velocityPID = this.getPIDController();
+        velocityPID.setOutputRange(0, 1);
+        velocityPID.setAbsoluteTolerance(tolerance);
     }
 
     protected void initDefaultCommand() {
@@ -106,19 +110,19 @@ public final class Shooter extends PIDSubsystem {
         return velocityControllerOut;
     }
     
-    public void setVelocity(double v) {
-        this.getPIDController().setSetpoint(v);
+    public void PIDSetVelocity(double v) {
+        velocityPID.setSetpoint(v);
     }
     
-    public void enablePID() {
-        this.getPIDController().enable();
+    public void enableVelocityPID() {
+        velocityPID.enable();
     }
     
-    public void disablePID() {
-        this.getPIDController().disable();
+    public void disableVelocityPID() {
+        velocityPID.disable();
     }
     
-    public void setPID(double p, double i, double d) {
-        this.getPIDController().setPID(p, i, d);
+    public void setVelocityPID(double p, double i, double d) {
+        velocityPID.setPID(p, i, d);
     }
 }
