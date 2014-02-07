@@ -20,6 +20,8 @@ public class Dashboard {
     public static String SHOOTER_KP = "Shoot KP";
     public static String SHOOTER_KI = "Shoot KI";
     public static String SHOOTER_KD = "Shoot KD";
+    public static String SHOOTER_OFFSET = "Shooter Offset";
+
     
     public static void intializeDashboard() {
         if (ENABLE_SPECTRUM_DASHBOARD) {
@@ -27,6 +29,7 @@ public class Dashboard {
             SmartDashboard.putData(CommandBase.shooter);
             SmartDashboard.putNumber(SHOOTER_VELOCITY, 20.0);
             SmartDashboard.putNumber(SHOOTER_ANGLE, 90.0);
+            SmartDashboard.putNumber(SHOOTER_OFFSET, 67);
             SmartDashboard.putNumber(SHOOTER_KP, 0.0);
             SmartDashboard.putNumber(SHOOTER_KI, 0.0);
             SmartDashboard.putNumber(SHOOTER_KD, 0.0);
@@ -37,6 +40,9 @@ public class Dashboard {
         if (ENABLE_SPECTRUM_DASHBOARD) {
             if ((Timer.getFPGATimestamp() - shortOldTime) > SHORT_DELAY) {
                 shortOldTime = Timer.getFPGATimestamp();
+                SmartDashboard.putNumber("Pot", CommandBase.shooter.getPot().getAngle());
+                SmartDashboard.putNumber("Pot Voltage", CommandBase.shooter.getPot().getAverageVoltage());                
+                SmartDashboard.putNumber("Arm Angle", CommandBase.shooter.getArmAngle());
             }
             if ((Timer.getFPGATimestamp() - longOldTime) > LONG_DELAY) {
                 //Thing that should be updated every LONG_DELAY

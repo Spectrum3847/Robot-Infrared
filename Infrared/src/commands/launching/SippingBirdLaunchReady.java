@@ -23,7 +23,7 @@ public class SippingBirdLaunchReady extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        SmartDashboard.putNumber("Current Shooter Angle", shooter.getAngle());
+        SmartDashboard.putNumber("Current Shooter Angle", shooter.getArmAngle());
         SmartDashboard.putNumber("Current Shooter Rate", shooter.getRate());
     }
 

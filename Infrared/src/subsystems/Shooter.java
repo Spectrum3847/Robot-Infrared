@@ -5,6 +5,8 @@ import driver.Potentiometer;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import framework.Dashboard;
 import framework.HW;
 
 /**
@@ -30,6 +32,7 @@ public final class Shooter extends PIDSubsystem {
         setInvert2(true);
         setInvert3(true);
         pot = new Potentiometer(HW.SHOOTER_POT);
+        pot.setInvertAngle(true);
         enc = new Encoder(HW.SHOOTER_ENCODER, HW.SHOOTER_ENCODER+1);
         this.getPIDController().setOutputRange(0, 1);
         this.getPIDController().setAbsoluteTolerance(tolerance);
@@ -78,8 +81,13 @@ public final class Shooter extends PIDSubsystem {
         setLauncherSpeed(velocityControllerOut);
     }
     
-    public double getAngle() {
-        return (15.0/26.0)*(280.0 - pot.getAngle());
+    public double getArmAngle() {
+        
+        return (15.0/22.0)* pot.getAngle() - (SmartDashboard.getNumber(Dashboard.SHOOTER_OFFSET, 100));
+    }
+    
+    public Potentiometer getPot(){
+        return pot;
     }
     
     public double getRate() {
