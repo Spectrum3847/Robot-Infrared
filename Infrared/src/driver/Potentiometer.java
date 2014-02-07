@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.AnalogChannel;
 public class Potentiometer extends AnalogChannel {
 
     public final double MAX_ANGLE;
+    private boolean inverted = true;
 
     public Potentiometer(int channel, double angle) {
         super(channel);
@@ -20,7 +21,14 @@ public class Potentiometer extends AnalogChannel {
 
     //PLACEHOLDER: TO BE IMPLEMENTED LATER
     public double getAngle() {
-        return getAverageVoltage() / 5.00 * MAX_ANGLE;
+        if (inverted){
+            return MAX_ANGLE - (getAverageVoltage() / 5.00 * MAX_ANGLE);
+        } else {
+            return getAverageVoltage() / 5.00 * MAX_ANGLE;
+        }
     }
 
+    public void setInvertAngle(boolean invert){
+       inverted = invert;
+    }
 }

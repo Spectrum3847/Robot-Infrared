@@ -23,7 +23,7 @@ public class PIDLauncherDashboardFWD extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        //if(Init.launchready.isRunning() && shooter.getAngle() > SmartDashboard.getNumber(Dashboard.SHOOTER_ANGLE, 90.0))
+        //if(Init.launchready.isRunning() && shooter.getArmAngle() > SmartDashboard.getNumber(Dashboard.SHOOTER_ANGLE, 90.0))
         //    shooter.stopLauncher();
         //else
         shooter.PIDSetVelocity(SmartDashboard.getNumber(Dashboard.SHOOTER_VELOCITY));

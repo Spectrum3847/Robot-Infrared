@@ -39,7 +39,7 @@ public class ButteryflyDrive extends CommandBase {
             drivebase.setCheesyDrive(throttle, wheel, quickturn);
         }
         
-        SmartDashboard.putNumber("Current Shooter Angle", shooter.getAngle());
+        SmartDashboard.putNumber("Current Shooter Angle", shooter.getArmAngle());
     }
 
     // Make this return true when this Command no longer needs to run execute()

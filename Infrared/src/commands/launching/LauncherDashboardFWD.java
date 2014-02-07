@@ -22,10 +22,14 @@ public class LauncherDashboardFWD extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        if(Init.launchready.isRunning() && shooter.getAngle() < SmartDashboard.getNumber(Dashboard.SHOOTER_ANGLE, 90.0))
-            shooter.fastLauncher();
-        else
+        if (Init.launchready.isRunning()){
+            if(shooter.getArmAngle() < SmartDashboard.getNumber(Dashboard.SHOOTER_ANGLE, 90.0))
+                shooter.fastLauncher(); 
+            else
+                shooter.setLauncherSpeed(-.2);
+        } else {
             shooter.stopLauncher();
+        }
     }
 
     // Make this return true when this Command no longer needs to run execute()
