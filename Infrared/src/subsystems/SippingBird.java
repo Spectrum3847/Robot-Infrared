@@ -1,6 +1,7 @@
 package subsystems;
 
 import driver.IRSensor;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -13,9 +14,14 @@ import framework.HW;
  */
 public class SippingBird extends Subsystem {
 
+    public SippingBird() {
+        collector = new DoubleSolenoid(HW.SIPPINGBIRD, HW.SIPPINGBIRD + 1);
+    }
+
     private Victor leftMotor, rightMotor;
     private IRSensor ballSensor;
     public double ballDetectDistance = 15.0; //This is the default ball detect distance
+    final DoubleSolenoid collector;
 
     protected void initDefaultCommand() {
         leftMotor = new Victor(HW.COLLECTOR_LEFT);
@@ -45,5 +51,13 @@ public class SippingBird extends Subsystem {
         } else {
             return false;
         }
+    }
+
+    public void collectorDeploy() {
+        collector.set(DoubleSolenoid.Value.kForward);
+    }
+
+    public void collectorRetract() {
+        collector.set(DoubleSolenoid.Value.kReverse);
     }
 }

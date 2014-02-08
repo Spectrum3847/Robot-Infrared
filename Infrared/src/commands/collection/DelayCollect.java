@@ -19,7 +19,7 @@ public class DelayCollect extends CommandBase {
     protected void initialize() {
         delay = SmartDashboard.getNumber(Dashboard.COLLECT_DELAY);
         wait = Timer.getFPGATimestamp();
-        pneumatics.collectorDeploy();
+        sippingbird.collectorDeploy();
     }
 
     protected void execute() {

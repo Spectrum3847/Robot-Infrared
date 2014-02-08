@@ -42,9 +42,6 @@ public class HW {
     /**IR Sensors**/
     public static final int BALL_SENSOR = 3;
     
-    /**Ball Sensor**/
-    public static final int BALL_SENSOR = 7;
-    
     /**RELAY ALLOCATIONS**/
     public static final int COMPRESSOR = 1;
    

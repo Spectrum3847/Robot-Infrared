@@ -2,6 +2,7 @@ package subsystems;
 
 import driver.IMU;
 import driver.SpectrumDrive;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -26,10 +27,12 @@ public class DriveBase extends PIDSubsystem {
     private final IMU imu;
     private double turnControllerOut = 0;
     private final double tolerance = 1; //Percentage of error that the turn controller can be off and still be onTarget()
+    final DoubleSolenoid mecanum;
 
     public DriveBase() {
         super(HW.TURN_KP, HW.TURN_KI, HW.TURN_KD);
         setVictors();
+        mecanum = new DoubleSolenoid(HW.OCTOCANUM, HW.OCTOCANUM + 1);
         spectrumDrive = new SpectrumDrive(vic_1, vic_2, vic_3, vic_4);
         spectrumDrive.setMaxOutput(1.0);
         imu = new IMU(HW.IMU_PORT);
@@ -234,5 +237,17 @@ public class DriveBase extends PIDSubsystem {
 
     public SpectrumDrive getDrive() {
         return spectrumDrive;
+    }
+
+    public void engageAlt() {
+        mecanum.set(DoubleSolenoid.Value.kReverse);
+    }
+
+    public boolean isCheesy() {
+        return mecanum.get().value != DoubleSolenoid.Value.kReverse_val;
+    }
+
+    public void engageCheesy() {
+        mecanum.set(DoubleSolenoid.Value.kForward);
     }
 }

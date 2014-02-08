@@ -18,7 +18,7 @@ public class ButteryflyDrive extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        pneumatics.engageAlt();
+        drivebase.engageAlt();
         drivebase.disableTurnController();
         System.out.println("Butteryflydrive, GO!");
     }

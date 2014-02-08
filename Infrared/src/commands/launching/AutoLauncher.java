@@ -19,8 +19,8 @@ public class AutoLauncher extends CommandBase {
 
     protected void initialize() {
         System.out.println("SHOOOT!");
-        pneumatics.collectorDeploy();
-        pneumatics.wingsOpen();
+        sippingbird.collectorDeploy();
+        launcher.wingsOpen();
         sippingbird.collectorOFF();
         launcher.enableEncoder();
         wait = Timer.getFPGATimestamp();
@@ -48,8 +48,8 @@ public class AutoLauncher extends CommandBase {
     }
 
     protected void end() {
-        pneumatics.collectorRetract();
-        pneumatics.wingsClose();
+        sippingbird.collectorRetract();
+        launcher.wingsClose();
         launcher.disableEncoder();
         sippingbird.collectorOFF();
     }

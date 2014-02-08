@@ -17,7 +17,7 @@ public class CheesyDrive extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        pneumatics.engageCheesy();
+        drivebase.engageCheesy();
         drivebase.disableTurnController();
         System.out.println("Cheesydrive, GO!");
     }

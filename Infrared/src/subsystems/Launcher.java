@@ -2,6 +2,7 @@ package subsystems;
 
 import commands.launching.LauncherManual;
 import driver.Potentiometer;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.Victor;
@@ -25,9 +26,11 @@ public final class Launcher extends PIDSubsystem {
     
     private double velocityControllerOut;
     private final double tolerance = 1; //Percentage of error that the turn controller can be off and still be onTarget()
+    final DoubleSolenoid wings;
 
     public Launcher() {
         super(HW.SHOOTER_KP, HW.SHOOTER_KI, HW.SHOOTER_KD);
+        wings = new DoubleSolenoid(HW.WINGS, HW.WINGS + 1);
         v1 = new Victor(HW.SHOOTER_MOTOR_1);
         v2 = new Victor(HW.SHOOTER_MOTOR_2);
         v3 = new Victor(HW.SHOOTER_MOTOR_3);
@@ -136,5 +139,13 @@ public final class Launcher extends PIDSubsystem {
     
     public void setVelocityPID(double p, double i, double d) {
         velocityPID.setPID(p, i, d);
+    }
+
+    public void wingsClose() {
+        wings.set(DoubleSolenoid.Value.kForward);
+    }
+
+    public void wingsOpen() {
+        wings.set(DoubleSolenoid.Value.kReverse);
     }
 }

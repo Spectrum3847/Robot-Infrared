@@ -13,7 +13,7 @@ public abstract class CommandBase extends Command {
 
     public static OI oi;
     public static DriveBase drivebase = new DriveBase();
-    public static Pneumatics pneumatics = new Pneumatics();
+    public static Compress pneumatics = new Compress();
     public static SippingBird sippingbird = new SippingBird();
     public static Launcher launcher = new Launcher();
 

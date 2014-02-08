@@ -14,7 +14,7 @@ public class SippingBirdCatch extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        pneumatics.collectorDeploy();
+        sippingbird.collectorDeploy();
         sippingbird.collectorOFF();
         System.out.println("SippingBird, GO!");
     }
@@ -30,7 +30,7 @@ public class SippingBirdCatch extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
-        pneumatics.collectorRetract();
+        sippingbird.collectorRetract();
     }
 
     // Called when another command which requires one or more of the same
