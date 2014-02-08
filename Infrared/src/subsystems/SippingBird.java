@@ -1,7 +1,10 @@
 package subsystems;
 
+import driver.IRSensor;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import framework.Dashboard;
 import framework.HW;
 
 /**
@@ -11,10 +14,13 @@ import framework.HW;
 public class SippingBird extends Subsystem {
 
     private Victor leftMotor, rightMotor;
+    private IRSensor ballSensor;
+    public double ballDetectDistance = 15.0; //This is the default ball detect distance
 
     protected void initDefaultCommand() {
         leftMotor = new Victor(HW.COLLECTOR_LEFT);
         rightMotor = new Victor(HW.COLLECTOR_RIGHT);
+        ballSensor = new IRSensor(HW.BALL_SENSOR);
     }
 
     public void collectorIN() {
@@ -30,5 +36,14 @@ public class SippingBird extends Subsystem {
     public void collectorOUT() {
         leftMotor.set(-1);
         rightMotor.set(-1);
+    }
+    
+    public boolean isBall(){
+       ballDetectDistance = SmartDashboard.getNumber(Dashboard.BALL_DETECT_DISTANCE, ballDetectDistance);
+        if (ballSensor.getDistance() <= ballDetectDistance){
+            return true;
+        } else {
+            return false;
+        }
     }
 }

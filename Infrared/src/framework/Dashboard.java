@@ -24,7 +24,7 @@ public class Dashboard {
     public static String LAUNCHER_STALL = "Launcher Stall Voltage";
     
     public static String COLLECT_DELAY = "Collect Delay";
-
+    public static String BALL_DETECT_DISTANCE = "BALL DETECT DISTANCE";  
     
     public static void intializeDashboard() {
         if (ENABLE_SPECTRUM_DASHBOARD) {
@@ -39,6 +39,8 @@ public class Dashboard {
             
             SmartDashboard.putNumber(LAUNCHER_STALL, 0.0);
             SmartDashboard.putNumber(COLLECT_DELAY, 0.0);
+            
+            SmartDashboard.putNumber(BALL_DETECT_DISTANCE, CommandBase.sippingbird.ballDetectDistance); //Set Default distance in SippingBird Subsystem
         }
     }
 

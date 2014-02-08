@@ -33,6 +33,7 @@ public class HW {
     /**Pneumatics**/
     public static final int PRESSURE_SENSOR = 5;
     
+    
     /**ANALOG SENSOR ALLOCATIONS**/ 
     /**Gyroscope**/
     public static final int GYRO = 1;
@@ -40,6 +41,9 @@ public class HW {
     public static final int SHOOTER_POT = 2;
     /**IR Sensors**/
     public static final int BALL_SENSOR = 3;
+    
+    /**Ball Sensor**/
+    public static final int BALL_SENSOR = 7;
     
     /**RELAY ALLOCATIONS**/
     public static final int COMPRESSOR = 1;
