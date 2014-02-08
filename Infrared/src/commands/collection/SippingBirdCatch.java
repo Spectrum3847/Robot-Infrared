@@ -6,21 +6,21 @@ import commands.CommandBase;
 /*
  * @author Matthew
  */
-public class SippingBirdCollect extends CommandBase {
+public class SippingBirdCatch extends CommandBase {
 
-    public SippingBirdCollect() {
+    public SippingBirdCatch() {
         requires(CommandBase.sippingbird);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
         pneumatics.collectorDeploy();
+        sippingbird.collectorOFF();
         System.out.println("SippingBird, GO!");
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        sippingbird.collectorIN();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -30,7 +30,6 @@ public class SippingBirdCollect extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
-        sippingbird.collectorOFF();
         pneumatics.collectorRetract();
     }
 
