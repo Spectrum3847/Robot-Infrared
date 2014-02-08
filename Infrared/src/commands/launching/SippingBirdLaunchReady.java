@@ -18,14 +18,14 @@ public class SippingBirdLaunchReady extends CommandBase {
         pneumatics.collectorDeploy();
         pneumatics.wingsOpen();
         sippingbird.collectorOFF();
-        shooter.enableEncoder();
+        launcher.enableEncoder();
         System.out.println("SippingBird, LAUNCH READY!");
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        SmartDashboard.putNumber("Current Shooter Angle", shooter.getArmAngle());
-        SmartDashboard.putNumber("Current Shooter Rate", shooter.getRate());
+        SmartDashboard.putNumber("Current Shooter Angle", launcher.getArmAngle());
+        SmartDashboard.putNumber("Current Shooter Rate", launcher.getRate());
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -37,7 +37,7 @@ public class SippingBirdLaunchReady extends CommandBase {
     protected void end() {
         pneumatics.collectorRetract();
         pneumatics.wingsClose();
-        shooter.disableEncoder();
+        launcher.disableEncoder();
         sippingbird.collectorOFF();
     }
 

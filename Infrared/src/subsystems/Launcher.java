@@ -14,7 +14,7 @@ import framework.HW;
  *
  * @author matthew
  */
-public final class Shooter extends PIDSubsystem {
+public final class Launcher extends PIDSubsystem {
 
     private final Victor v1, v2, v3, v4;
     private int invert1 = 1, invert2 = 1, invert3 = 1, invert4 = 1;
@@ -26,7 +26,7 @@ public final class Shooter extends PIDSubsystem {
     private double velocityControllerOut;
     private final double tolerance = 1; //Percentage of error that the turn controller can be off and still be onTarget()
 
-    public Shooter() {
+    public Launcher() {
         super(HW.SHOOTER_KP, HW.SHOOTER_KI, HW.SHOOTER_KD);
         v1 = new Victor(HW.SHOOTER_MOTOR_1);
         v2 = new Victor(HW.SHOOTER_MOTOR_2);

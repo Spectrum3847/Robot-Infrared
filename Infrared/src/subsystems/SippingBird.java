@@ -17,7 +17,7 @@ public class SippingBird extends Subsystem {
         rightMotor = new Victor(HW.COLLECTOR_RIGHT);
     }
 
-    public void collectorFWD() {
+    public void collectorIN() {
         leftMotor.set(.7);
         rightMotor.set(.7);
     }
@@ -27,7 +27,7 @@ public class SippingBird extends Subsystem {
         rightMotor.set(0);
     }
 
-    public void collectorREV() {
+    public void collectorOUT() {
         leftMotor.set(-1);
         rightMotor.set(-1);
     }

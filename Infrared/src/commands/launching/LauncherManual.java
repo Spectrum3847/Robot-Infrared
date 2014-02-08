@@ -11,7 +11,7 @@ import framework.Utilities;
 public class LauncherManual extends CommandBase {
 
     public LauncherManual() {
-        requires(CommandBase.shooter);
+        requires(CommandBase.launcher);
     }
 
     // Called just before this Command runs the first time
@@ -26,7 +26,7 @@ public class LauncherManual extends CommandBase {
         if (speed < 0) {
             speed = speed * .5;
         }
-        shooter.setLauncherSpeed(speed);
+        launcher.setLauncherSpeed(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -36,7 +36,7 @@ public class LauncherManual extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
-        shooter.stopLauncher();
+        launcher.stopLauncher();
     }
 
     // Called when another command which requires one or more of the same

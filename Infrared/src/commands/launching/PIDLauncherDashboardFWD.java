@@ -12,13 +12,13 @@ import framework.Init;
 public class PIDLauncherDashboardFWD extends CommandBase {
 
     public PIDLauncherDashboardFWD() {
-        requires(CommandBase.shooter);
+        requires(CommandBase.launcher);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
         System.out.println("SHOOOT!");
-        shooter.enableVelocityPID();
+        launcher.enableVelocityPID();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -26,9 +26,9 @@ public class PIDLauncherDashboardFWD extends CommandBase {
         //if(Init.launchready.isRunning() && shooter.getArmAngle() > SmartDashboard.getNumber(Dashboard.SHOOTER_ANGLE, 90.0))
         //    shooter.stopLauncher();
         //else
-        shooter.PIDSetVelocity(SmartDashboard.getNumber(Dashboard.SHOOTER_VELOCITY));
-        shooter.setVelocityPID(SmartDashboard.getNumber(Dashboard.SHOOTER_KP), SmartDashboard.getNumber(Dashboard.SHOOTER_KI), SmartDashboard.getNumber(Dashboard.SHOOTER_KD));
-        shooter.PIDLauncher();
+        launcher.PIDSetVelocity(SmartDashboard.getNumber(Dashboard.SHOOTER_VELOCITY));
+        launcher.setVelocityPID(SmartDashboard.getNumber(Dashboard.SHOOTER_KP), SmartDashboard.getNumber(Dashboard.SHOOTER_KI), SmartDashboard.getNumber(Dashboard.SHOOTER_KD));
+        launcher.PIDLauncher();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -38,8 +38,8 @@ public class PIDLauncherDashboardFWD extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
-        shooter.stopLauncher();
-        shooter.disableVelocityPID();
+        launcher.stopLauncher();
+        launcher.disableVelocityPID();
     }
 
     // Called when another command which requires one or more of the same

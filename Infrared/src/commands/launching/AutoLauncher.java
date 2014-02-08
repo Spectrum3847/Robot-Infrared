@@ -14,7 +14,7 @@ public class AutoLauncher extends CommandBase {
     private double wait;
     private boolean launched = false;
     public AutoLauncher() {
-        requires(shooter);
+        requires(launcher);
     }
 
     protected void initialize() {
@@ -22,35 +22,35 @@ public class AutoLauncher extends CommandBase {
         pneumatics.collectorDeploy();
         pneumatics.wingsOpen();
         sippingbird.collectorOFF();
-        shooter.enableEncoder();
+        launcher.enableEncoder();
         wait = Timer.getFPGATimestamp();
     }
 
     protected void execute() {
         if(Timer.getFPGATimestamp()-wait > DELAY)
             if(!launched )
-                if(shooter.getAngle() <= SmartDashboard.getNumber(Dashboard.SHOOTER_ANGLE, 90.0))
-                    shooter.fastLauncher();
+                if(launcher.getArmAngle() <= SmartDashboard.getNumber(Dashboard.SHOOTER_ANGLE, 90.0))
+                    launcher.fastLauncher();
                 else
                     launched = true;
             else
-                if(shooter.getAngle() >= 10.0)
-                    shooter.setLauncherSpeed(-0.3);
+                if(launcher.getArmAngle() >= 10.0)
+                    launcher.setLauncherSpeed(-0.3);
                 else
-                    shooter.stopLauncher();
+                    launcher.stopLauncher();
         else
-            shooter.stopLauncher();
+            launcher.stopLauncher();
             
     }
 
     protected boolean isFinished() {
-        return launched && shooter.getAngle() < 10.0;
+        return launched && launcher.getArmAngle() < 10.0;
     }
 
     protected void end() {
         pneumatics.collectorRetract();
         pneumatics.wingsClose();
-        shooter.disableEncoder();
+        launcher.disableEncoder();
         sippingbird.collectorOFF();
     }
 
