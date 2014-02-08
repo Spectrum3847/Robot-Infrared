@@ -21,6 +21,7 @@ public class Dashboard {
     public static String SHOOTER_KI = "Shoot KI";
     public static String SHOOTER_KD = "Shoot KD";
     public static String SHOOTER_OFFSET = "Shooter Offset";
+    public static String LAUNCHER_STALL = "Launcher Stall Voltage";
     
     public static String COLLECT_DELAY = "Collect Delay";
 
@@ -31,11 +32,12 @@ public class Dashboard {
             SmartDashboard.putData(CommandBase.launcher);
             SmartDashboard.putNumber(SHOOTER_VELOCITY, 20.0);
             SmartDashboard.putNumber(SHOOTER_ANGLE, 90.0);
-            SmartDashboard.putNumber(SHOOTER_OFFSET, 67);
+            SmartDashboard.putNumber(SHOOTER_OFFSET, 20.0);
             SmartDashboard.putNumber(SHOOTER_KP, 0.0);
             SmartDashboard.putNumber(SHOOTER_KI, 0.0);
             SmartDashboard.putNumber(SHOOTER_KD, 0.0);
             
+            SmartDashboard.putNumber(LAUNCHER_STALL, 0.0);
             SmartDashboard.putNumber(COLLECT_DELAY, 0.0);
         }
     }

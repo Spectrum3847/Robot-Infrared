@@ -1,6 +1,8 @@
 package commands.launching;
 
 import commands.CommandBase;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import framework.Dashboard;
 import framework.OI;
 import framework.Utilities;
 
@@ -27,6 +29,7 @@ public class LauncherManual extends CommandBase {
             speed = speed * .5;
         }
         launcher.setLauncherSpeed(speed);
+        SmartDashboard.putNumber("Shooter Manual Speed", speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()

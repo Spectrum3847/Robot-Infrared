@@ -27,7 +27,9 @@ public class HW {
     public static final int IMU_PORT = 1;
     /**Drivebase Encoders**/
     /**Shooter Encoder**/
-    public static final int SHOOTER_ENCODER = 2;
+    public static final int SHOOTER_ENCODER = 2; // and 3
+    /**Buttons**/
+    public static final int LAUNCHER_STOP = 4;
     /**Pneumatics**/
     public static final int PRESSURE_SENSOR = 5;
     
@@ -36,6 +38,8 @@ public class HW {
     public static final int GYRO = 1;
     /**Potentiometers**/
     public static final int SHOOTER_POT = 2;
+    /**IR Sensors**/
+    public static final int BALL_SENSOR = 3;
     
     /**RELAY ALLOCATIONS**/
     public static final int COMPRESSOR = 1;

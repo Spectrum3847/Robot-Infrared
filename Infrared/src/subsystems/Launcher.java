@@ -81,13 +81,17 @@ public final class Launcher extends PIDSubsystem {
         setLauncherSpeed(-0.2);
     }
     
+    public void stallLauncher() {
+        v2.set(-0.2); // Tested stall value for one CIM motor
+    }
+    
     public void PIDLauncher() {
         setLauncherSpeed(velocityControllerOut);
     }
     
     public double getArmAngle() {
         
-        return (15.0/22.0)* pot.getAngle() - (SmartDashboard.getNumber(Dashboard.SHOOTER_OFFSET, 100));
+        return (15.0/22.0)* pot.getAngle() - (SmartDashboard.getNumber(Dashboard.SHOOTER_OFFSET, 20.0));
     }
     
     public Potentiometer getPot(){
