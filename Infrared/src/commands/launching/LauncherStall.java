@@ -19,6 +19,8 @@ public class LauncherStall extends CommandBase {
 
     protected void execute() {
         launcher.stallLauncher();
+        SmartDashboard.putNumber("Current Shooter Angle", launcher.getArmAngle());
+        SmartDashboard.putNumber("Current Shooter Rate", launcher.getRate());
     }
 
     protected boolean isFinished() {

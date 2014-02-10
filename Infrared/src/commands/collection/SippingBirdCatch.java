@@ -16,6 +16,7 @@ public class SippingBirdCatch extends CommandBase {
     protected void initialize() {
         sippingbird.collectorDeploy();
         sippingbird.collectorOFF();
+        launcher.wingsOpen();
         System.out.println("SippingBird, GO!");
     }
 
@@ -31,6 +32,7 @@ public class SippingBirdCatch extends CommandBase {
     // Called once after isFinished returns true
     protected void end() {
         sippingbird.collectorRetract();
+        launcher.wingsClose();
     }
 
     // Called when another command which requires one or more of the same

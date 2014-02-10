@@ -4,6 +4,7 @@ import commands.CommandBase;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import framework.Dashboard;
 import framework.Init;
+import java.io.IOException;
 
 
 /*
@@ -19,6 +20,15 @@ public class PIDLauncherDashboardFWD extends CommandBase {
     protected void initialize() {
         System.out.println("SHOOOT!");
         launcher.enableVelocityPID();
+        launcher.stopLauncher();
+        double kp = SmartDashboard.getNumber(Dashboard.SHOOTER_KP);
+        double ki = SmartDashboard.getNumber(Dashboard.SHOOTER_KI);
+        double kd = SmartDashboard.getNumber(Dashboard.SHOOTER_KD);
+        launcher.disablePID();launcher.setVelocityPID(kp, ki, kd);
+        try {
+            Init.theFile.writeChars("\n\n#PID: " + kp + " " + ki + " " + kd + "\n\n");
+        } catch (IOException ex) {
+        }
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -26,9 +36,11 @@ public class PIDLauncherDashboardFWD extends CommandBase {
         //if(Init.launchready.isRunning() && shooter.getArmAngle() > SmartDashboard.getNumber(Dashboard.SHOOTER_ANGLE, 90.0))
         //    shooter.stopLauncher();
         //else
-        launcher.PIDSetVelocity(SmartDashboard.getNumber(Dashboard.SHOOTER_VELOCITY));
-        launcher.setVelocityPID(SmartDashboard.getNumber(Dashboard.SHOOTER_KP), SmartDashboard.getNumber(Dashboard.SHOOTER_KI), SmartDashboard.getNumber(Dashboard.SHOOTER_KD));
-        launcher.PIDLauncher();
+        launcher.PIDSetVelocity(SmartDashboard.getNumber(Dashboard.SHOOTER_PID_VELOCITY));
+        try {
+            Init.theFile.writeChars("" + launcher.getRate() + "\n");
+        } catch (IOException ex) {
+        }
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -39,7 +51,12 @@ public class PIDLauncherDashboardFWD extends CommandBase {
     // Called once after isFinished returns true
     protected void end() {
         launcher.stopLauncher();
-        launcher.disableVelocityPID();
+        launcher.disablePID();
+        try {
+            Init.theFile.writeChars("" + launcher.getRate() + "#\n\n");
+            Init.theFile.flush();
+        } catch (IOException ex) {
+        }
     }
 
     // Called when another command which requires one or more of the same

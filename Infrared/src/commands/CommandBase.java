@@ -16,6 +16,7 @@ public abstract class CommandBase extends Command {
     public static Compress pneumatics = new Compress();
     public static SippingBird sippingbird = new SippingBird();
     public static Launcher launcher = new Launcher();
+    public static Vision vision = new Vision();
 
     // Create a single static instance of all of your subsystems
     public static void init() {
@@ -25,7 +26,7 @@ public abstract class CommandBase extends Command {
         // yet. Thus, their requires() statements may grab null pointers. Bad
         // news. Don't move it.
         oi = new OI();
-
+        //vision.visionInit();
         // Show what command your subsystem is running on the SmartDashboard
         //SmartDashboard.putData(null);
     }

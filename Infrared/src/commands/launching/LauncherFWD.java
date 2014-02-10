@@ -1,6 +1,7 @@
 package commands.launching;
 
 import commands.CommandBase;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import framework.Init;
 
 
@@ -24,6 +25,8 @@ public class LauncherFWD extends CommandBase {
             launcher.fastLauncher();
         else
             launcher.stopLauncher();
+        SmartDashboard.putNumber("Current Shooter Angle", launcher.getArmAngle());
+        SmartDashboard.putNumber("Current Shooter Rate", launcher.getRate());
     }
 
     // Make this return true when this Command no longer needs to run execute()

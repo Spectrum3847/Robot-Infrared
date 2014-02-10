@@ -44,6 +44,7 @@ public class HW {
     
     /**RELAY ALLOCATIONS**/
     public static final int COMPRESSOR = 1;
+    public static final int LIGHT_RING = 2;
    
     /**SOLENOID ALLOCATIONS**/
     public static final int OCTOCANUM = 1;
@@ -60,6 +61,10 @@ public class HW {
     public static final double SHOOTER_KP = 0.0;
     public static final double SHOOTER_KI = 0.0;
     public static final double SHOOTER_KD = 0.0;
+    /**Shooter Position PID**/
+    public static final double SHOOTER_POS_KP = 0.015;
+    public static final double SHOOTER_POS_KI = 0.23/1000;
+    public static final double SHOOTER_POS_KD = 0.015;
     
     /**JOYSTICKS/GAMEPAD ASSIGNMENTS**/
     public static final int usbPort_one = 1;

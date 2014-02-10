@@ -25,11 +25,20 @@ public class LauncherManual extends CommandBase {
     protected void execute() {
         double speed = OI.gamepad_aux.getLeftY();
         speed = Utilities.deadBand(speed, 0.2);
-        if (speed < 0) {
-            speed = speed * .5;
+        /*if((speed == 0 || launcher.isDown()) && !sippingbird.isBall()) {
+            launcher.stallLauncher();
         }
-        launcher.setLauncherSpeed(speed);
+        else {*/
+            if (speed < 0) {
+                speed = speed * .5;
+            }
+            launcher.setLauncherSpeed(speed);
+        //}
+        SmartDashboard.putBoolean("Button", launcher.isDown());
+        SmartDashboard.putBoolean("Is Ball", sippingbird.isBall());
         SmartDashboard.putNumber("Shooter Manual Speed", speed);
+        SmartDashboard.putNumber("Current Shooter Angle", launcher.getArmAngle());
+        SmartDashboard.putNumber("Current Shooter Rate", launcher.getRate());
     }
 
     // Make this return true when this Command no longer needs to run execute()

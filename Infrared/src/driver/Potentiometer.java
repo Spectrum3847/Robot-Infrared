@@ -1,12 +1,13 @@
 package driver;
 
 import edu.wpi.first.wpilibj.AnalogChannel;
+import edu.wpi.first.wpilibj.PIDSource;
 
 /**
  *
  * @author David
  */
-public class Potentiometer extends AnalogChannel {
+public class Potentiometer extends AnalogChannel implements PIDSource{
 
     public final double MAX_ANGLE;
     private boolean inverted = true;
@@ -30,5 +31,9 @@ public class Potentiometer extends AnalogChannel {
 
     public void setInvertAngle(boolean invert){
        inverted = invert;
+    }
+    
+    public double PIDGet() {
+        return getAngle();
     }
 }

@@ -1,7 +1,10 @@
 package subsystems;
 
+import commands.CommandBase;
 import commands.launching.LauncherManual;
+import commands.launching.LauncherZero;
 import driver.Potentiometer;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
@@ -10,6 +13,7 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import framework.Dashboard;
 import framework.HW;
+import framework.Utilities;
 
 /**
  *
@@ -21,32 +25,42 @@ public final class Launcher extends PIDSubsystem {
     private int invert1 = 1, invert2 = 1, invert3 = 1, invert4 = 1;
     private final Potentiometer pot;
     private final Encoder enc;
+    private final DigitalInput button;
     
-    private final PIDController velocityPID;
+    private final PIDController controller;
     
-    private double velocityControllerOut;
-    private final double tolerance = 1; //Percentage of error that the turn controller can be off and still be onTarget()
+    private boolean isVelocity = false;
+    
+    private boolean stall = true;
+    
+    private double positionSetpoint = 0.0;
+    private double velocitySetpoint = 0.0;
+    
+    private double PIDControllerOut;
+    private final double tolerance = 3.5; //Percentage of error that the turn controller can be off and still be onTarget()
     final DoubleSolenoid wings;
 
     public Launcher() {
         super(HW.SHOOTER_KP, HW.SHOOTER_KI, HW.SHOOTER_KD);
         wings = new DoubleSolenoid(HW.WINGS, HW.WINGS + 1);
         v1 = new Victor(HW.SHOOTER_MOTOR_1);
-        v2 = new Victor(HW.SHOOTER_MOTOR_2);
-        v3 = new Victor(HW.SHOOTER_MOTOR_3);
+        v2 = new Victor(HW.SHOOTER_MOTOR_2); // CIM 4
+        v3 = new Victor(HW.SHOOTER_MOTOR_3); // CIM
         v4 = new Victor(HW.SHOOTER_MOTOR_4);
         setInvert2(true);
         setInvert3(true);
+        button = new DigitalInput(HW.LAUNCHER_STOP);
         pot = new Potentiometer(HW.SHOOTER_POT);
         pot.setInvertAngle(true);
         enc = new Encoder(HW.SHOOTER_ENCODER, HW.SHOOTER_ENCODER+1);
-        velocityPID = this.getPIDController();
-        velocityPID.setOutputRange(0, 1);
-        velocityPID.setAbsoluteTolerance(tolerance);
+        controller = this.getPIDController();
+        controller.setOutputRange(-0.5, 1);
+        controller.setAbsoluteTolerance(tolerance);
     }
 
     protected void initDefaultCommand() {
-        setDefaultCommand(new LauncherManual());
+        setDefaultCommand(new LauncherZero());
+        //setDefaultCommand(new LauncherManual());
     }
 
     public void setLauncherSpeed(double speed) {
@@ -54,6 +68,11 @@ public final class Launcher extends PIDSubsystem {
         v2.set(speed * invert2);
         v3.set(speed * invert3);
         v4.set(speed * invert4);
+    }
+    
+    public void setCIMSpeed(double s) {
+        v2.set(s * invert2);
+        v3.set(s * invert3);
     }
 
     public final void setInvert1(boolean isInverted) {
@@ -85,16 +104,30 @@ public final class Launcher extends PIDSubsystem {
     }
     
     public void stallLauncher() {
-        v2.set(-0.2); // Tested stall value for one CIM motor
+        setCIMSpeed(-0.2);
+        v1.set(0);
+        v4.set(0);
     }
     
-    public void PIDLauncher() {
-        setLauncherSpeed(velocityControllerOut);
+    public void PIDStall(boolean b) {
+        stall = b;
+    }
+
+    public void wingsClose() {
+        wings.set(DoubleSolenoid.Value.kForward);
+    }
+
+    public void wingsOpen() {
+        wings.set(DoubleSolenoid.Value.kReverse);
+    }
+    
+    public boolean isDown() {
+        return !button.get(); //Vex button sensor inverted
     }
     
     public double getArmAngle() {
         
-        return (15.0/22.0)* pot.getAngle() - (SmartDashboard.getNumber(Dashboard.SHOOTER_OFFSET, 20.0));
+        return (15.0/22.0)* pot.getAngle() - (SmartDashboard.getNumber(Dashboard.SHOOTER_OFFSET, 0.0));
     }
     
     public Potentiometer getPot(){
@@ -104,14 +137,6 @@ public final class Launcher extends PIDSubsystem {
     public double getRate() {
         return enc.getRate();
     }
-
-    protected double returnPIDInput() {
-        return getRate();
-    }
-
-    protected void usePIDOutput(double d) {
-        velocityControllerOut = d;
-    }
     
     public void enableEncoder() {
         enc.start();
@@ -120,32 +145,80 @@ public final class Launcher extends PIDSubsystem {
     public void disableEncoder() {
         enc.stop();
     }
+
+    protected double returnPIDInput() {
+        if(isVelocity)
+            return getRate();
+        else
+            return getArmAngle();
+    }
+
+    protected void usePIDOutput(double d) {
+        if(!isVelocity && atPosition()) {
+            if(!CommandBase.sippingbird.isBall())
+                stallLauncher();
+            else
+                stopLauncher();
+            SmartDashboard.putBoolean("Good Stall", true);
+        }
+        else if(!isVelocity) {
+            setLauncherSpeed(d);
+            SmartDashboard.putBoolean("Good Stall", false);
+        }
+    }
     
-    public double getVelocityControllerOut() {
-        return velocityControllerOut;
+    public double getPIDControllerOut() {
+        return PIDControllerOut;
+    }
+    
+    public void disablePID() {
+        controller.disable();
+        controller.reset();
     }
     
     public void PIDSetVelocity(double v) {
-        velocityPID.setSetpoint(v);
+        velocitySetpoint = v;
+        controller.setSetpoint(v);
     }
     
     public void enableVelocityPID() {
-        velocityPID.enable();
-    }
-    
-    public void disableVelocityPID() {
-        velocityPID.disable();
+        isVelocity = true;
+        controller.setPID(HW.SHOOTER_KP, HW.SHOOTER_KI, HW.SHOOTER_KD);
+        controller.setInputRange(-1000, 1000);
+        controller.setSetpoint(velocitySetpoint);
+        controller.enable();
     }
     
     public void setVelocityPID(double p, double i, double d) {
-        velocityPID.setPID(p, i, d);
+        controller.setPID(p, i, d);
+    }
+    
+    public boolean atVelocity() {
+        return Utilities.abs(velocitySetpoint-getRate()) <= tolerance;
+    }
+    
+    public void PIDSetPosition(double v) {
+        positionSetpoint = v;
+        controller.setSetpoint(v);
+    }
+    
+    public void enablePositionPID() {
+        isVelocity = false;
+        controller.setPID(HW.SHOOTER_POS_KP, HW.SHOOTER_POS_KI, HW.SHOOTER_POS_KD);
+        controller.setInputRange(0, 180);
+        controller.setSetpoint(positionSetpoint);
+        controller.enable();
+    }
+    
+    public void setPositionPID(double p, double i, double d) {
+        controller.setPID(p, i, d);
     }
 
-    public void wingsClose() {
-        wings.set(DoubleSolenoid.Value.kForward);
+    public void setPositionPID(double p, double i, double d, double f) {
+        controller.setPID(p, i, d, f);
     }
-
-    public void wingsOpen() {
-        wings.set(DoubleSolenoid.Value.kReverse);
+    
+    public boolean atPosition() {
+        return Utilities.abs(positionSetpoint-getArmAngle()) <= tolerance;
     }
 }

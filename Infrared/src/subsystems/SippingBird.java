@@ -20,7 +20,7 @@ public class SippingBird extends Subsystem {
 
     private Victor leftMotor, rightMotor;
     private IRSensor ballSensor;
-    public double ballDetectDistance = 15.0; //This is the default ball detect distance
+    public double ballDetectDistance = 20.0; //This is the default ball detect distance
     final DoubleSolenoid collector;
 
     protected void initDefaultCommand() {
@@ -45,7 +45,8 @@ public class SippingBird extends Subsystem {
     }
     
     public boolean isBall(){
-       ballDetectDistance = SmartDashboard.getNumber(Dashboard.BALL_DETECT_DISTANCE, ballDetectDistance);
+        SmartDashboard.putNumber("Distance Ball", ballSensor.getDistance());
+        ballDetectDistance = SmartDashboard.getNumber(Dashboard.BALL_DETECT_DISTANCE, ballDetectDistance);
         if (ballSensor.getDistance() <= ballDetectDistance){
             return true;
         } else {

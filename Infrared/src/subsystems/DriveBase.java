@@ -26,7 +26,7 @@ public class DriveBase extends PIDSubsystem {
     private final Gyro gyro;
     private final IMU imu;
     private double turnControllerOut = 0;
-    private final double tolerance = 1; //Percentage of error that the turn controller can be off and still be onTarget()
+    private final double tolerance = 0.5;
     final DoubleSolenoid mecanum;
 
     public DriveBase() {
@@ -38,6 +38,7 @@ public class DriveBase extends PIDSubsystem {
         imu = new IMU(HW.IMU_PORT);
         gyro = new Gyro(HW.GYRO);
         this.getPIDController().setOutputRange(-1, 1);
+        this.getPIDController().setInputRange(-250.0, 250);
         this.getPIDController().setAbsoluteTolerance(tolerance);
     }
 
@@ -56,7 +57,7 @@ public class DriveBase extends PIDSubsystem {
      * @return
      */
     public double returnPIDInput() {
-        return gyro.getAngle();
+        return gyro.getRate();
     }
 
     /**
