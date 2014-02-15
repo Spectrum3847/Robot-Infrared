@@ -18,4 +18,8 @@ public class Teleop {
         Scheduler.getInstance().run();
         Dashboard.updateDashboard();
     }
+
+    public static void cancel() {
+        Scheduler.getInstance().removeAll();
+    }
 }

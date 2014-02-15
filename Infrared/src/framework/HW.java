@@ -30,6 +30,7 @@ public class HW {
     public static final int SHOOTER_ENCODER = 2; // and 3
     /**Buttons**/
     public static final int LAUNCHER_STOP = 4;
+    public static final int LAUNCHER_TOP = 6;
     /**Pneumatics**/
     public static final int PRESSURE_SENSOR = 5;
     
@@ -47,9 +48,9 @@ public class HW {
     public static final int LIGHT_RING = 2;
    
     /**SOLENOID ALLOCATIONS**/
-    public static final int OCTOCANUM = 1;
-    public static final int SIPPINGBIRD = 3;
-    public static final int WINGS = 5;
+    public static final int DRIVESHIFT = 1; // and 2
+    public static final int SIPPINGBIRD = 3; // and 4
+    public static final int WINGS = 5; // and 6
     
     
     /**PID CONSTANTS**/

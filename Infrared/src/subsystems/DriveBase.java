@@ -32,7 +32,7 @@ public class DriveBase extends PIDSubsystem {
     public DriveBase() {
         super(HW.TURN_KP, HW.TURN_KI, HW.TURN_KD);
         setVictors();
-        mecanum = new DoubleSolenoid(HW.OCTOCANUM, HW.OCTOCANUM + 1);
+        mecanum = new DoubleSolenoid(HW.DRIVESHIFT, HW.DRIVESHIFT + 1);
         spectrumDrive = new SpectrumDrive(vic_1, vic_2, vic_3, vic_4);
         spectrumDrive.setMaxOutput(1.0);
         imu = new IMU(HW.IMU_PORT);

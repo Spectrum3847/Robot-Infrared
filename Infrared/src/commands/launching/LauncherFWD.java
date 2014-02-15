@@ -21,7 +21,7 @@ public class LauncherFWD extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        if(Init.launchready.isRunning())
+        if(Init.sippingbirdlaunchready.isRunning())
             launcher.fastLauncher();
         else
             launcher.stopLauncher();
@@ -31,7 +31,7 @@ public class LauncherFWD extends CommandBase {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return !Init.launchready.isRunning();
+        return !Init.sippingbirdlaunchready.isRunning();
     }
 
     // Called once after isFinished returns true

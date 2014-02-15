@@ -10,6 +10,8 @@ public class Autonomous {
 
     public static void init() {
         CommandBase.drivebase.zeroIMU();
+        CommandBase.drivebase.zeroGyro();
+        Init.launcherzero.start();
     }
 
     public static void periodic() {
@@ -18,5 +20,6 @@ public class Autonomous {
     }
 
     public static void cancel() {
+        Scheduler.getInstance().removeAll();
     }
 }

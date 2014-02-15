@@ -20,7 +20,7 @@ public class ButteryflyDrive extends CommandBase {
     // Called just before this Command runs the first time
     protected void initialize() {
         drivebase.engageAlt();
-        //drivebase.enableTurnController();
+        drivebase.enableTurnController();
         drivebase.setSetpoint(0.0);
         System.out.println("Butteryflydrive, GO!");
     }
@@ -41,8 +41,8 @@ public class ButteryflyDrive extends CommandBase {
             drivebase.setCheesyDrive(0, quickTurnTriggers, true);
         }
         else {
-            //drivebase.setCheesyDrive(throttle, wheel != 0 ? wheel : drivebase.getPIDTurnOutput(), quickturn);
-            drivebase.setCheesyDrive(throttle, wheel, quickturn);
+            drivebase.setCheesyDrive(throttle, wheel != 0 ? wheel : drivebase.getPIDTurnOutput(), quickturn);
+            //drivebase.setCheesyDrive(throttle, wheel, quickturn);
         }
         
         SmartDashboard.putNumber("Current Shooter Angle", launcher.getArmAngle());

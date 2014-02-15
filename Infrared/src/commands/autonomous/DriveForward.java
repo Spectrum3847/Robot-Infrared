@@ -1,27 +1,32 @@
-package commands.collection;
+package commands.autonomous;
 
 import commands.CommandBase;
+import driver.Gamepad;
+import framework.OI;
+import framework.Utilities;
 
-
-/*
- * @author Matthew
+/**
+ *
+ * @author matthew
  */
-public class SippingBirdEject extends CommandBase {
+public class DriveForward extends CommandBase {
 
-    public SippingBirdEject() {
-        requires(CommandBase.sippingbird);
+    public DriveForward() {
+        requires(CommandBase.drivebase);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        sippingbird.collectorRetract();
-        launcher.wingsOpen();
-        System.out.println("SippingBird, Eject!");
+        drivebase.engageCheesy();
+        drivebase.enableTurnController();
+        System.out.println("Cheesydrive, GO!");
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        sippingbird.collectorOUT();
+        drivebase.setCheesySensetivity(1.32);
+
+        drivebase.setCheesyDrive(0.3, 0, false);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -31,9 +36,8 @@ public class SippingBirdEject extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
-        sippingbird.collectorOFF();
-        launcher.wingsClose();
-        sippingbird.collectorRetract();
+        drivebase.setArcade(0, 0);
+        drivebase.disableTurnController();
     }
 
     // Called when another command which requires one or more of the same

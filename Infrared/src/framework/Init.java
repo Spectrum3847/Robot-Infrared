@@ -2,6 +2,7 @@ package framework;
 
 import com.sun.squawk.microedition.io.FileConnection;
 import commands.CommandBase;
+import commands.collection.SippingBirdCatch;
 import commands.collection.SippingBirdCollect;
 import commands.collection.SippingBirdEject;
 import commands.driving.ButteryflyDrive;
@@ -10,12 +11,13 @@ import commands.driving.DriveSelect;
 import commands.driving.HoloDrive;
 import commands.launching.LauncherDashboardFWD;
 import commands.launching.LauncherFWD;
-import commands.launching.LauncherStall;
+import commands.launching.LauncherManual;
 import commands.launching.LauncherZero;
-import commands.launching.PIDLauncherDashboardFWD;
+import commands.launching.LauncherDashboardFWDPID;
 import commands.launching.SippingBirdLaunchReady;
 import commands.pneumatics.RunCompressor;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import javax.microedition.io.Connector;
 
 /**
@@ -24,19 +26,23 @@ import javax.microedition.io.Connector;
  */
 public class Init {
 
+    public static DriveSelect driveselect = new DriveSelect();
     public static CheesyDrive cheesydrive = new CheesyDrive();
     public static HoloDrive holodrive = new HoloDrive();
     public static ButteryflyDrive butteryflydrive = new ButteryflyDrive();
-    public static DriveSelect driveselect = new DriveSelect();
+    
     public static RunCompressor runcompressor = new RunCompressor();
+    
     public static SippingBirdCollect sippingbirdcollect = new SippingBirdCollect();
     public static SippingBirdEject sippingbirdeject = new SippingBirdEject();
-    public static SippingBirdLaunchReady launchready = new SippingBirdLaunchReady();
-    public static LauncherFWD launcherfwd = new LauncherFWD();
+    public static SippingBirdCatch sippingbirdcatch = new SippingBirdCatch();
+    public static SippingBirdLaunchReady sippingbirdlaunchready = new SippingBirdLaunchReady();
+    
+    public static LauncherManual launchermanual = new LauncherManual();
     public static LauncherDashboardFWD launcherdashboardfwd = new LauncherDashboardFWD();
-    public static PIDLauncherDashboardFWD pidlauncherdashboardfwd = new PIDLauncherDashboardFWD();
-    public static LauncherStall launcherstall = new LauncherStall();
+    public static LauncherDashboardFWDPID launcherdashboardfwdpid = new LauncherDashboardFWDPID();
     public static LauncherZero launcherzero = new LauncherZero();
+    
     public static DataOutputStream theFile;
 
     public static void init() {
@@ -49,7 +55,7 @@ public class Init {
             fc = (FileConnection) Connector.open("file:///output.txt", Connector.WRITE);
             fc.create();
             theFile = fc.openDataOutputStream();
-        } catch (Exception e) {}
+        } catch (IOException e) {}
     }
 
     public static void periodic() {

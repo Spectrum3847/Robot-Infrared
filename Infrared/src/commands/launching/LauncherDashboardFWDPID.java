@@ -10,15 +10,16 @@ import java.io.IOException;
 /*
  * @author Matthew
  */
-public class PIDLauncherDashboardFWD extends CommandBase {
+public class LauncherDashboardFWDPID extends CommandBase {
 
-    public PIDLauncherDashboardFWD() {
+    public LauncherDashboardFWDPID() {
         requires(CommandBase.launcher);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
         System.out.println("SHOOOT!");
+        launcher.enableEncoder();
         launcher.enableVelocityPID();
         launcher.stopLauncher();
         double kp = SmartDashboard.getNumber(Dashboard.SHOOTER_KP);
@@ -51,6 +52,7 @@ public class PIDLauncherDashboardFWD extends CommandBase {
     // Called once after isFinished returns true
     protected void end() {
         launcher.stopLauncher();
+        launcher.disableEncoder();
         launcher.disablePID();
         try {
             Init.theFile.writeChars("" + launcher.getRate() + "#\n\n");

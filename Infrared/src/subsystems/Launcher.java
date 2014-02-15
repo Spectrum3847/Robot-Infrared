@@ -155,11 +155,9 @@ public final class Launcher extends PIDSubsystem {
 
     protected void usePIDOutput(double d) {
         if(!isVelocity && atPosition()) {
-            if(!CommandBase.sippingbird.isBall())
-                stallLauncher();
-            else
+            if(CommandBase.sippingbird.isBall())
                 stopLauncher();
-            SmartDashboard.putBoolean("Good Stall", true);
+            //SmartDashboard.putBoolean("Good Stall", true);
         }
         else if(!isVelocity) {
             setLauncherSpeed(d);
@@ -172,7 +170,6 @@ public final class Launcher extends PIDSubsystem {
     }
     
     public void disablePID() {
-        controller.disable();
         controller.reset();
     }
     
@@ -182,10 +179,12 @@ public final class Launcher extends PIDSubsystem {
     }
     
     public void enableVelocityPID() {
+        controller.reset();
         isVelocity = true;
         controller.setPID(HW.SHOOTER_KP, HW.SHOOTER_KI, HW.SHOOTER_KD);
         controller.setInputRange(-1000, 1000);
-        controller.setSetpoint(velocitySetpoint);
+        controller.setContinuous(false);
+        controller.setSetpoint(0);
         controller.enable();
     }
     
@@ -194,7 +193,7 @@ public final class Launcher extends PIDSubsystem {
     }
     
     public boolean atVelocity() {
-        return Utilities.abs(velocitySetpoint-getRate()) <= tolerance;
+        return velocitySetpoint-getRate() <= tolerance;
     }
     
     public void PIDSetPosition(double v) {
@@ -203,10 +202,12 @@ public final class Launcher extends PIDSubsystem {
     }
     
     public void enablePositionPID() {
+        controller.reset();
         isVelocity = false;
         controller.setPID(HW.SHOOTER_POS_KP, HW.SHOOTER_POS_KI, HW.SHOOTER_POS_KD);
-        controller.setInputRange(0, 180);
-        controller.setSetpoint(positionSetpoint);
+        controller.setInputRange(-10, 180);
+        controller.setContinuous(true);
+        controller.setSetpoint(0);
         controller.enable();
     }
     

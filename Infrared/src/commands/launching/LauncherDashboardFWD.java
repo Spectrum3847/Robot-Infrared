@@ -22,7 +22,7 @@ public class LauncherDashboardFWD extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        if (Init.launchready.isRunning()){
+        if (Init.sippingbirdlaunchready.isRunning()){
             if(launcher.getArmAngle() < SmartDashboard.getNumber(Dashboard.SHOOTER_ANGLE, 90.0))
                 launcher.setLauncherSpeed(SmartDashboard.getNumber(Dashboard.SHOOTER_SPEED));
            /* else
@@ -36,7 +36,7 @@ public class LauncherDashboardFWD extends CommandBase {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return !Init.launchready.isRunning() || launcher.getArmAngle() > SmartDashboard.getNumber(Dashboard.SHOOTER_ANGLE, 90.0);
+        return !Init.sippingbirdlaunchready.isRunning() || launcher.getArmAngle() > SmartDashboard.getNumber(Dashboard.SHOOTER_ANGLE, 90.0);
     }
 
     // Called once after isFinished returns true

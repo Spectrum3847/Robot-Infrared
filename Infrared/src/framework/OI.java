@@ -2,7 +2,6 @@ package framework;
 
 import commands.collection.SippingBirdCatch;
 import commands.launching.LauncherManual;
-import commands.launching.LauncherStall;
 import driver.Gamepad;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -16,8 +15,7 @@ public class OI {
     public static final Gamepad gamepad = new Gamepad(HW.usbPort_one);
     public static final Gamepad gamepad_aux = new Gamepad(HW.usbPort_two);
 
-    public static final Button tank_toggle = new JoystickButton(gamepad.getGamepad(), Gamepad.A_BUTTON);
-    public static final Button buttery_drive_toggle = new JoystickButton(gamepad.getGamepad(), Gamepad.B_BUTTON);
+    public static final Button drive_toggle = new JoystickButton(gamepad.getGamepad(), Gamepad.A_BUTTON);
     public static final Button collect = new JoystickButton(gamepad.getGamepad(), Gamepad.LEFT_BUMPER);
     public static final Button eject = new JoystickButton(gamepad.getGamepad(), Gamepad.RIGHT_BUMPER);
     public static final Button autocollect = new JoystickButton(gamepad.getGamepad(), Gamepad.Y_BUTTON);
@@ -27,20 +25,17 @@ public class OI {
     public static final Button launch_ready = new JoystickButton(gamepad_aux.getGamepad(), Gamepad.LEFT_BUMPER);
     public static final Button degree_launch = new JoystickButton(gamepad_aux.getGamepad(), Gamepad.B_BUTTON);
     public static final Button PID_launch = new JoystickButton(gamepad_aux.getGamepad(), Gamepad.Y_BUTTON);
-    public static final Button launch_stall = new JoystickButton(gamepad_aux.getGamepad(), Gamepad.X_BUTTON);
 
     //Use this constructor to setup up button schedulers for commands
     public OI() {
-        buttery_drive_toggle.toggleWhenPressed(Init.butteryflydrive);
-        tank_toggle.toggleWhenPressed(Init.cheesydrive);
+        drive_toggle.toggleWhenPressed(Init.cheesydrive);
         collect.whileHeld(Init.sippingbirdcollect);
         eject.whileHeld(Init.sippingbirdeject);
-        autocollect.whenPressed(new SippingBirdCatch());
-        launch.whileHeld(Init.launcherfwd);
+        autocollect.whenPressed(Init.sippingbirdcatch);
+        
+        launch_manual.toggleWhenPressed(Init.launchermanual);
+        launch_ready.toggleWhenPressed(Init.sippingbirdlaunchready);
         degree_launch.whenPressed(Init.launcherdashboardfwd);
-        launch_ready.toggleWhenPressed(Init.launchready);
-        PID_launch.whileHeld(Init.pidlauncherdashboardfwd);
-        launch_stall.whileHeld(Init.launcherstall);
-        launch_manual.toggleWhenPressed(new LauncherManual());
+        PID_launch.whileHeld(Init.launcherdashboardfwdpid);
     }
 }
