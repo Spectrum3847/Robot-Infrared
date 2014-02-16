@@ -23,9 +23,9 @@ public class Potentiometer extends AnalogChannel implements PIDSource{
     //PLACEHOLDER: TO BE IMPLEMENTED LATER
     public double getAngle() {
         if (inverted){
-            return MAX_ANGLE - (getAverageVoltage() / 5.00 * MAX_ANGLE);
+            return MAX_ANGLE - (getVoltage() / 5.00 * MAX_ANGLE);
         } else {
-            return getAverageVoltage() / 5.00 * MAX_ANGLE;
+            return getVoltage() / 5.00 * MAX_ANGLE;
         }
     }
 

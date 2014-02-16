@@ -14,6 +14,7 @@ public class DelayCollect extends CommandBase {
     private double delay;
 
     public DelayCollect() {
+        requires(CommandBase.sippingbird);
     }
 
     protected void initialize() {

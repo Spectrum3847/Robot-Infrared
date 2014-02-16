@@ -1,7 +1,5 @@
 package framework;
 
-import commands.collection.SippingBirdCatch;
-import commands.launching.LauncherManual;
 import driver.Gamepad;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -34,7 +32,7 @@ public class OI {
         autocollect.whenPressed(Init.sippingbirdcatch);
         
         launch_manual.toggleWhenPressed(Init.launchermanual);
-        launch_ready.toggleWhenPressed(Init.sippingbirdlaunchready);
+        launch_ready.toggleWhenPressed(Init.launcherready);
         degree_launch.whenPressed(Init.launcherdashboardfwd);
         PID_launch.whileHeld(Init.launcherdashboardfwdpid);
     }

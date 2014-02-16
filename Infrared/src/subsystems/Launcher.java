@@ -41,26 +41,28 @@ public final class Launcher extends PIDSubsystem {
     final DoubleSolenoid wings;
 
     public Launcher() {
-        super(HW.SHOOTER_KP, HW.SHOOTER_KI, HW.SHOOTER_KD);
+        super(HW.LAUNCHER_KP, HW.LAUNCHER_KI, HW.LAUNCHER_KD);
         wings = new DoubleSolenoid(HW.WINGS, HW.WINGS + 1);
-        v1 = new Victor(HW.SHOOTER_MOTOR_1);
-        v2 = new Victor(HW.SHOOTER_MOTOR_2); // CIM 4
-        v3 = new Victor(HW.SHOOTER_MOTOR_3); // CIM
-        v4 = new Victor(HW.SHOOTER_MOTOR_4);
+        v1 = new Victor(HW.LAUNCHER_MOTOR_1);
+        v2 = new Victor(HW.LAUNCHER_MOTOR_2); // CIM 4
+        v3 = new Victor(HW.LAUNCHER_MOTOR_3); // CIM
+        v4 = new Victor(HW.LAUNCHER_MOTOR_4);
+        setInvert1(true);
         setInvert2(true);
         setInvert3(true);
+        setInvert4(true);
         button = new DigitalInput(HW.LAUNCHER_STOP);
-        pot = new Potentiometer(HW.SHOOTER_POT);
+        pot = new Potentiometer(HW.LAUNCHER_POT);
         pot.setInvertAngle(true);
-        enc = new Encoder(HW.SHOOTER_ENCODER, HW.SHOOTER_ENCODER+1);
+        enc = new Encoder(HW.LAUNCHER_ENCODER, HW.LAUNCHER_ENCODER+1);
         controller = this.getPIDController();
         controller.setOutputRange(-0.5, 1);
         controller.setAbsoluteTolerance(tolerance);
     }
 
     protected void initDefaultCommand() {
-        setDefaultCommand(new LauncherZero());
-        //setDefaultCommand(new LauncherManual());
+        //setDefaultCommand(new LauncherZero());
+        setDefaultCommand(new LauncherManual());
     }
 
     public void setLauncherSpeed(double speed) {
@@ -127,7 +129,7 @@ public final class Launcher extends PIDSubsystem {
     
     public double getArmAngle() {
         
-        return (15.0/22.0)* pot.getAngle() - (SmartDashboard.getNumber(Dashboard.SHOOTER_OFFSET, 0.0));
+        return 360.0 - (15.0/26.0)* pot.getAngle() - (SmartDashboard.getNumber(Dashboard.LAUNCHER_OFFSET, 183.5));
     }
     
     public Potentiometer getPot(){
@@ -181,7 +183,7 @@ public final class Launcher extends PIDSubsystem {
     public void enableVelocityPID() {
         controller.reset();
         isVelocity = true;
-        controller.setPID(HW.SHOOTER_KP, HW.SHOOTER_KI, HW.SHOOTER_KD);
+        controller.setPID(HW.LAUNCHER_KP, HW.LAUNCHER_KI, HW.LAUNCHER_KD);
         controller.setInputRange(-1000, 1000);
         controller.setContinuous(false);
         controller.setSetpoint(0);
@@ -204,7 +206,7 @@ public final class Launcher extends PIDSubsystem {
     public void enablePositionPID() {
         controller.reset();
         isVelocity = false;
-        controller.setPID(HW.SHOOTER_POS_KP, HW.SHOOTER_POS_KI, HW.SHOOTER_POS_KD);
+        controller.setPID(HW.LAUNCHER_POS_KP, HW.LAUNCHER_POS_KI, HW.LAUNCHER_POS_KD);
         controller.setInputRange(-10, 180);
         controller.setContinuous(true);
         controller.setSetpoint(0);

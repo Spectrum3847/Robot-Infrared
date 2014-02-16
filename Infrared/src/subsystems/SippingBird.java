@@ -30,7 +30,7 @@ public class SippingBird extends Subsystem {
     }
 
     public void collectorIN() {
-        leftMotor.set(.7);
+        leftMotor.set(-.7); // Invert for robot
         rightMotor.set(.7);
     }
 
@@ -40,12 +40,11 @@ public class SippingBird extends Subsystem {
     }
 
     public void collectorOUT() {
-        leftMotor.set(-1);
+        leftMotor.set(1); // Invert for robot
         rightMotor.set(-1);
     }
     
     public boolean isBall(){
-        SmartDashboard.putNumber("Distance Ball", ballSensor.getDistance());
         ballDetectDistance = SmartDashboard.getNumber(Dashboard.BALL_DETECT_DISTANCE, ballDetectDistance);
         if (ballSensor.getDistance() <= ballDetectDistance){
             return true;

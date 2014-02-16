@@ -22,9 +22,9 @@ public class LauncherDashboardFWDPID extends CommandBase {
         launcher.enableEncoder();
         launcher.enableVelocityPID();
         launcher.stopLauncher();
-        double kp = SmartDashboard.getNumber(Dashboard.SHOOTER_KP);
-        double ki = SmartDashboard.getNumber(Dashboard.SHOOTER_KI);
-        double kd = SmartDashboard.getNumber(Dashboard.SHOOTER_KD);
+        double kp = SmartDashboard.getNumber(Dashboard.LAUNCHER_KP);
+        double ki = SmartDashboard.getNumber(Dashboard.LAUNCHER_KI);
+        double kd = SmartDashboard.getNumber(Dashboard.LAUNCHER_KD);
         launcher.disablePID();launcher.setVelocityPID(kp, ki, kd);
         try {
             Init.theFile.writeChars("\n\n#PID: " + kp + " " + ki + " " + kd + "\n\n");
@@ -34,10 +34,7 @@ public class LauncherDashboardFWDPID extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        //if(Init.launchready.isRunning() && shooter.getArmAngle() > SmartDashboard.getNumber(Dashboard.SHOOTER_ANGLE, 90.0))
-        //    shooter.stopLauncher();
-        //else
-        launcher.PIDSetVelocity(SmartDashboard.getNumber(Dashboard.SHOOTER_PID_VELOCITY));
+        launcher.PIDSetVelocity(SmartDashboard.getNumber(Dashboard.LAUNCHER_PID_VELOCITY));
         try {
             Init.theFile.writeChars("" + launcher.getRate() + "\n");
         } catch (IOException ex) {

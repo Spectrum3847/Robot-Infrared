@@ -21,17 +21,15 @@ public class LauncherFWD extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        if(Init.sippingbirdlaunchready.isRunning())
+        if(Init.launcherready.isRunning())
             launcher.fastLauncher();
         else
             launcher.stopLauncher();
-        SmartDashboard.putNumber("Current Shooter Angle", launcher.getArmAngle());
-        SmartDashboard.putNumber("Current Shooter Rate", launcher.getRate());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return !Init.sippingbirdlaunchready.isRunning();
+        return !Init.launcherready.isRunning();
     }
 
     // Called once after isFinished returns true

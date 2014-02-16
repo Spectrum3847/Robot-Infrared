@@ -14,7 +14,7 @@ import commands.launching.LauncherFWD;
 import commands.launching.LauncherManual;
 import commands.launching.LauncherZero;
 import commands.launching.LauncherDashboardFWDPID;
-import commands.launching.SippingBirdLaunchReady;
+import commands.launching.LauncherReady;
 import commands.pneumatics.RunCompressor;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -36,8 +36,8 @@ public class Init {
     public static SippingBirdCollect sippingbirdcollect = new SippingBirdCollect();
     public static SippingBirdEject sippingbirdeject = new SippingBirdEject();
     public static SippingBirdCatch sippingbirdcatch = new SippingBirdCatch();
-    public static SippingBirdLaunchReady sippingbirdlaunchready = new SippingBirdLaunchReady();
     
+    public static LauncherReady launcherready = new LauncherReady();
     public static LauncherManual launchermanual = new LauncherManual();
     public static LauncherDashboardFWD launcherdashboardfwd = new LauncherDashboardFWD();
     public static LauncherDashboardFWDPID launcherdashboardfwdpid = new LauncherDashboardFWDPID();

@@ -1,15 +1,14 @@
 package commands.launching;
 
 import commands.CommandBase;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 /*
  * @author Matthew
  */
-public class SippingBirdLaunchReady extends CommandBase {
+public class LauncherReady extends CommandBase {
 
-    public SippingBirdLaunchReady() {
+    public LauncherReady() {
         requires(CommandBase.sippingbird);
     }
 
@@ -24,8 +23,6 @@ public class SippingBirdLaunchReady extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        SmartDashboard.putNumber("Current Shooter Angle", launcher.getArmAngle());
-        SmartDashboard.putNumber("Current Shooter Rate", launcher.getRate());
     }
 
     // Make this return true when this Command no longer needs to run execute()

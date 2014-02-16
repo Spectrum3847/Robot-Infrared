@@ -9,11 +9,13 @@ import framework.Dashboard;
  *
  * @author matthew
  */
-public class AutoLauncher extends CommandBase {
-    private final double DELAY = 0.1;
+public class LauncherAuto extends CommandBase {
+
+    private final double DELAY = 1.0;
     private double wait;
     private boolean launched = false;
-    public AutoLauncher() {
+
+    public LauncherAuto() {
         requires(launcher);
     }
 
@@ -27,24 +29,17 @@ public class AutoLauncher extends CommandBase {
     }
 
     protected void execute() {
-        if(Timer.getFPGATimestamp()-wait > DELAY)
-            if(!launched )
-                if(launcher.getArmAngle() <= SmartDashboard.getNumber(Dashboard.SHOOTER_ANGLE, 90.0))
-                    launcher.fastLauncher();
-                else
-                    launched = true;
-            else
-                if(launcher.getArmAngle() >= 10.0)
-                    launcher.setLauncherSpeed(-0.3);
-                else
-                    launcher.stopLauncher();
-        else
+        if (Timer.getFPGATimestamp() - wait > DELAY) {
+            if (launcher.getArmAngle() <= SmartDashboard.getNumber(Dashboard.LAUNCHER_ANGLE, 90.0)) {
+                launcher.fastLauncher();
+            }
+        } else {
             launcher.stopLauncher();
-            
+        }
     }
 
     protected boolean isFinished() {
-        return launched && launcher.getArmAngle() < 10.0;
+        return launcher.getArmAngle() <= SmartDashboard.getNumber(Dashboard.LAUNCHER_ANGLE, 90.0);
     }
 
     protected void end() {

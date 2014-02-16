@@ -33,7 +33,7 @@ public class ButteryflyDrive extends CommandBase {
 
         drivebase.setCheesySensetivity(1.32);
         
-        drivebase.setPID(SmartDashboard.getNumber(Dashboard.DRIVE_KP), SmartDashboard.getNumber(Dashboard.DRIVE_KI), SmartDashboard.getNumber(Dashboard.DRIVE_KD));
+        drivebase.setPID(SmartDashboard.getNumber(Dashboard.DRIVE_KP)/1000.0, SmartDashboard.getNumber(Dashboard.DRIVE_KI)/1000.0, SmartDashboard.getNumber(Dashboard.DRIVE_KD)/1000.0);
 
         double quickTurnTriggers = -OI.gamepad.getTriggers();
 
@@ -44,8 +44,6 @@ public class ButteryflyDrive extends CommandBase {
             drivebase.setCheesyDrive(throttle, wheel != 0 ? wheel : drivebase.getPIDTurnOutput(), quickturn);
             //drivebase.setCheesyDrive(throttle, wheel, quickturn);
         }
-        
-        SmartDashboard.putNumber("Current Shooter Angle", launcher.getArmAngle());
     }
 
     // Make this return true when this Command no longer needs to run execute()

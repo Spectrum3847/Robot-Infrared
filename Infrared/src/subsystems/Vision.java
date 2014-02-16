@@ -9,7 +9,7 @@
 // it from being updated in the future.
 package subsystems;
 
-import commands.launching.GetDistanceToGoal;
+import commands.vision.GetDistanceToGoal;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.camera.AxisCamera;

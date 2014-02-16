@@ -13,13 +13,13 @@ import framework.Init;
  */
 public class AutonSingleBallHigh extends CommandGroup{
     public AutonSingleBallHigh() {
-        this.addSequential(new DriveForward(), 0);
-        this.addParallel(Init.sippingbirdlaunchready, 3);
+        this.addSequential(new AutonDriveForward(), 0);
+        this.addParallel(Init.launcherready, 3);
         this.addSequential(new LauncherDashboardFWD());
     }
     
     
     protected boolean isFinished() {
-        return CommandBase.launcher.getArmAngle() > SmartDashboard.getNumber(Dashboard.SHOOTER_ANGLE, 90.0);
+        return CommandBase.launcher.getArmAngle() > SmartDashboard.getNumber(Dashboard.LAUNCHER_ANGLE, 90.0);
     }
 }

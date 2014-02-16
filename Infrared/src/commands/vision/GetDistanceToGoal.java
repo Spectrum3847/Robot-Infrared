@@ -1,4 +1,4 @@
-package commands.launching;
+package commands.vision;
 
 import commands.CommandBase;
 import edu.wpi.first.wpilibj.Timer;
@@ -19,9 +19,8 @@ public class GetDistanceToGoal extends CommandBase {
 
     protected void execute() {
         if(Timer.getFPGATimestamp() - wait >= DELAY) {
-            double distance = vision.getDistanceToGoalCrio();
             wait = Timer.getFPGATimestamp();
-            SmartDashboard.putNumber("Distance", distance);
+            SmartDashboard.putNumber("Distance", vision.getDistanceToGoalCrio());
             SmartDashboard.putBoolean("Is Hot", vision.isHotGoal());
         }
     }

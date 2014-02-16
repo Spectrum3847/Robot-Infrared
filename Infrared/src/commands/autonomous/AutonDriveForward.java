@@ -9,9 +9,9 @@ import framework.Utilities;
  *
  * @author matthew
  */
-public class DriveForward extends CommandBase {
+public class AutonDriveForward extends CommandBase {
 
-    public DriveForward() {
+    public AutonDriveForward() {
         requires(CommandBase.drivebase);
     }
 
