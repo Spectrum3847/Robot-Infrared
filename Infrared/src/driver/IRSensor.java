@@ -15,14 +15,12 @@ public class IRSensor extends AnalogChannel {
     
     public IRSensor(int channel){
        super(channel);
+       this.setAverageBits(4);
     }
 
-    public double getRawVoltage(){
-        return getAverageVoltage();
-    }
     public double getDistance(){
         
-        double voltage = getRawVoltage();
+        double voltage = this.getAverageVoltage();
         double distance = 0;
         
         /**

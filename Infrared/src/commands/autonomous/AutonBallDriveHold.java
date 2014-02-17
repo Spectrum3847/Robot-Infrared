@@ -1,39 +1,36 @@
-package commands.collection;
+package commands.autonomous;
 
 import commands.CommandBase;
 
-
-/*
- * @author Matthew
+/**
+ *
+ * @author matthew
  */
-public class SippingBirdCollect extends CommandBase {
+public class AutonBallDriveHold extends CommandBase {
 
-    public SippingBirdCollect() {
+    public AutonBallDriveHold() {
         requires(CommandBase.sippingbird);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        System.out.println("SippingBird, GO!");
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
         sippingbird.collectorDeploy();
-        launcher.wingsOpen();
         sippingbird.collectorIN();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return sippingbird.isBall();
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
         sippingbird.collectorOFF();
-        sippingbird.collectorRetract();
-        launcher.wingsClose();
+        launcher.wingsOpen();
     }
 
     // Called when another command which requires one or more of the same

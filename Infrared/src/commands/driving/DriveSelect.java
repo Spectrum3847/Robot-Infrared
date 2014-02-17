@@ -39,10 +39,8 @@ public class DriveSelect extends CommandBase {
     protected void execute() {
         if (defaultDriveMode != null && defaultDriveMode.doesRequire(drivebase)) {
             defaultDriveMode.start();
-            this.cancel();
         } else {
-            Init.holodrive.start();        //This is the standard drive mode in case defaultDriveMode gets corrupt or unset
-            this.cancel();
+            Init.butteryflydrive.start();        //This is the standard drive mode in case defaultDriveMode gets corrupt or unset
             defaultDriveMode = DEFAULT;
         }
     }

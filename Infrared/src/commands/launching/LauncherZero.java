@@ -22,7 +22,7 @@ public class LauncherZero extends CommandBase {
     }
 
     protected void execute() {
-        //launcher.setPositionPID(SmartDashboard.getNumber(Dashboard.LAUNCHER_POS_KP), SmartDashboard.getNumber(Dashboard.LAUNCHER_POS_KI)/1000.0, SmartDashboard.getNumber(Dashboard.LAUNCHER_POS_KD));
+        launcher.setPositionPID(SmartDashboard.getNumber(Dashboard.LAUNCHER_POS_KP), SmartDashboard.getNumber(Dashboard.LAUNCHER_POS_KI)/1000.0, SmartDashboard.getNumber(Dashboard.LAUNCHER_POS_KD));
     }
 
     protected boolean isFinished() {

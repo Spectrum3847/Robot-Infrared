@@ -16,6 +16,7 @@ import commands.launching.LauncherZero;
 import commands.launching.LauncherDashboardFWDPID;
 import commands.launching.LauncherReady;
 import commands.pneumatics.RunCompressor;
+import edu.wpi.first.wpilibj.Timer;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import javax.microedition.io.Connector;
@@ -52,7 +53,7 @@ public class Init {
         FileConnection fc;
 
         try {
-            fc = (FileConnection) Connector.open("file:///output.txt", Connector.WRITE);
+            fc = (FileConnection) Connector.open("file:///output_" + Timer.getFPGATimestamp() + "_.txt", Connector.WRITE);
             fc.create();
             theFile = fc.openDataOutputStream();
         } catch (IOException e) {}

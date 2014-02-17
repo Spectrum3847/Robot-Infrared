@@ -30,7 +30,7 @@ public class DriveBase extends PIDSubsystem {
     final DoubleSolenoid mecanum;
 
     public DriveBase() {
-        super(HW.TURN_KP, HW.TURN_KI, HW.TURN_KD);
+        super(HW.TURN_KP, HW.TURN_KI, HW.TURN_KD, 0.33);
         setVictors();
         mecanum = new DoubleSolenoid(HW.DRIVESHIFT, HW.DRIVESHIFT + 1);
         spectrumDrive = new SpectrumDrive(vic_1, vic_2, vic_3, vic_4);

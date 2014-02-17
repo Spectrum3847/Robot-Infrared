@@ -16,41 +16,43 @@ public class SippingBird extends Subsystem {
 
     public SippingBird() {
         collector = new DoubleSolenoid(HW.SIPPINGBIRD, HW.SIPPINGBIRD + 1);
-    }
-
-    private Victor leftMotor, rightMotor;
-    private IRSensor ballSensor;
-    public double ballDetectDistance = 20.0; //This is the default ball detect distance
-    final DoubleSolenoid collector;
-
-    protected void initDefaultCommand() {
         leftMotor = new Victor(HW.COLLECTOR_LEFT);
         rightMotor = new Victor(HW.COLLECTOR_RIGHT);
         ballSensor = new IRSensor(HW.BALL_SENSOR);
     }
 
+    private Victor leftMotor, rightMotor;
+    private IRSensor ballSensor;
+    public double ballDetectDistance = 10.0; //This is the default ball detect distance
+    final DoubleSolenoid collector;
+
+    protected void initDefaultCommand() {
+    }
+    
+    public void setCollector(double v) {
+        leftMotor.set(-v); // Invert for robot
+        rightMotor.set(v);
+    }
+
     public void collectorIN() {
-        leftMotor.set(-.7); // Invert for robot
-        rightMotor.set(.7);
+        setCollector(SmartDashboard.getNumber(Dashboard.COLLECTOR_IN_SPEED, 0.6));
     }
 
     public void collectorOFF() {
-        leftMotor.set(0);
-        rightMotor.set(0);
+        setCollector(0.0);
     }
 
     public void collectorOUT() {
-        leftMotor.set(1); // Invert for robot
-        rightMotor.set(-1);
+        setCollector(SmartDashboard.getNumber(Dashboard.COLLECTOR_OUT_SPEED, -1.0));
     }
     
-    public boolean isBall(){
+    public double ballDistance() {
+        return ballSensor.getDistance();
+    }
+    
+    public boolean isBall() {
         ballDetectDistance = SmartDashboard.getNumber(Dashboard.BALL_DETECT_DISTANCE, ballDetectDistance);
-        if (ballSensor.getDistance() <= ballDetectDistance){
-            return true;
-        } else {
-            return false;
-        }
+        return ballDistance() <= ballDetectDistance;
     }
 
     public void collectorDeploy() {
