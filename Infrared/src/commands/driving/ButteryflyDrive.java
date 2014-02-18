@@ -27,13 +27,15 @@ public class ButteryflyDrive extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        double throttle = Utilities.haloDeadBand(OI.gamepad.getLeftY(), OI.gamepad.getRightX(), .15, .17);
+        double raw_throttle = Utilities.haloDeadBand(OI.gamepad.getLeftY(), OI.gamepad.getRightX(), .15, .17);
         double wheel = Utilities.haloDeadBand(OI.gamepad.getRightX(), OI.gamepad.getLeftY(), .15, .17);
         boolean quickturn = OI.gamepad.getButton(Gamepad.RIGHT_CLICK);
 
-        drivebase.setCheesySensetivity(1.32);
+        drivebase.setCheesySensetivity(SmartDashboard.getNumber(Dashboard.BUTTERY_SENSITIVITY));
         
-        //drivebase.setPID(SmartDashboard.getNumber(Dashboard.DRIVE_KP)/1000.0, SmartDashboard.getNumber(Dashboard.DRIVE_KI)/1000.0, SmartDashboard.getNumber(Dashboard.DRIVE_KD)/1000.0);
+        double throttle = Utilities.expMap(raw_throttle);
+        
+        //drivebase.setPID(SmartDashboard.getNumber(Dashboard.DRIVE_KP)/100.0, SmartDashboard.getNumber(Dashboard.DRIVE_KI)/100.0, SmartDashboard.getNumber(Dashboard.DRIVE_KD)/100.0);
 
         double quickTurnTriggers = -OI.gamepad.getTriggers();
 

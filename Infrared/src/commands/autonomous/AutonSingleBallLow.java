@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class AutonSingleBallLow extends CommandGroup{
     public AutonSingleBallLow() {
-        this.addSequential(new AutonDriveForward(), 0);
-        this.addSequential(new SippingBirdEject());
+        this.addSequential(new AutonDriveForward(), 2);
+        this.addSequential(new SippingBirdEject(), 2);
     }
 }

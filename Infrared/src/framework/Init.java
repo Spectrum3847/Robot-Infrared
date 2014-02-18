@@ -53,7 +53,8 @@ public class Init {
         FileConnection fc;
 
         try {
-            fc = (FileConnection) Connector.open("file:///output_" + Timer.getFPGATimestamp() + "_.txt", Connector.WRITE);
+            //fc = (FileConnection) Connector.open("file:///output_" + Timer.getFPGATimestamp() + "_.txt", Connector.WRITE);
+            fc = (FileConnection) Connector.open("file:///output.txt", Connector.WRITE);
             fc.create();
             theFile = fc.openDataOutputStream();
         } catch (IOException e) {}

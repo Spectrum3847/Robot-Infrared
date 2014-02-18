@@ -1,5 +1,7 @@
 package framework;
 
+import com.sun.squawk.util.MathUtils;
+
 /*
  * @author JAG, matthew
  */
@@ -25,7 +27,12 @@ public class Utilities {
             return deadBand(input, largeDead);
         }
     }
-
+    
+    public static double expMap(double x) {
+        // Magic numbers, plugged stuff into graphs until it looked nice
+        //return MathUtils.pow(x, 7) + 0.02*MathUtils.pow(x, 7) + 0.08*x;
+        return MathUtils.pow(x, 3);
+    }
     public static double sign(double in) {
         return in / -in;
     }

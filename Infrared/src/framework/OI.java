@@ -34,6 +34,6 @@ public class OI {
         launch_manual.toggleWhenPressed(Init.launchermanual);
         launch_ready.toggleWhenPressed(Init.launcherready);
         degree_launch.whenPressed(Init.launcherdashboardfwd);
-        PID_launch.whileHeld(Init.launcherdashboardfwdpid);
+        PID_launch.whenPressed(Init.launcherdashboardfwdpid);
     }
 }

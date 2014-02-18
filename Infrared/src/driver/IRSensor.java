@@ -5,7 +5,7 @@
 package driver;
 
 /**
- * @author hunter
+ * @author David, Hunter, Matthew
  */
 import edu.wpi.first.wpilibj.AnalogChannel;
 
@@ -21,7 +21,7 @@ public class IRSensor extends AnalogChannel {
     public double getDistance(){
         
         double voltage = this.getAverageVoltage();
-        double distance = 0;
+        double distance;
         
         /**
          * THIS EQUATION WAS APPROXIMATED BASED ON A SERIES OF ROUGH SAMPLED DATA.
