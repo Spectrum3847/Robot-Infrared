@@ -1,12 +1,11 @@
 package commands.autonomous;
 
 import commands.CommandBase;
-import driver.Gamepad;
-import framework.OI;
-import framework.Utilities;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import framework.Dashboard;
 
 /**
- *
+ * Drive forward until canceled
  * @author matthew
  */
 public class AutonDriveForward extends CommandBase {
@@ -17,8 +16,8 @@ public class AutonDriveForward extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        drivebase.engageCheesy();
-        drivebase.enableTurnController();
+        drivebase.engageAlt();
+        //drivebase.enableTurnController();
         System.out.println("Cheesydrive, GO!");
     }
 
@@ -26,7 +25,7 @@ public class AutonDriveForward extends CommandBase {
     protected void execute() {
         drivebase.setCheesySensetivity(1.32);
 
-        drivebase.setCheesyDrive(0.3, 0, false);
+        drivebase.setCheesyDrive(SmartDashboard.getNumber(Dashboard.AUTON_SINGLE_LOW_DRIVE_FORWARD_SPEED, 0.5), 0, false);
     }
 
     // Make this return true when this Command no longer needs to run execute()

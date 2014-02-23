@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import framework.Dashboard;
 
 /**
- *
+ * Collect for designated delay time
  * @author matthew
  */
 public class DelayCollect extends CommandBase {

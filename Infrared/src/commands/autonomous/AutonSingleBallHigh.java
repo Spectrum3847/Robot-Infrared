@@ -8,9 +8,10 @@ import framework.Dashboard;
 import framework.Init;
 
 /**
- *
+ * Command Group for single high goal autonomous
  * @author matthew
  */
+
 public class AutonSingleBallHigh extends CommandGroup{
     public AutonSingleBallHigh() {
         this.addSequential(new AutonDriveForward(), 0);

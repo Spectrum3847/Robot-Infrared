@@ -49,25 +49,28 @@ public class Dashboard {
 
     public static String COLLECT_DELAY = "Collect Delay";
     public static String BALL_DETECT_DISTANCE = "Ball Detect Distance";
+    
+    public static String AUTON_SINGLE_LOW_DRIVE_FORWARD_TIME = "Autonomous Single Ball Low Goal Drive Time";
+    public static String AUTON_SINGLE_LOW_DRIVE_FORWARD_SPEED = "Autonomous Single Ball Low Goal Drive SPEED";
 
     public static void intializeDashboard() {
         if (ENABLE_SPECTRUM_DASHBOARD) {
-            SmartDashboard.putNumber(LAUNCHER_PID_VELOCITY, 20.0);
-            SmartDashboard.putNumber(LAUNCHER_SPEED, 1);
-            SmartDashboard.putNumber(LAUNCHER_ANGLE, 90.0);
-            SmartDashboard.putNumber(LAUNCHER_OFFSET, -28.5);
+            SmartDashboard.putNumber(Dashboard.LAUNCHER_PID_VELOCITY, 20.0);
+            SmartDashboard.putNumber(Dashboard.LAUNCHER_SPEED, 1);
+            SmartDashboard.putNumber(Dashboard.LAUNCHER_ANGLE, 90.0);
+            SmartDashboard.putNumber(Dashboard.LAUNCHER_OFFSET, -28.5);
 
-            SmartDashboard.putNumber(LAUNCHER_KP, HW.LAUNCHER_KP);
-            SmartDashboard.putNumber(LAUNCHER_KI, HW.LAUNCHER_KP);
-            SmartDashboard.putNumber(LAUNCHER_KD, HW.LAUNCHER_KP);
-            SmartDashboard.putNumber(LAUNCHER_KF, HW.LAUNCHER_KF);
+            SmartDashboard.putNumber(Dashboard.LAUNCHER_KP, HW.LAUNCHER_KP);
+            SmartDashboard.putNumber(Dashboard.LAUNCHER_KI, HW.LAUNCHER_KP);
+            SmartDashboard.putNumber(Dashboard.LAUNCHER_KD, HW.LAUNCHER_KP);
+            SmartDashboard.putNumber(Dashboard.LAUNCHER_KF, HW.LAUNCHER_KF);
 
-            SmartDashboard.putNumber(LAUNCHER_POS_KP, HW.LAUNCHER_POS_KP);
-            SmartDashboard.putNumber(LAUNCHER_POS_KI, HW.LAUNCHER_POS_KI);
-            SmartDashboard.putNumber(LAUNCHER_POS_KD, HW.LAUNCHER_POS_KD);
+            SmartDashboard.putNumber(Dashboard.LAUNCHER_POS_KP, HW.LAUNCHER_POS_KP);
+            SmartDashboard.putNumber(Dashboard.LAUNCHER_POS_KI, HW.LAUNCHER_POS_KI);
+            SmartDashboard.putNumber(Dashboard.LAUNCHER_POS_KD, HW.LAUNCHER_POS_KD);
 
-            SmartDashboard.putNumber(COLLECTOR_IN_SPEED, 0.6);
-            SmartDashboard.putNumber(COLLECTOR_OUT_SPEED, -1.0);
+            SmartDashboard.putNumber(Dashboard.COLLECTOR_IN_SPEED, 0.6);
+            SmartDashboard.putNumber(Dashboard.COLLECTOR_OUT_SPEED, -1.0);
 
             /*
              SmartDashboard.putNumber(VISION_H_H, 270);
@@ -78,20 +81,20 @@ public class Dashboard {
              SmartDashboard.putNumber(VISION_L_V, 51);
              */
             
-            SmartDashboard.putNumber(DRIVE_KP, HW.TURN_KP);
-            SmartDashboard.putNumber(DRIVE_KI, HW.TURN_KI);
-            SmartDashboard.putNumber(DRIVE_KD, HW.TURN_KD);
+            SmartDashboard.putNumber(Dashboard.DRIVE_KP, HW.TURN_KP);
+            SmartDashboard.putNumber(Dashboard.DRIVE_KI, HW.TURN_KI);
+            SmartDashboard.putNumber(Dashboard.DRIVE_KD, HW.TURN_KD);
 
-            SmartDashboard.putNumber(COLLECTOR_IN_SPEED, 0.6);
-            SmartDashboard.putNumber(COLLECTOR_OUT_SPEED, -1.0);
+            SmartDashboard.putNumber(Dashboard.COLLECTOR_IN_SPEED, 0.6);
+            SmartDashboard.putNumber(Dashboard.COLLECTOR_OUT_SPEED, -1.0);
 
-            SmartDashboard.putNumber(CHEESY_SENSITIVITY, 1.32);
-            SmartDashboard.putNumber(BUTTERY_SENSITIVITY, 1.32);
+            SmartDashboard.putNumber(Dashboard.CHEESY_SENSITIVITY, 1.32);
+            SmartDashboard.putNumber(Dashboard.BUTTERY_SENSITIVITY, 1.32);
             
-            /*
-             SmartDashboard.putNumber(COLLECT_DELAY, 0.0);
-             */
-            SmartDashboard.putNumber(BALL_DETECT_DISTANCE, CommandBase.sippingbird.ballDetectDistance); //Set Default distance in SippingBird Subsystem
+            SmartDashboard.putNumber(Dashboard.BALL_DETECT_DISTANCE, CommandBase.sippingbird.ballDetectDistance); //Set Default distance in SippingBird Subsystem
+            
+            SmartDashboard.putNumber(Dashboard.AUTON_SINGLE_LOW_DRIVE_FORWARD_TIME, 3.1);
+            SmartDashboard.putNumber(Dashboard.AUTON_SINGLE_LOW_DRIVE_FORWARD_SPEED, 0.5);
         }
     }
 

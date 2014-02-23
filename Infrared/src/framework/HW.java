@@ -69,10 +69,15 @@ public class HW {
     public static final double LAUNCHER_POS_KI = 0.23/1000;
     public static final double LAUNCHER_POS_KD = 0.015;
     */
+    
+    public static final double LAUNCHER_POS_KP = 0.020;
+    public static final double LAUNCHER_POS_KI = 0.001/1000;
+    public static final double LAUNCHER_POS_KD = 0.040;
+    /*
     public static final double LAUNCHER_POS_KP = 0.007;
     public static final double LAUNCHER_POS_KI = 0.0;
     public static final double LAUNCHER_POS_KD = 0.020;
-    
+    */
     /**JOYSTICKS/GAMEPAD ASSIGNMENTS**/
     public static final int usbPort_one = 1;
     public static final int usbPort_two = 2;

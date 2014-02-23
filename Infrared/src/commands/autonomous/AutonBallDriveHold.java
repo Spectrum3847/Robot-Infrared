@@ -3,7 +3,8 @@ package commands.autonomous;
 import commands.CommandBase;
 
 /**
- *
+ * Drag second ball around using collectors
+ * 
  * @author matthew
  */
 public class AutonBallDriveHold extends CommandBase {
@@ -30,7 +31,6 @@ public class AutonBallDriveHold extends CommandBase {
     // Called once after isFinished returns true
     protected void end() {
         sippingbird.collectorOFF();
-        launcher.wingsOpen();
     }
 
     // Called when another command which requires one or more of the same

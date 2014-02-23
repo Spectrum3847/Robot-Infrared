@@ -1,6 +1,7 @@
 package framework;
 
 import commands.CommandBase;
+import commands.autonomous.AutonSingleBallLow;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
 /*
@@ -12,6 +13,7 @@ public class Autonomous {
         CommandBase.drivebase.zeroIMU();
         CommandBase.drivebase.zeroGyro();
         Init.launcherzero.start();
+        (new AutonSingleBallLow()).start();
     }
 
     public static void periodic() {
