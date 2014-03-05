@@ -31,7 +31,7 @@ public class ButteryflyDrive extends CommandBase {
         double wheel = Utilities.haloDeadBand(OI.gamepad.getRightX(), OI.gamepad.getLeftY(), .15, .17);
         boolean quickturn = OI.gamepad.getButton(Gamepad.RIGHT_CLICK);
 
-        drivebase.setCheesySensetivity(SmartDashboard.getNumber(Dashboard.BUTTERY_SENSITIVITY));
+        drivebase.setCheesySensetivity(0.674);
         
         double throttle = Utilities.expMap(raw_throttle);
         

@@ -21,9 +21,9 @@ public class SippingBird extends Subsystem {
         ballSensor = new IRSensor(HW.BALL_SENSOR);
     }
 
-    private Victor leftMotor, rightMotor;
-    private IRSensor ballSensor;
-    public double ballDetectDistance = 10.0; //This is the default ball detect distance
+    private final Victor leftMotor, rightMotor;
+    private final IRSensor ballSensor;
+    public double ballDetectDistance = 0.0; //This is the default ball detect distance
     final DoubleSolenoid collector;
 
     protected void initDefaultCommand() {

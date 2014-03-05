@@ -1,6 +1,9 @@
 package commands.driving;
 
+
 import commands.CommandBase;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import framework.Dashboard;
 import framework.OI;
 import framework.Utilities;
 
@@ -30,6 +33,8 @@ public class HoloDrive extends CommandBase {
         double x = Utilities.deadBand(OI.gamepad.getLeftX(), .25);
 
         double rotation = -OI.gamepad.getTriggers();
+        
+        drivebase.setCheesySensetivity(SmartDashboard.getNumber(Dashboard.BUTTERY_SENSITIVITY));
 
         if (rotation != 0) {
             drivebase.setSetpoint(drivebase.getGyroAngle() + (rotation / -rotation));

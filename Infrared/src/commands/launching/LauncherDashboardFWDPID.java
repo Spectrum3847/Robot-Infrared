@@ -20,10 +20,10 @@ public class LauncherDashboardFWDPID extends CommandBase {
     protected void initialize() {
         System.out.println("SHOOOT!");
         launcher.enableEncoder();
-        double kp = SmartDashboard.getNumber(Dashboard.LAUNCHER_KP)/100000.0;
-        double ki = SmartDashboard.getNumber(Dashboard.LAUNCHER_KI)/100000.0;
-        double kd = SmartDashboard.getNumber(Dashboard.LAUNCHER_KD)/100000.0;
-        double kf = SmartDashboard.getNumber(Dashboard.LAUNCHER_KF)/1000.0;
+        double kp = SmartDashboard.getNumber(Dashboard.LAUNCHER_KP) / 100000.0;
+        double ki = SmartDashboard.getNumber(Dashboard.LAUNCHER_KI) / 100000.0;
+        double kd = SmartDashboard.getNumber(Dashboard.LAUNCHER_KD) / 100000.0;
+        double kf = SmartDashboard.getNumber(Dashboard.LAUNCHER_KF) / 1000.0;
         launcher.enableVelocityPID();
         launcher.setVelocityPID(kp, ki, kd, kf);
         try {
@@ -34,19 +34,15 @@ public class LauncherDashboardFWDPID extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        if (Init.launcherready.isRunning()){
-            if(launcher.getArmAngle() < SmartDashboard.getNumber(Dashboard.LAUNCHER_ANGLE, 90.0))
-                launcher.PIDSetVelocity(SmartDashboard.getNumber(Dashboard.LAUNCHER_PID_VELOCITY));
-        }/*
-        try {
-            Init.theFile.writeChars("" + launcher.getRate() + "\n");
-        } catch (IOException ex) {
-        }*/
+        if (launcher.getArmAngle() < SmartDashboard.getNumber(Dashboard.LAUNCHER_ANGLE, 90.0)) {
+            launcher.PIDSetVelocity(SmartDashboard.getNumber(Dashboard.LAUNCHER_PID_VELOCITY));
+        }
+
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return !Init.launcherready.isRunning() || launcher.getArmAngle() > SmartDashboard.getNumber(Dashboard.LAUNCHER_ANGLE, 90.0);
+        return launcher.getArmAngle() > SmartDashboard.getNumber(Dashboard.LAUNCHER_ANGLE, 90.0);
     }
 
     // Called once after isFinished returns true

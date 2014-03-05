@@ -1,8 +1,6 @@
 package framework;
 
-import commands.CommandBase;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -24,6 +22,7 @@ public class Teleop {
     public static void periodic() {
         Scheduler.getInstance().run();
         Dashboard.updateDashboard();
+        /*
         if(Init.launcherzero.isRunning() || Init.launcherdashboardfwdpid.isRunning() || Init.launcherdashboardfwd.isRunning()) {
             double angle = CommandBase.launcher.getArmAngle();
             double speed = CommandBase.launcher.getRate();
@@ -40,6 +39,7 @@ public class Teleop {
             max_angle = 0;
             speed_at = 0;
         }
+                */
     }
 
     public static void cancel() {

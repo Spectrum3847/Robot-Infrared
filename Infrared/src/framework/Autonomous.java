@@ -1,8 +1,14 @@
 package framework;
 
 import commands.CommandBase;
+import commands.autonomous.AutonDoubleBallHigh;
+import commands.autonomous.AutonDoubleBallLow;
+import commands.autonomous.AutonMobility;
+import commands.autonomous.AutonSingleBallHigh;
 import commands.autonomous.AutonSingleBallLow;
+import commands.autonomous.AutonTripleBallLow;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /*
  * @author matthew
@@ -13,7 +19,28 @@ public class Autonomous {
         CommandBase.drivebase.zeroIMU();
         CommandBase.drivebase.zeroGyro();
         Init.launcherzero.start();
-        (new AutonSingleBallLow()).start();
+        switch((int)SmartDashboard.getNumber(Dashboard.AUTON_SELECT, 0)) {
+            case 0:
+                break;
+            case 1:
+                (new AutonMobility()).start();
+                break;
+            case 2:
+                (new AutonSingleBallLow()).start();
+                break;
+            case 3:
+                (new AutonDoubleBallLow()).start();
+                break;
+            case 4:
+                (new AutonTripleBallLow()).start();
+                break;
+            case 5:
+                (new AutonSingleBallHigh()).start();
+                break;
+            case 6:
+                (new AutonDoubleBallHigh()).start();
+                break;
+        }
     }
 
     public static void periodic() {

@@ -10,16 +10,21 @@ import framework.Init;
 /*
  * @author Matthew
  */
-public class LauncherDashboardFWD extends CommandBase {
+public class LauncherParameter extends CommandBase {
     private double wait;
     private double delay;
+    private final String angle;
+    private final String power;
 
-    public LauncherDashboardFWD() {
+    public LauncherParameter(String angle, String power) {
         requires(launcher);
+        this.angle = angle;
+        this.power = power;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        Init.runcompressor.cancel();
         delay = SmartDashboard.getNumber(Dashboard.LAUNCHER_DROP_DELAY);
         wait = Timer.getFPGATimestamp();
         sippingbird.collectorDeploy();
@@ -28,14 +33,14 @@ public class LauncherDashboardFWD extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        if (launcher.getArmAngle() < SmartDashboard.getNumber(Dashboard.LAUNCHER_ANGLE, 90.0) && Timer.getFPGATimestamp()-wait > delay ) {
-            launcher.setLauncherSpeed(SmartDashboard.getNumber(Dashboard.LAUNCHER_SPEED));
+        if (launcher.getArmAngle() < SmartDashboard.getNumber(angle) && Timer.getFPGATimestamp()-wait > delay ) {
+            launcher.setLauncherSpeed(SmartDashboard.getNumber(power));
         }
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return launcher.getArmAngle() > SmartDashboard.getNumber(Dashboard.LAUNCHER_ANGLE, 90.0);
+        return launcher.getArmAngle() > SmartDashboard.getNumber(angle);
     }
 
     // Called once after isFinished returns true

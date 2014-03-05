@@ -30,7 +30,7 @@ public class HW {
     public static final int LAUNCHER_ENCODER = 2; // and 3
     /**Buttons**/
     public static final int LAUNCHER_STOP = 4;
-    public static final int LAUNCHER_TOP = 6;
+    public static final int LAUNCHER_TOP = 7;
     /**Pneumatics**/
     public static final int PRESSURE_SENSOR = 5;
     

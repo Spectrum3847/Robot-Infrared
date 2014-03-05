@@ -1,40 +1,38 @@
-package commands.launching;
+package commands.collection;
 
 import commands.CommandBase;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import framework.Init;
 
 
 /*
  * @author Matthew
  */
-public class LauncherFWD extends CommandBase {
+public class SippingBirdAutoCatch extends CommandBase {
 
-    public LauncherFWD() {
-        requires(CommandBase.launcher);
+    public SippingBirdAutoCatch() {
+        requires(CommandBase.sippingbird);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        System.out.println("SHOOOT!");
+        sippingbird.collectorDeploy();
+        sippingbird.collectorOFF();
+        launcher.wingsOpen();
+        System.out.println("SippingBird, GO!");
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        if(Init.launcherready.isRunning())
-            launcher.fastLauncher();
-        else
-            launcher.stopLauncher();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return !Init.launcherready.isRunning();
+        return sippingbird.isBall();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        launcher.stopLauncher();
+        sippingbird.collectorRetract();
+        launcher.wingsClose();
     }
 
     // Called when another command which requires one or more of the same

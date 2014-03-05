@@ -20,7 +20,6 @@ public class SippingBirdCollect extends CommandBase {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
         sippingbird.collectorDeploy();
-        launcher.wingsOpen();
         sippingbird.collectorIN();
     }
 

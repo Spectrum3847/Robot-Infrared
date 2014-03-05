@@ -27,18 +27,22 @@ public class Dashboard {
     public static String LAUNCHER_POS_KP = "Launch Position KP";
     public static String LAUNCHER_POS_KI = "Launch Position KI";
     public static String LAUNCHER_POS_KD = "Launch Position KD";
+    
+    public static String LAUNCHER_DROP_DELAY = "Launching Collector Drop Delay";
 
     public static String LAUNCHER_OFFSET = "Launcher Offset";
+    
+    public static String LAUNCHER_POWER_ANG = "Power Angle";
+    public static String LAUNCHER_POWER_POW = "Power Power";
+    public static String LAUNCHER_TRUSS_ANG = "Truss Angle";
+    public static String LAUNCHER_TRUSS_POW = "Truss Power";
+    public static String LAUNCHER_MIDRANGE_ANG = "Midrange Angle";
+    public static String LAUNCHER_MIDRANGE_POW = "Midrange Power";
+    public static String LAUNCHER_LOW_ANG = "Low Angle";
+    public static String LAUNCHER_LOW_POW = "Low Power";
 
     public static String COLLECTOR_IN_SPEED = "Collector In Speed";
     public static String COLLECTOR_OUT_SPEED = "Collector Out Speed";
-
-    public static String VISION_H_H = "Vision High Hue";
-    public static String VISION_L_H = "Vision Low Hue";
-    public static String VISION_H_S = "Vision High Saturation";
-    public static String VISION_L_S = "Vision Low Saturation";
-    public static String VISION_H_V = "Vision High Value";
-    public static String VISION_L_V = "Vision Low Value";
 
     public static String DRIVE_KP = "Drive KP";
     public static String DRIVE_KI = "Drive KI";
@@ -52,12 +56,13 @@ public class Dashboard {
     
     public static String AUTON_SINGLE_LOW_DRIVE_FORWARD_TIME = "Autonomous Single Ball Low Goal Drive Time";
     public static String AUTON_SINGLE_LOW_DRIVE_FORWARD_SPEED = "Autonomous Single Ball Low Goal Drive SPEED";
+    
+    public static String AUTON_SELECT = "Auton Mode";
 
     public static void intializeDashboard() {
         if (ENABLE_SPECTRUM_DASHBOARD) {
-            SmartDashboard.putNumber(Dashboard.LAUNCHER_PID_VELOCITY, 20.0);
-            SmartDashboard.putNumber(Dashboard.LAUNCHER_SPEED, 1);
-            SmartDashboard.putNumber(Dashboard.LAUNCHER_ANGLE, 90.0);
+            SmartDashboard.putNumber(Dashboard.LAUNCHER_PID_VELOCITY, 20.0); 
+            
             SmartDashboard.putNumber(Dashboard.LAUNCHER_OFFSET, -28.5);
 
             SmartDashboard.putNumber(Dashboard.LAUNCHER_KP, HW.LAUNCHER_KP);
@@ -68,18 +73,20 @@ public class Dashboard {
             SmartDashboard.putNumber(Dashboard.LAUNCHER_POS_KP, HW.LAUNCHER_POS_KP);
             SmartDashboard.putNumber(Dashboard.LAUNCHER_POS_KI, HW.LAUNCHER_POS_KI);
             SmartDashboard.putNumber(Dashboard.LAUNCHER_POS_KD, HW.LAUNCHER_POS_KD);
+            
+            SmartDashboard.putNumber(Dashboard.LAUNCHER_DROP_DELAY, 0.5);
+            
+            SmartDashboard.putNumber(Dashboard.LAUNCHER_POWER_POW, 1);
+            SmartDashboard.putNumber(Dashboard.LAUNCHER_POWER_ANG, 90);
+            SmartDashboard.putNumber(Dashboard.LAUNCHER_TRUSS_POW, 0.9);
+            SmartDashboard.putNumber(Dashboard.LAUNCHER_TRUSS_ANG, 40);
+            SmartDashboard.putNumber(Dashboard.LAUNCHER_MIDRANGE_POW, 0.97);
+            SmartDashboard.putNumber(Dashboard.LAUNCHER_MIDRANGE_ANG, 55);
+            SmartDashboard.putNumber(Dashboard.LAUNCHER_LOW_POW, 1);
+            SmartDashboard.putNumber(Dashboard.LAUNCHER_LOW_ANG, 46);
 
             SmartDashboard.putNumber(Dashboard.COLLECTOR_IN_SPEED, 0.6);
             SmartDashboard.putNumber(Dashboard.COLLECTOR_OUT_SPEED, -1.0);
-
-            /*
-             SmartDashboard.putNumber(VISION_H_H, 270);
-             SmartDashboard.putNumber(VISION_L_H, 235);
-             SmartDashboard.putNumber(VISION_H_S, 255);
-             SmartDashboard.putNumber(VISION_L_S, 230);
-             SmartDashboard.putNumber(VISION_H_V, 153);
-             SmartDashboard.putNumber(VISION_L_V, 51);
-             */
             
             SmartDashboard.putNumber(Dashboard.DRIVE_KP, HW.TURN_KP);
             SmartDashboard.putNumber(Dashboard.DRIVE_KI, HW.TURN_KI);
@@ -89,12 +96,14 @@ public class Dashboard {
             SmartDashboard.putNumber(Dashboard.COLLECTOR_OUT_SPEED, -1.0);
 
             SmartDashboard.putNumber(Dashboard.CHEESY_SENSITIVITY, 1.32);
-            SmartDashboard.putNumber(Dashboard.BUTTERY_SENSITIVITY, 1.32);
+            SmartDashboard.putNumber(Dashboard.BUTTERY_SENSITIVITY, 0.9);
             
             SmartDashboard.putNumber(Dashboard.BALL_DETECT_DISTANCE, CommandBase.sippingbird.ballDetectDistance); //Set Default distance in SippingBird Subsystem
             
             SmartDashboard.putNumber(Dashboard.AUTON_SINGLE_LOW_DRIVE_FORWARD_TIME, 3.1);
             SmartDashboard.putNumber(Dashboard.AUTON_SINGLE_LOW_DRIVE_FORWARD_SPEED, 0.5);
+            
+            SmartDashboard.putNumber(Dashboard.AUTON_SELECT, 0);
         }
     }
 

@@ -1,6 +1,8 @@
 package commands.pneumatics;
 
 import commands.CommandBase;
+import framework.OI;
+import framework.Utilities;
 
 /**
  *
@@ -20,6 +22,11 @@ public class RunCompressor extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        double raw_throttle = Utilities.haloDeadBand(OI.gamepad.getLeftY(), OI.gamepad.getRightX(), .15, .17);
+        if(raw_throttle > 0.92)
+            pneumatics.stopCompressor();
+        else
+            pneumatics.runCompressor();
     }
 
     // Make this return true when this Command no longer needs to run execute()

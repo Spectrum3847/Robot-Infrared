@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
  * Command Group for two ball high goal autonomous mode
  * @author matthew
  */
-public class AutonTwoBall extends CommandGroup {
+public class AutonDoubleBallLow extends CommandGroup {
 
-    public AutonTwoBall() {
+    public AutonDoubleBallLow() {
         this.addParallel(new AutonBallDriveHold());
         this.addParallel(new AutonDriveForward());
         this.addSequential(new WaitCommand(5));

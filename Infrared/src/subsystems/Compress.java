@@ -3,6 +3,7 @@ package subsystems;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import framework.HW;
+import framework.Init;
 
 /**
  *
@@ -19,6 +20,7 @@ public class Compress extends Subsystem {
     }
 
     protected void initDefaultCommand() {
+        Init.runcompressor.start();
     }
     
     public boolean isMaxPSI() {
