@@ -40,6 +40,8 @@ public class Dashboard {
     public static String LAUNCHER_MIDRANGE_POW = "Midrange Power";
     public static String LAUNCHER_LOW_ANG = "Low Angle";
     public static String LAUNCHER_LOW_POW = "Low Power";
+    
+    public static String LAUNCHER_PID_TOGGLE = "PID Toggle";
 
     public static String COLLECTOR_IN_SPEED = "Collector In Speed";
     public static String COLLECTOR_OUT_SPEED = "Collector Out Speed";
@@ -84,6 +86,8 @@ public class Dashboard {
             SmartDashboard.putNumber(Dashboard.LAUNCHER_MIDRANGE_ANG, 55);
             SmartDashboard.putNumber(Dashboard.LAUNCHER_LOW_POW, 1);
             SmartDashboard.putNumber(Dashboard.LAUNCHER_LOW_ANG, 46);
+            
+            SmartDashboard.putBoolean(Dashboard.LAUNCHER_PID_TOGGLE, false);
 
             SmartDashboard.putNumber(Dashboard.COLLECTOR_IN_SPEED, 0.6);
             SmartDashboard.putNumber(Dashboard.COLLECTOR_OUT_SPEED, -1.0);

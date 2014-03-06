@@ -1,9 +1,6 @@
 package commands.blocking;
 
 import commands.CommandBase;
-import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.command.PIDCommand;
-import framework.HW;
 
 /**
  *
@@ -15,12 +12,11 @@ public class LauncherBlock extends CommandBase {
     }
 
     protected void execute() {
-        if(CommandBase.launcher.isUp()) {
-        }
+        launcher.setCIMSpeed(0.7);
     }
 
     protected boolean isFinished() {
-        return false;
+        return CommandBase.launcher.isUp();
     }
 
     protected void end() {

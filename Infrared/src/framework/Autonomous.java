@@ -6,6 +6,7 @@ import commands.autonomous.AutonDoubleBallLow;
 import commands.autonomous.AutonMobility;
 import commands.autonomous.AutonSingleBallHigh;
 import commands.autonomous.AutonSingleBallLow;
+import commands.autonomous.AutonTripleBallHigh;
 import commands.autonomous.AutonTripleBallLow;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -39,6 +40,9 @@ public class Autonomous {
                 break;
             case 6:
                 (new AutonDoubleBallHigh()).start();
+                break;
+            case 7:
+                (new AutonTripleBallHigh()).start();
                 break;
         }
     }

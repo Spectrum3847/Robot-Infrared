@@ -34,7 +34,6 @@ public class HoloDrive extends CommandBase {
 
         double rotation = -OI.gamepad.getTriggers();
         
-        drivebase.setCheesySensetivity(SmartDashboard.getNumber(Dashboard.BUTTERY_SENSITIVITY));
 
         if (rotation != 0) {
             drivebase.setSetpoint(drivebase.getGyroAngle() + (rotation / -rotation));

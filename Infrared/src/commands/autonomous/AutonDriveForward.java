@@ -10,8 +10,15 @@ import framework.Dashboard;
  */
 public class AutonDriveForward extends CommandBase {
 
+    private double speed = 0.5;
+    
     public AutonDriveForward() {
         requires(CommandBase.drivebase);
+    }
+    
+    public AutonDriveForward(double speed) {
+        requires(CommandBase.drivebase);
+        this.speed = speed;
     }
 
     // Called just before this Command runs the first time
@@ -25,7 +32,7 @@ public class AutonDriveForward extends CommandBase {
     protected void execute() {
         drivebase.setCheesySensetivity(1.32);
 
-        drivebase.setCheesyDrive(SmartDashboard.getNumber(Dashboard.AUTON_SINGLE_LOW_DRIVE_FORWARD_SPEED, 0.5), 0, false);
+        drivebase.setCheesyDrive(SmartDashboard.getNumber(Dashboard.AUTON_SINGLE_LOW_DRIVE_FORWARD_SPEED, speed), 0, false);
     }
 
     // Make this return true when this Command no longer needs to run execute()
