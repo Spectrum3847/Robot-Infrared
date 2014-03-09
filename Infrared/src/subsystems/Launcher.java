@@ -33,7 +33,7 @@ public final class Launcher extends PIDSubsystem {
 
     private boolean stall = true;
 
-    private final double pot_offset = -28.5;
+    private final double pot_offset = -31.5;
     private final double pot_max = 340;
     private final double gear_ratio = 15.0 / 26.0;
 
@@ -237,7 +237,7 @@ public final class Launcher extends PIDSubsystem {
         controller.setInputRange(0, 180);
         controller.setContinuous(false);
         controller.setSetpoint(0);
-        controller.setOutputRange(-0.5, 0);
+        controller.setOutputRange(-0.35, 0);
         controller.enable();
     }
 

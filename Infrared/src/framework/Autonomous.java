@@ -30,19 +30,10 @@ public class Autonomous {
                 (new AutonSingleBallLow()).start();
                 break;
             case 3:
-                (new AutonDoubleBallLow()).start();
-                break;
-            case 4:
-                (new AutonTripleBallLow()).start();
-                break;
-            case 5:
                 (new AutonSingleBallHigh()).start();
                 break;
-            case 6:
+            case 4:
                 (new AutonDoubleBallHigh()).start();
-                break;
-            case 7:
-                (new AutonTripleBallHigh()).start();
                 break;
         }
     }

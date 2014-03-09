@@ -8,8 +8,15 @@ import commands.CommandBase;
  */
 public class SippingBirdCollect extends CommandBase {
 
+    double speed = 0;
+    
     public SippingBirdCollect() {
         requires(CommandBase.sippingbird);
+    }
+    
+    public SippingBirdCollect(double speed) {
+        requires(CommandBase.sippingbird);
+        this.speed = speed;
     }
 
     // Called just before this Command runs the first time
@@ -20,7 +27,10 @@ public class SippingBirdCollect extends CommandBase {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
         sippingbird.collectorDeploy();
-        sippingbird.collectorIN();
+        if(speed == 0)
+            sippingbird.collectorIN();
+        else
+            sippingbird.setCollector(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()

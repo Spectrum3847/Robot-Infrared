@@ -7,16 +7,20 @@ import commands.CommandBase;
  * @author matthew
  */
 public class LauncherBlock extends CommandBase {
+    
+    public LauncherBlock() {
+        requires(launcher);
+    }
 
     protected void initialize() {
     }
 
     protected void execute() {
-        launcher.setCIMSpeed(0.7);
+        launcher.setCIMSpeed(0.95);
     }
 
     protected boolean isFinished() {
-        return CommandBase.launcher.isUp();
+        return CommandBase.launcher.getArmAngle() > 107;
     }
 
     protected void end() {

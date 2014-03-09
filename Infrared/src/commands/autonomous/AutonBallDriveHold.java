@@ -12,15 +12,20 @@ public class AutonBallDriveHold extends CommandBase {
     public AutonBallDriveHold() {
         requires(CommandBase.sippingbird);
     }
+    
+    public AutonBallDriveHold(double speed) {
+        requires(CommandBase.sippingbird);
+    }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        sippingbird.setCollector(0.5);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        sippingbird.setCollector(0.5);
         sippingbird.collectorDeploy();
-        sippingbird.collectorIN();
     }
 
     // Make this return true when this Command no longer needs to run execute()

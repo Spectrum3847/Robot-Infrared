@@ -15,10 +15,14 @@ import framework.Dashboard;
 public class AutonTripleBallHigh extends CommandGroup {
     public AutonTripleBallHigh() {
         double drive_time = SmartDashboard.getNumber(Dashboard.AUTON_SINGLE_LOW_DRIVE_FORWARD_TIME, 3.1);
-        this.addParallel(new AutonBallDriveHold());
-        this.addSequential(new AutonDriveForward(-0.5), drive_time);
+        double delay_time = SmartDashboard.getNumber(Dashboard.AUTON_SINGLE_LOW_DELAY_FORWARD_TIME, 2.0);
+        this.addParallel(new AutonBallDriveHold(), drive_time+delay_time-0.2);
+        this.addSequential(new WaitCommand(0.75));
+        this.addSequential(new AutonDriveForward(Dashboard.AUTON_SINGLE_LOW_DRIVE_FORWARD_SPEED, true), drive_time);
+        this.addSequential(new AutonDriveForward(Dashboard.AUTON_SINGLE_LOW_DELAY_FORWARD_SPEED, true), delay_time);
         this.addSequential(new LauncherParameter(Dashboard.LAUNCHER_LOW_ANG, Dashboard.LAUNCHER_LOW_POW));
         this.addSequential(new LauncherZero(), 1);
+        this.addSequential(new WaitCommand(1));
         this.addSequential(new SippingBirdCollect(), 1);
         this.addSequential(new LauncherParameter(Dashboard.LAUNCHER_LOW_ANG, Dashboard.LAUNCHER_LOW_POW));
     }

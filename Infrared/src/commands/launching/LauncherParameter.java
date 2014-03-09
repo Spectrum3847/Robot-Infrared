@@ -33,8 +33,8 @@ public class LauncherParameter extends CommandBase {
         wait = Timer.getFPGATimestamp();
         sippingbird.collectorDeploy();
         System.out.println("SHOOOT!");
+        launcher.enableEncoder();
         if (PID) {
-            launcher.enableEncoder();
             double kp = SmartDashboard.getNumber(Dashboard.LAUNCHER_KP) / 100000.0;
             double ki = SmartDashboard.getNumber(Dashboard.LAUNCHER_KI) / 100000.0;
             double kd = SmartDashboard.getNumber(Dashboard.LAUNCHER_KD) / 100000.0;
@@ -57,6 +57,7 @@ public class LauncherParameter extends CommandBase {
                 launcher.setLauncherSpeed(SmartDashboard.getNumber(power));
             }
         }
+        SmartDashboard.putNumber("Current Launcher Rate", launcher.getRate());
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -66,9 +67,9 @@ public class LauncherParameter extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
+        Init.runcompressor.start();
         if (PID) {
             launcher.stopLauncher();
-            launcher.disableEncoder();
             launcher.disablePID();
             try {
                 Init.theFile.writeChars("" + launcher.getRate() + "#\n\n");
@@ -76,6 +77,7 @@ public class LauncherParameter extends CommandBase {
             } catch (IOException ex) {
             }
         }
+        launcher.disableEncoder();
         launcher.stopLauncher();
         sippingbird.collectorRetract();
     }

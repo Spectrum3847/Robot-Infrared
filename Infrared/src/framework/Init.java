@@ -2,6 +2,7 @@ package framework;
 
 import com.sun.squawk.microedition.io.FileConnection;
 import commands.CommandBase;
+import commands.blocking.LauncherBlock;
 import commands.collection.SippingBirdAutoCatch;
 import commands.collection.SippingBirdCollect;
 import commands.collection.SippingBirdEject;
@@ -35,10 +36,10 @@ public class Init {
     public static SippingBirdEject sippingbirdeject = new SippingBirdEject();
     public static SippingBirdAutoCatch sippingbirdcatch = new SippingBirdAutoCatch();
     
+    public static LauncherZero launcherzero = new LauncherZero();
     public static LauncherReady launcherready = new LauncherReady();
     public static LauncherManual launchermanual = new LauncherManual();
-    public static LauncherDashboardFWDPID launcherdashboardfwdpid = new LauncherDashboardFWDPID();
-    public static LauncherZero launcherzero = new LauncherZero();
+    public static LauncherBlock laucherblock = new LauncherBlock();
     
     public static DataOutputStream theFile;
 

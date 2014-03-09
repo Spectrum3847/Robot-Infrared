@@ -57,7 +57,9 @@ public class Dashboard {
     public static String BALL_DETECT_DISTANCE = "Ball Detect Distance";
     
     public static String AUTON_SINGLE_LOW_DRIVE_FORWARD_TIME = "Autonomous Single Ball Low Goal Drive Time";
+    public static String AUTON_SINGLE_LOW_DELAY_FORWARD_TIME = "Autonomous Single Ball Low Goal Delay Time";
     public static String AUTON_SINGLE_LOW_DRIVE_FORWARD_SPEED = "Autonomous Single Ball Low Goal Drive SPEED";
+    public static String AUTON_SINGLE_LOW_DELAY_FORWARD_SPEED = "Autonomous Single Ball Low Goal Delay SPEED";
     
     public static String AUTON_SELECT = "Auton Mode";
 
@@ -65,7 +67,7 @@ public class Dashboard {
         if (ENABLE_SPECTRUM_DASHBOARD) {
             SmartDashboard.putNumber(Dashboard.LAUNCHER_PID_VELOCITY, 20.0); 
             
-            SmartDashboard.putNumber(Dashboard.LAUNCHER_OFFSET, -28.5);
+            SmartDashboard.putNumber(Dashboard.LAUNCHER_OFFSET, -31.5);
 
             SmartDashboard.putNumber(Dashboard.LAUNCHER_KP, HW.LAUNCHER_KP);
             SmartDashboard.putNumber(Dashboard.LAUNCHER_KI, HW.LAUNCHER_KP);
@@ -76,7 +78,7 @@ public class Dashboard {
             SmartDashboard.putNumber(Dashboard.LAUNCHER_POS_KI, HW.LAUNCHER_POS_KI);
             SmartDashboard.putNumber(Dashboard.LAUNCHER_POS_KD, HW.LAUNCHER_POS_KD);
             
-            SmartDashboard.putNumber(Dashboard.LAUNCHER_DROP_DELAY, 0.5);
+            SmartDashboard.putNumber(Dashboard.LAUNCHER_DROP_DELAY, 0.3);
             
             SmartDashboard.putNumber(Dashboard.LAUNCHER_POWER_POW, 1);
             SmartDashboard.putNumber(Dashboard.LAUNCHER_POWER_ANG, 90);
@@ -106,6 +108,8 @@ public class Dashboard {
             
             SmartDashboard.putNumber(Dashboard.AUTON_SINGLE_LOW_DRIVE_FORWARD_TIME, 3.1);
             SmartDashboard.putNumber(Dashboard.AUTON_SINGLE_LOW_DRIVE_FORWARD_SPEED, 0.5);
+            SmartDashboard.putNumber(Dashboard.AUTON_SINGLE_LOW_DELAY_FORWARD_TIME, 1.5);
+            SmartDashboard.putNumber(Dashboard.AUTON_SINGLE_LOW_DELAY_FORWARD_SPEED, 0.2);
             
             SmartDashboard.putNumber(Dashboard.AUTON_SELECT, 0);
         }
