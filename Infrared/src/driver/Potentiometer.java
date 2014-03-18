@@ -52,6 +52,10 @@ public class Potentiometer extends AnalogChannel implements PIDSource{
         gear_ratio = ratio;
     }
     
+    public double getGearRatio() {
+        return gear_ratio;
+    }
+    
     public double PIDGet() {
         return getAngle();
     }

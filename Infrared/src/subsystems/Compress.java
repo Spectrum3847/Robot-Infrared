@@ -20,7 +20,6 @@ public class Compress extends Subsystem {
     }
 
     protected void initDefaultCommand() {
-        Init.runcompressor.start();
     }
     
     public boolean isMaxPSI() {

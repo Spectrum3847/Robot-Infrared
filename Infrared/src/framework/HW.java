@@ -59,10 +59,10 @@ public class HW {
     public static final double TURN_KI = 0.0;
     public static final double TURN_KD = 0.0;
     /**Launcher Velocity PID**/
-    public static final double LAUNCHER_KP = 0.0;
+    public static final double LAUNCHER_KP = 40.0;
     public static final double LAUNCHER_KI = 0.0;
     public static final double LAUNCHER_KD = 0.0;
-    public static final double LAUNCHER_KF = 1.54;
+    public static final double LAUNCHER_KF = 1.60;
     /**Launcher Position PID**/
     /*
     public static final double LAUNCHER_POS_KP = 0.015;

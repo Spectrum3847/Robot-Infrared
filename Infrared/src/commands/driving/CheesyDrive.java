@@ -31,7 +31,7 @@ public class CheesyDrive extends CommandBase {
         double wheel = Utilities.haloDeadBand(OI.gamepad.getRightX(), OI.gamepad.getLeftY(), .15, .17);
         boolean quickturn = OI.gamepad.getButton(Gamepad.RIGHT_CLICK);
 
-        drivebase.setCheesySensetivity(SmartDashboard.getNumber(Dashboard.CHEESY_SENSITIVITY));
+        drivebase.setCheesySensetivity(SmartDashboard.getNumber(Dashboard.CHEESY_SENSITIVITY, 1.32));
         
         double throttle = Utilities.expMap(raw_throttle);
         

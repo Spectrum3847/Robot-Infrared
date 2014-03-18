@@ -15,21 +15,41 @@ public class LauncherParameter extends CommandBase {
 
     private double wait;
     private double delay;
+    private final String delays;
     private final String angle;
     private final String power;
+    private boolean auton = false;
     private boolean PID;
 
     public LauncherParameter(String angle, String power) {
         requires(launcher);
         this.angle = angle;
         this.power = power;
+        this.delays = Dashboard.LAUNCHER_DROP_DELAY;
+    }
+    
+    
+    public LauncherParameter(String angle, String power, String delay) {
+        requires(launcher);
+        this.angle = angle;
+        this.power = power;
+        this.delays = delay;
+    }
+    
+    public LauncherParameter(String angle, String power, String delay, boolean auto) {
+        requires(launcher);
+        this.angle = angle;
+        this.power = power;
+        this.delays = delay;
+        this.auton = auto;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
         Init.runcompressor.cancel();
+        CommandBase.pneumatics.stopCompressor();
         PID = SmartDashboard.getBoolean(Dashboard.LAUNCHER_PID_TOGGLE, false);
-        delay = SmartDashboard.getNumber(Dashboard.LAUNCHER_DROP_DELAY);
+        delay = SmartDashboard.getNumber(delays);
         wait = Timer.getFPGATimestamp();
         sippingbird.collectorDeploy();
         System.out.println("SHOOOT!");
@@ -45,6 +65,9 @@ public class LauncherParameter extends CommandBase {
                 Init.theFile.writeChars("\n\n#PID: " + kp + " " + ki + " " + kd + "\n\n");
             } catch (IOException ex) {
             }
+        }
+        if(auton) {
+            sippingbird.setCollector(0.2);
         }
     }
 
@@ -79,7 +102,8 @@ public class LauncherParameter extends CommandBase {
         }
         launcher.disableEncoder();
         launcher.stopLauncher();
-        sippingbird.collectorRetract();
+        if(!auton)
+            sippingbird.collectorRetract();
     }
 
     // Called when another command which requires one or more of the same

@@ -33,7 +33,7 @@ public final class Launcher extends PIDSubsystem {
 
     private boolean stall = true;
 
-    private final double pot_offset = -31.5;
+    public static final double pot_offset = -40;
     private final double pot_max = 340;
     private final double gear_ratio = 15.0 / 26.0;
 
@@ -98,10 +98,6 @@ public final class Launcher extends PIDSubsystem {
 
     public final void setInvert4(boolean isInverted) {
         invert4 = isInverted ? -1 : 1;
-    }
-    
-    public void zeroPot() {
-        pot.setOffset(-pot.getRawAngle());
     }
 
     public void stopLauncher() {

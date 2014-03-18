@@ -1,8 +1,10 @@
 package framework;
 
 import commands.CommandBase;
+import commands.blocking.LauncherBlock;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import subsystems.Launcher;
 
 /*
  * @author matthew
@@ -42,6 +44,9 @@ public class Dashboard {
     public static String LAUNCHER_LOW_POW = "Low Power";
     
     public static String LAUNCHER_PID_TOGGLE = "PID Toggle";
+    
+    public static String BLOCK_ANGLE = "Block Angle";
+    public static String BLOCK_POWER = "Block Power";
 
     public static String COLLECTOR_IN_SPEED = "Collector In Speed";
     public static String COLLECTOR_OUT_SPEED = "Collector Out Speed";
@@ -61,17 +66,19 @@ public class Dashboard {
     public static String AUTON_SINGLE_LOW_DRIVE_FORWARD_SPEED = "Autonomous Single Ball Low Goal Drive SPEED";
     public static String AUTON_SINGLE_LOW_DELAY_FORWARD_SPEED = "Autonomous Single Ball Low Goal Delay SPEED";
     
+    public static String AUTON_LAUNCHER_DELAY = "Autonomous Launcher Delay";
+    
     public static String AUTON_SELECT = "Auton Mode";
 
     public static void intializeDashboard() {
         if (ENABLE_SPECTRUM_DASHBOARD) {
             SmartDashboard.putNumber(Dashboard.LAUNCHER_PID_VELOCITY, 20.0); 
             
-            SmartDashboard.putNumber(Dashboard.LAUNCHER_OFFSET, -31.5);
+            SmartDashboard.putNumber(Dashboard.LAUNCHER_OFFSET, Launcher.pot_offset);
 
             SmartDashboard.putNumber(Dashboard.LAUNCHER_KP, HW.LAUNCHER_KP);
-            SmartDashboard.putNumber(Dashboard.LAUNCHER_KI, HW.LAUNCHER_KP);
-            SmartDashboard.putNumber(Dashboard.LAUNCHER_KD, HW.LAUNCHER_KP);
+            SmartDashboard.putNumber(Dashboard.LAUNCHER_KI, HW.LAUNCHER_KI);
+            SmartDashboard.putNumber(Dashboard.LAUNCHER_KD, HW.LAUNCHER_KD);
             SmartDashboard.putNumber(Dashboard.LAUNCHER_KF, HW.LAUNCHER_KF);
 
             SmartDashboard.putNumber(Dashboard.LAUNCHER_POS_KP, HW.LAUNCHER_POS_KP);
@@ -80,16 +87,19 @@ public class Dashboard {
             
             SmartDashboard.putNumber(Dashboard.LAUNCHER_DROP_DELAY, 0.3);
             
-            SmartDashboard.putNumber(Dashboard.LAUNCHER_POWER_POW, 1);
-            SmartDashboard.putNumber(Dashboard.LAUNCHER_POWER_ANG, 90);
-            SmartDashboard.putNumber(Dashboard.LAUNCHER_TRUSS_POW, 0.9);
-            SmartDashboard.putNumber(Dashboard.LAUNCHER_TRUSS_ANG, 40);
+            SmartDashboard.putNumber(Dashboard.LAUNCHER_POWER_POW, 0.9);
+            SmartDashboard.putNumber(Dashboard.LAUNCHER_POWER_ANG, 105);
+            SmartDashboard.putNumber(Dashboard.LAUNCHER_TRUSS_POW, 0.8);
+            SmartDashboard.putNumber(Dashboard.LAUNCHER_TRUSS_ANG, 105);
             SmartDashboard.putNumber(Dashboard.LAUNCHER_MIDRANGE_POW, 0.97);
             SmartDashboard.putNumber(Dashboard.LAUNCHER_MIDRANGE_ANG, 55);
-            SmartDashboard.putNumber(Dashboard.LAUNCHER_LOW_POW, 1);
-            SmartDashboard.putNumber(Dashboard.LAUNCHER_LOW_ANG, 46);
+            SmartDashboard.putNumber(Dashboard.LAUNCHER_LOW_POW, .68);
+            SmartDashboard.putNumber(Dashboard.LAUNCHER_LOW_ANG, 115);
             
             SmartDashboard.putBoolean(Dashboard.LAUNCHER_PID_TOGGLE, false);
+            
+            SmartDashboard.putNumber(Dashboard.BLOCK_ANGLE, LauncherBlock.angle);
+            SmartDashboard.putNumber(Dashboard.BLOCK_POWER, LauncherBlock.power);
 
             SmartDashboard.putNumber(Dashboard.COLLECTOR_IN_SPEED, 0.6);
             SmartDashboard.putNumber(Dashboard.COLLECTOR_OUT_SPEED, -1.0);
@@ -102,14 +112,15 @@ public class Dashboard {
             SmartDashboard.putNumber(Dashboard.COLLECTOR_OUT_SPEED, -1.0);
 
             SmartDashboard.putNumber(Dashboard.CHEESY_SENSITIVITY, 1.32);
-            SmartDashboard.putNumber(Dashboard.BUTTERY_SENSITIVITY, 0.9);
+            SmartDashboard.putNumber(Dashboard.BUTTERY_SENSITIVITY, 0.674);
             
             SmartDashboard.putNumber(Dashboard.BALL_DETECT_DISTANCE, CommandBase.sippingbird.ballDetectDistance); //Set Default distance in SippingBird Subsystem
             
-            SmartDashboard.putNumber(Dashboard.AUTON_SINGLE_LOW_DRIVE_FORWARD_TIME, 3.1);
+            SmartDashboard.putNumber(Dashboard.AUTON_SINGLE_LOW_DRIVE_FORWARD_TIME, 3.75);
             SmartDashboard.putNumber(Dashboard.AUTON_SINGLE_LOW_DRIVE_FORWARD_SPEED, 0.5);
-            SmartDashboard.putNumber(Dashboard.AUTON_SINGLE_LOW_DELAY_FORWARD_TIME, 1.5);
+            SmartDashboard.putNumber(Dashboard.AUTON_SINGLE_LOW_DELAY_FORWARD_TIME, 0.5);
             SmartDashboard.putNumber(Dashboard.AUTON_SINGLE_LOW_DELAY_FORWARD_SPEED, 0.2);
+            SmartDashboard.putNumber(Dashboard.AUTON_LAUNCHER_DELAY, 0.5);
             
             SmartDashboard.putNumber(Dashboard.AUTON_SELECT, 0);
         }

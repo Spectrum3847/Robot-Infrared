@@ -19,8 +19,6 @@ public class LauncherZero extends CommandBase {
         launcher.enablePositionPID();
         launcher.PIDSetPosition(0);
         launcher.setPositionPID(HW.LAUNCHER_POS_KP, HW.LAUNCHER_POS_KI, HW.LAUNCHER_POS_KD);
-        if(launcher.isDown())
-            launcher.zeroPot();
     }
 
     protected void execute() {
