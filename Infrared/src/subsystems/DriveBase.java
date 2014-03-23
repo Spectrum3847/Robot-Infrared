@@ -1,5 +1,6 @@
 package subsystems;
 
+import driver.AnalogButton;
 import driver.IMU;
 import driver.SpectrumDrive;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -8,6 +9,8 @@ import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import framework.Dashboard;
 import framework.HW;
 import framework.Init;
 import framework.Utilities;
@@ -22,21 +25,26 @@ public class DriveBase extends PIDSubsystem {
     private Victor vic_1, vic_2, vic_3, vic_4;
     private Victor[] vic_arr;
     private final SpectrumDrive spectrumDrive;
-
+    
+    private final AnalogButton rline, lline;
     private final Gyro gyro;
     private final IMU imu;
     private double turnControllerOut = 0;
     private final double tolerance = 0.5;
-    final DoubleSolenoid mecanum;
+    final DoubleSolenoid mecanum, test;
 
     public DriveBase() {
         super(HW.TURN_KP, HW.TURN_KI, HW.TURN_KD, 0.33);
         setVictors();
         mecanum = new DoubleSolenoid(HW.DRIVESHIFT, HW.DRIVESHIFT + 1);
+        test = new DoubleSolenoid(7, 8);
         spectrumDrive = new SpectrumDrive(vic_1, vic_2, vic_3, vic_4);
         spectrumDrive.setMaxOutput(1.0);
         imu = new IMU(HW.IMU_PORT);
         gyro = new Gyro(HW.GYRO);
+        lline = new AnalogButton(HW.LINE_SENSOR_LEFT, 3.35, AnalogButton.Direction.FALLING);
+        rline = new AnalogButton(HW.LINE_SENSOR_RIGHT, 4.3, AnalogButton.Direction.FALLING);
+        
         this.getPIDController().setOutputRange(-1, 1);
         this.getPIDController().setInputRange(-250.0, 250);
         this.getPIDController().setAbsoluteTolerance(tolerance);
@@ -242,6 +250,7 @@ public class DriveBase extends PIDSubsystem {
 
     public void engageAlt() {
         mecanum.set(DoubleSolenoid.Value.kReverse);
+        test.set(DoubleSolenoid.Value.kReverse);
     }
 
     public boolean isCheesy() {
@@ -250,5 +259,24 @@ public class DriveBase extends PIDSubsystem {
 
     public void engageCheesy() {
         mecanum.set(DoubleSolenoid.Value.kForward);
+        test.set(DoubleSolenoid.Value.kForward);
+    }
+    
+    public AnalogButton getRightLine() {
+        return rline;
+    }
+    
+    public AnalogButton getLeftLine() {
+        return lline;
+    }
+    
+    public boolean isOnLine() {
+        rline.setThreshold(SmartDashboard.getNumber(Dashboard.RIGHT_LIGHT_THRESHOLD));
+        lline.setThreshold(SmartDashboard.getNumber(Dashboard.LEFT_LIGHT_THRESHOLD));
+        return rline.get() || lline.get();
+    }
+    
+    public boolean isParallelLine() {
+        return rline.get() && lline.get();
     }
 }

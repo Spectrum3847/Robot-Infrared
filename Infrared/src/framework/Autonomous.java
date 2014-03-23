@@ -19,7 +19,7 @@ public class Autonomous {
     public static void init() {
         CommandBase.drivebase.zeroIMU();
         CommandBase.drivebase.zeroGyro();
-        Init.launcherzero.start();
+        //Init.launcherzero.start();
         switch((int)SmartDashboard.getNumber(Dashboard.AUTON_SELECT, 0)) {
             case 0:
                 break;

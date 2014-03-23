@@ -1,8 +1,10 @@
 package framework;
 
 import commands.collection.SippingBirdKiss;
-import commands.launching.LauncherParameter;
-import commands.launching.LauncherPotZero;
+//import commands.launching.LauncherParameter;
+import commands.launching.LauncherPneumatic;
+import commands.launching.LauncherPneumaticLine;
+//import commands.launching.LauncherPotZero;
 import driver.Gamepad;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -26,32 +28,22 @@ public class OI {
     public static final Button launch_manual = new JoystickButton(gamepad_aux.getGamepad(), Gamepad.LEFT_CLICK);
     public static final Button launch_ready = new JoystickButton(gamepad_aux.getGamepad(), Gamepad.LEFT_BUMPER);
     public static final Button launch_block = new JoystickButton(gamepad_aux.getGamepad(), Gamepad.RIGHT_BUMPER);
-    public static final Button launch_truss = new JoystickButton(gamepad_aux.getGamepad(), Gamepad.A_BUTTON);
-    public static final Button launch_low = new JoystickButton(gamepad_aux.getGamepad(), Gamepad.B_BUTTON);
-    public static final Button pot_zero = new JoystickButton(gamepad_aux.getGamepad(), Gamepad.X_BUTTON);
+    public static final Button launch_a = new JoystickButton(gamepad_aux.getGamepad(), Gamepad.A_BUTTON);
+    public static final Button launch_b = new JoystickButton(gamepad_aux.getGamepad(), Gamepad.B_BUTTON);
+    public static final Button launch_x = new JoystickButton(gamepad_aux.getGamepad(), Gamepad.X_BUTTON);
     public static final Button launch_power = new JoystickButton(gamepad_aux.getGamepad(), Gamepad.Y_BUTTON);
 
     //Use this constructor to setup up button schedulers for commands
     public OI() {
-        drive_toggle.toggleWhenPressed(Init.cheesydrive);
+        drive_toggle.whenPressed(new LauncherPneumatic());
         collect.whileHeld(Init.sippingbirdcollect);
         eject.whileHeld(Init.sippingbirdeject);
         autocollect.whenPressed(Init.sippingbirdcatch);
         kisspass.whileHeld(new SippingBirdKiss());
         
-        /*
-        launch_manual.toggleWhenPressed(Init.launchermanual);
+        launch_a.whenPressed(new LauncherPneumatic(Dashboard.LAUNCHER_PULSE_A));
+        launch_b.whenPressed(new LauncherPneumatic(Dashboard.LAUNCHER_PULSE_B));
+        launch_x.whileHeld(new LauncherPneumaticLine());
         launch_ready.toggleWhenPressed(Init.launcherready);
-        degree_launch.whenPressed(Init.launcherdashboardfwd);
-        PID_launch.whenPressed(Init.launcherdashboardfwdpid);
-        */
-        
-        launch_manual.toggleWhenPressed(Init.launchermanual);
-        launch_ready.toggleWhenPressed(Init.launcherready);
-        launch_block.whileHeld(Init.laucherblock);
-        launch_truss.whenPressed(new LauncherParameter(Dashboard.LAUNCHER_TRUSS_ANG, Dashboard.LAUNCHER_TRUSS_POW));
-        launch_power.whenPressed(new LauncherParameter(Dashboard.LAUNCHER_POWER_ANG, Dashboard.LAUNCHER_POWER_POW));
-        launch_low.whenPressed(new LauncherParameter(Dashboard.LAUNCHER_LOW_ANG, Dashboard.LAUNCHER_LOW_POW));
-        pot_zero.whenPressed(new LauncherPotZero());
     }
 }

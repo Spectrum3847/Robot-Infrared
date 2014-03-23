@@ -45,6 +45,9 @@ public class Dashboard {
     
     public static String LAUNCHER_PID_TOGGLE = "PID Toggle";
     
+    public static String LAUNCHER_PULSE_A = "Pnuematic Pulse Time A (millis)";
+    public static String LAUNCHER_PULSE_B = "Pnuematic Pulse Time B (millis)";
+    
     public static String BLOCK_ANGLE = "Block Angle";
     public static String BLOCK_POWER = "Block Power";
 
@@ -69,6 +72,13 @@ public class Dashboard {
     public static String AUTON_LAUNCHER_DELAY = "Autonomous Launcher Delay";
     
     public static String AUTON_SELECT = "Auton Mode";
+    
+    public static String LEFT_LIGHT_THRESHOLD = "Left Light Sensitivty";
+    public static String RIGHT_LIGHT_THRESHOLD = "Right Light Sensitivty";
+    public static String LEFT_LIGHT_DELTA = "Left Light Delta";
+    public static String RIGHT_LIGHT_DELTA = "Right Light Delta";
+    public static String LIGHT_SAMPLE_TIME = "Line Sample Time";
+
 
     public static void intializeDashboard() {
         if (ENABLE_SPECTRUM_DASHBOARD) {
@@ -98,6 +108,9 @@ public class Dashboard {
             
             SmartDashboard.putBoolean(Dashboard.LAUNCHER_PID_TOGGLE, false);
             
+            SmartDashboard.putNumber(Dashboard.LAUNCHER_PULSE_A, 300);
+            SmartDashboard.putNumber(Dashboard.LAUNCHER_PULSE_B, 170);
+            
             SmartDashboard.putNumber(Dashboard.BLOCK_ANGLE, LauncherBlock.angle);
             SmartDashboard.putNumber(Dashboard.BLOCK_POWER, LauncherBlock.power);
 
@@ -112,7 +125,7 @@ public class Dashboard {
             SmartDashboard.putNumber(Dashboard.COLLECTOR_OUT_SPEED, -1.0);
 
             SmartDashboard.putNumber(Dashboard.CHEESY_SENSITIVITY, 1.32);
-            SmartDashboard.putNumber(Dashboard.BUTTERY_SENSITIVITY, 0.674);
+            SmartDashboard.putNumber(Dashboard.BUTTERY_SENSITIVITY, 1.00);
             
             SmartDashboard.putNumber(Dashboard.BALL_DETECT_DISTANCE, CommandBase.sippingbird.ballDetectDistance); //Set Default distance in SippingBird Subsystem
             
@@ -123,6 +136,12 @@ public class Dashboard {
             SmartDashboard.putNumber(Dashboard.AUTON_LAUNCHER_DELAY, 0.5);
             
             SmartDashboard.putNumber(Dashboard.AUTON_SELECT, 0);
+            
+            SmartDashboard.putNumber(Dashboard.LEFT_LIGHT_THRESHOLD, 3.35);
+            SmartDashboard.putNumber(Dashboard.RIGHT_LIGHT_THRESHOLD, 4.3);
+            SmartDashboard.putNumber(Dashboard.LEFT_LIGHT_DELTA, 0.01);
+            SmartDashboard.putNumber(Dashboard.RIGHT_LIGHT_DELTA, 0.01);
+            SmartDashboard.putNumber(Dashboard.LIGHT_SAMPLE_TIME, 30);
         }
     }
 
@@ -131,6 +150,10 @@ public class Dashboard {
         SmartDashboard.putBoolean("Launcher Position At Point", CommandBase.launcher.atPosition());
         SmartDashboard.putNumber("Ball Distance", CommandBase.sippingbird.ballDistance());
         SmartDashboard.putNumber("Drive Yaw Rate", CommandBase.drivebase.getGyro().getRate());
+        SmartDashboard.putNumber("Left Line Sensor Voltage", CommandBase.drivebase.getLeftLine().getVoltage());
+        SmartDashboard.putNumber("Right Line Sensor Voltage", CommandBase.drivebase.getRightLine().getVoltage());
+        SmartDashboard.putNumber("Pressure Voltage", CommandBase.pneumatics.getPressureRaw());
+        SmartDashboard.putNumber("Pressure PSI", CommandBase.pneumatics.getPressure());
     }
 
     public static void updateDashboard() {

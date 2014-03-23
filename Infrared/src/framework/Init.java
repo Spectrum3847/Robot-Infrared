@@ -10,10 +10,11 @@ import commands.driving.ButteryflyDrive;
 import commands.driving.CheesyDrive;
 import commands.driving.DriveSelect;
 import commands.driving.HoloDrive;
-import commands.launching.LauncherManual;
-import commands.launching.LauncherZero;
-import commands.launching.LauncherDashboardFWDPID;
 import commands.launching.LauncherReady;
+//import commands.launching.LauncherManual;
+//import commands.launching.LauncherZero;
+//import commands.launching.LauncherDashboardFWDPID;
+//import commands.launching.LauncherReady;
 import commands.pneumatics.RunCompressor;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -36,9 +37,9 @@ public class Init {
     public static SippingBirdEject sippingbirdeject = new SippingBirdEject();
     public static SippingBirdAutoCatch sippingbirdcatch = new SippingBirdAutoCatch();
     
-    public static LauncherZero launcherzero = new LauncherZero();
+    //public static LauncherZero launcherzero = new LauncherZero();
     public static LauncherReady launcherready = new LauncherReady();
-    public static LauncherManual launchermanual = new LauncherManual();
+    //public static LauncherManual launchermanual = new LauncherManual();
     public static LauncherBlock laucherblock = new LauncherBlock();
     
     public static DataOutputStream theFile;

@@ -42,6 +42,11 @@ public class HW {
     public static final int LAUNCHER_POT = 2;
     /**IR Sensors**/
     public static final int BALL_SENSOR = 3;
+    /**Line Sensors**/
+    public static final int LINE_SENSOR_LEFT = 4;
+    public static final int LINE_SENSOR_RIGHT = 5;
+    /**Pressure Sensor**/
+    public static final int PRESSURE_TRANSDUCER = 6;
     
     /**RELAY ALLOCATIONS**/
     public static final int COMPRESSOR = 1;

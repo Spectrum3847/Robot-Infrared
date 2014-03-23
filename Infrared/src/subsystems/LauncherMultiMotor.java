@@ -72,7 +72,7 @@ public final class LauncherMultiMotor extends PIDSubsystem {
     }
 
     protected void initDefaultCommand() {
-        setDefaultCommand(Init.launcherzero);
+        //setDefaultCommand(Init.launcherzero);
         //setDefaultCommand(new LauncherManual());
     }
 
