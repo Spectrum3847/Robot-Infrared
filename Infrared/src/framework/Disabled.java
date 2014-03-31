@@ -1,5 +1,6 @@
 package framework;
 
+import commands.CommandBase;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -13,6 +14,7 @@ public class Disabled {
 
     public static void init() {
         Scheduler.getInstance().removeAll();
+        CommandBase.launcher.lightOff();
     }
 
     public static void periodic() {

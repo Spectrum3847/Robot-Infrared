@@ -2,12 +2,9 @@ package framework;
 
 import commands.CommandBase;
 import commands.autonomous.AutonDoubleBallHigh;
-import commands.autonomous.AutonDoubleBallLow;
 import commands.autonomous.AutonMobility;
 import commands.autonomous.AutonSingleBallHigh;
 import commands.autonomous.AutonSingleBallLow;
-import commands.autonomous.AutonTripleBallHigh;
-import commands.autonomous.AutonTripleBallLow;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -17,9 +14,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Autonomous {
 
     public static void init() {
-        CommandBase.drivebase.zeroIMU();
+        CommandBase.launcher.lightOff();
         CommandBase.drivebase.zeroGyro();
-        //Init.launcherzero.start();
         switch((int)SmartDashboard.getNumber(Dashboard.AUTON_SELECT, 0)) {
             case 0:
                 break;

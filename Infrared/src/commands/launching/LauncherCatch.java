@@ -6,23 +6,20 @@ import commands.CommandBase;
 /*
  * @author Matthew
  */
-public class LauncherReady extends CommandBase {
+public class LauncherCatch extends CommandBase {
 
-    public LauncherReady() {
-        requires(CommandBase.sippingbird);
+    public LauncherCatch() {
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        sippingbird.collectorDeploy();
-        launcher.wingsOpen();
-        sippingbird.collectorOFF();
-        launcher.enableEncoder();
         System.out.println("SippingBird, LAUNCH READY!");
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        sippingbird.collectorDeploy();
+        launcher.wingsOpen();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -34,7 +31,6 @@ public class LauncherReady extends CommandBase {
     protected void end() {
         sippingbird.collectorRetract();
         launcher.wingsClose();
-        launcher.disableEncoder();
         sippingbird.collectorOFF();
     }
 

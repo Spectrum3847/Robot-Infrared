@@ -11,6 +11,6 @@ import framework.Dashboard;
 public class AutonMobility extends CommandGroup {
     public AutonMobility() {
         double drive_time = SmartDashboard.getNumber(Dashboard.AUTON_SINGLE_LOW_DRIVE_FORWARD_TIME, 3.1);
-        this.addSequential(new AutonDriveForward(), drive_time);
+        this.addSequential(new AutonDrive(), drive_time);
     }
 }

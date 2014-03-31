@@ -17,16 +17,16 @@ public class RunCompressor extends CommandBase {
      * Start Compressor once it's started
      */
     protected void initialize() {
-        pneumatics.runCompressor();
+        compress.runCompressor();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
         double raw_throttle = Utilities.haloDeadBand(OI.gamepad.getLeftY(), OI.gamepad.getRightX(), .15, .17);
         if(raw_throttle > 0.92)
-            pneumatics.stopCompressor();
+            compress.stopCompressor();
         else
-            pneumatics.runCompressor();
+            compress.runCompressor();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -36,7 +36,7 @@ public class RunCompressor extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
-        pneumatics.stopCompressor();
+        compress.stopCompressor();
     }
 
     // Called when another command which requires one or more of the same

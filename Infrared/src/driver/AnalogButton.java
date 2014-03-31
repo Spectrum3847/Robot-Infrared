@@ -22,6 +22,7 @@ public class AnalogButton extends AnalogChannel {
 
     public AnalogButton(int channel) {
         super(channel);
+        getModule().setSampleRate(70000.0);
         threshold = 0;
         direction = Direction.RISING;
     }

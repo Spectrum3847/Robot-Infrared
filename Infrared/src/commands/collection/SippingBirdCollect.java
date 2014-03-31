@@ -11,7 +11,6 @@ public class SippingBirdCollect extends CommandBase {
     double speed = 0;
     
     public SippingBirdCollect() {
-        requires(CommandBase.sippingbird);
     }
     
     public SippingBirdCollect(double speed) {
@@ -35,7 +34,7 @@ public class SippingBirdCollect extends CommandBase {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return sippingbird.isBall();
+        return false;
     }
 
     // Called once after isFinished returns true

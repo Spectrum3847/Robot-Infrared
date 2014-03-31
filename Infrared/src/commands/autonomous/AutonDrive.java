@@ -8,31 +8,31 @@ import framework.Dashboard;
  * Drive forward until canceled
  * @author matthew
  */
-public class AutonDriveForward extends CommandBase {
+public class AutonDrive extends CommandBase {
 
     private double speed;
     private String key;
     private double inverse = 1;
     
-    public AutonDriveForward() {
+    public AutonDrive() {
         requires(CommandBase.drivebase);
         speed = 0.0;
         key = Dashboard.AUTON_SINGLE_LOW_DRIVE_FORWARD_SPEED;
     }
     
-    public AutonDriveForward(double speed) {
+    public AutonDrive(double speed) {
         requires(CommandBase.drivebase);
         this.speed = speed;
         key = Dashboard.AUTON_SINGLE_LOW_DRIVE_FORWARD_SPEED;
     }
     
-    public AutonDriveForward(String key) {
+    public AutonDrive(String key) {
         requires(CommandBase.drivebase);
         speed = 0.0;
         this.key = key;
     }
     
-    public AutonDriveForward(String key, boolean invert) {
+    public AutonDrive(String key, boolean invert) {
         requires(CommandBase.drivebase);
         speed = 0.0;
         this.key = key;

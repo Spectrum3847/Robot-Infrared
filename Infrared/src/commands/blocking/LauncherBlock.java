@@ -1,8 +1,6 @@
 package commands.blocking;
 
 import commands.CommandBase;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import framework.Dashboard;
 
 /**
  *
@@ -21,10 +19,6 @@ public class LauncherBlock extends CommandBase {
     }
 
     protected void execute() {
-        if(CommandBase.launcher.getArmAngle() < SmartDashboard.getNumber(Dashboard.BLOCK_ANGLE, angle))
-            launcher.setCIMSpeed(SmartDashboard.getNumber(Dashboard.BLOCK_POWER, power));
-        else
-            launcher.setCIMSpeed(0.1);
     }
 
     protected boolean isFinished() {
@@ -32,7 +26,6 @@ public class LauncherBlock extends CommandBase {
     }
 
     protected void end() {
-        CommandBase.launcher.setLauncherSpeed(0);
     }
 
     protected void interrupted() {

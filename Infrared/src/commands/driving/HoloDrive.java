@@ -2,8 +2,6 @@ package commands.driving;
 
 
 import commands.CommandBase;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import framework.Dashboard;
 import framework.OI;
 import framework.Utilities;
 
@@ -21,7 +19,6 @@ public class HoloDrive extends CommandBase {
     protected void initialize() {
         drivebase.engageAlt();
         drivebase.setHoloInversion(true);
-        drivebase.getIMU().start();
         drivebase.enableTurnController();
         //drivebase.disableTurnController();
         System.out.println("Holodrive, GO!");
@@ -41,9 +38,6 @@ public class HoloDrive extends CommandBase {
         } else {
             drivebase.setHoloCartesian(x, y, 0);
         }
-
-        //double gy = drivebase.getGyro().getAngle()==0?0:((Utilities.sign(drivebase.getGyro().getAngle()))*drivebase.getGyro().getAngle()%360.0);
-        //System.out.println("IMU = " + drivebase.getIMU().getAngle() + " Gyro = " + gy + " Gyro Raw = " + drivebase.getGyro().getAngle() + " Gyro Rate = " + drivebase.getGyro().getRate());
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -54,7 +48,6 @@ public class HoloDrive extends CommandBase {
     // Called once after isFinished returns true
     protected void end() {
         drivebase.disableTurnController();
-        drivebase.getIMU().end();
         drivebase.setArcade(0, 0);
         drivebase.setStandardInversion(true);
     }

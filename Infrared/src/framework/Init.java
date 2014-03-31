@@ -1,24 +1,22 @@
 package framework;
 
-import com.sun.squawk.microedition.io.FileConnection;
 import commands.CommandBase;
 import commands.blocking.LauncherBlock;
 import commands.collection.SippingBirdAutoCatch;
 import commands.collection.SippingBirdCollect;
 import commands.collection.SippingBirdEject;
+import commands.collection.SippingBirdKiss;
 import commands.driving.ButteryflyDrive;
 import commands.driving.CheesyDrive;
 import commands.driving.DriveSelect;
 import commands.driving.HoloDrive;
-import commands.launching.LauncherReady;
-//import commands.launching.LauncherManual;
-//import commands.launching.LauncherZero;
-//import commands.launching.LauncherDashboardFWDPID;
-//import commands.launching.LauncherReady;
+import commands.launching.LauncherLaunch;
+import commands.launching.LauncherCatch;
+import commands.launching.LauncherLaunchForward;
+import commands.launching.LauncherLaunchLine;
+import commands.launching.LauncherToss;
+import commands.light.FlashLightOn;
 import commands.pneumatics.RunCompressor;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import javax.microedition.io.Connector;
 
 /**
  *
@@ -31,31 +29,27 @@ public class Init {
     public static HoloDrive holodrive = new HoloDrive();
     public static ButteryflyDrive butteryflydrive = new ButteryflyDrive();
     
+    public static FlashLightOn flashlighton = new FlashLightOn();
+    
     public static RunCompressor runcompressor = new RunCompressor();
     
     public static SippingBirdCollect sippingbirdcollect = new SippingBirdCollect();
     public static SippingBirdEject sippingbirdeject = new SippingBirdEject();
     public static SippingBirdAutoCatch sippingbirdcatch = new SippingBirdAutoCatch();
+    public static SippingBirdKiss sippingbirdkiss = new SippingBirdKiss();
     
-    //public static LauncherZero launcherzero = new LauncherZero();
-    public static LauncherReady launcherready = new LauncherReady();
-    //public static LauncherManual launchermanual = new LauncherManual();
+    public static LauncherLaunch lauch = new LauncherLaunch(Dashboard.LAUNCHER_PULSE_A);
+    public static LauncherLaunch lauch_alt = new LauncherLaunch(Dashboard.LAUNCHER_PULSE_B);
+    public static LauncherLaunchLine lauch_line = new LauncherLaunchLine();
+    public static LauncherCatch launchercatch = new LauncherCatch();
     public static LauncherBlock laucherblock = new LauncherBlock();
-    
-    public static DataOutputStream theFile;
+    public static LauncherToss lauchertoss = new LauncherToss();
+    public static LauncherLaunchForward lauch_forward = new LauncherLaunchForward(Dashboard.LAUNCHER_PULSE_A);
 
     public static void init() {
         CommandBase.init();
 
         Dashboard.intializeDashboard();
-        FileConnection fc;
-
-        try {
-            //fc = (FileConnection) Connector.open("file:///output_" + Timer.getFPGATimestamp() + "_.txt", Connector.WRITE);
-            fc = (FileConnection) Connector.open("file:///output.txt", Connector.WRITE);
-            fc.create();
-            theFile = fc.openDataOutputStream();
-        } catch (IOException e) {}
     }
 
     public static void periodic() {

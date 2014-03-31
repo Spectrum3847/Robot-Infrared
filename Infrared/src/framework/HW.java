@@ -23,14 +23,6 @@ public class HW {
     public static final int COLLECTOR_LEFT = 8;
     
     /**DIGITAL SENSOR ALLOCATIONS**/
-    /**IMU**/
-    public static final int IMU_PORT = 1;
-    /**Drivebase Encoders**/
-    /**Launcher Encoder**/
-    public static final int LAUNCHER_ENCODER = 2; // and 3
-    /**Buttons**/
-    public static final int LAUNCHER_STOP = 4;
-    public static final int LAUNCHER_TOP = 7;
     /**Pneumatics**/
     public static final int PRESSURE_SENSOR = 5;
     
@@ -38,10 +30,6 @@ public class HW {
     /**ANALOG SENSOR ALLOCATIONS**/ 
     /**Gyroscope**/
     public static final int GYRO = 1;
-    /**Potentiometers**/
-    public static final int LAUNCHER_POT = 2;
-    /**IR Sensors**/
-    public static final int BALL_SENSOR = 3;
     /**Line Sensors**/
     public static final int LINE_SENSOR_LEFT = 4;
     public static final int LINE_SENSOR_RIGHT = 5;
@@ -50,39 +38,18 @@ public class HW {
     
     /**RELAY ALLOCATIONS**/
     public static final int COMPRESSOR = 1;
-    public static final int LIGHT_RING = 2;
+    public static final int LIGHT = 2;
    
     /**SOLENOID ALLOCATIONS**/
     public static final int DRIVESHIFT = 1; // and 2
     public static final int SIPPINGBIRD = 3; // and 4
     public static final int WINGS = 5; // and 6
+    public static final int LAUNCHER_LEFT_PISTON = 7;
+    public static final int LAUNCHER_RIGHT_PISTON = 8;
     
     
     /**PID CONSTANTS**/
-    /**Turn Controller PID**/
-    public static final double TURN_KP = 0.0;
-    public static final double TURN_KI = 0.0;
-    public static final double TURN_KD = 0.0;
-    /**Launcher Velocity PID**/
-    public static final double LAUNCHER_KP = 40.0;
-    public static final double LAUNCHER_KI = 0.0;
-    public static final double LAUNCHER_KD = 0.0;
-    public static final double LAUNCHER_KF = 1.60;
-    /**Launcher Position PID**/
-    /*
-    public static final double LAUNCHER_POS_KP = 0.015;
-    public static final double LAUNCHER_POS_KI = 0.23/1000;
-    public static final double LAUNCHER_POS_KD = 0.015;
-    */
     
-    public static final double LAUNCHER_POS_KP = 0.020;
-    public static final double LAUNCHER_POS_KI = 0.001/1000;
-    public static final double LAUNCHER_POS_KD = 0.040;
-    /*
-    public static final double LAUNCHER_POS_KP = 0.007;
-    public static final double LAUNCHER_POS_KI = 0.0;
-    public static final double LAUNCHER_POS_KD = 0.020;
-    */
     /**JOYSTICKS/GAMEPAD ASSIGNMENTS**/
     public static final int usbPort_one = 1;
     public static final int usbPort_two = 2;
