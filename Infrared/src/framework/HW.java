@@ -14,10 +14,7 @@ public class HW {
     public static final int REAR_LDRIVE_MOTOR = 10;
     
     /**NON-DRIVEBASE MOTOR ASSIGNMENTS (PWM)**/
-    public static final int LAUNCHER_MOTOR_1 = 4;
-    public static final int LAUNCHER_MOTOR_2 = 5;
-    public static final int LAUNCHER_MOTOR_3 = 6;
-    public static final int LAUNCHER_MOTOR_4 = 7;
+    public static final int POLE_DROP_MOTOR = 7;
     
     public static final int COLLECTOR_RIGHT = 3;
     public static final int COLLECTOR_LEFT = 8;
@@ -30,6 +27,8 @@ public class HW {
     /**ANALOG SENSOR ALLOCATIONS**/ 
     /**Gyroscope**/
     public static final int GYRO = 1;
+    /**Ultrasonic**/
+    public static final int SONIC = 2;
     /**Line Sensors**/
     public static final int LINE_SENSOR_LEFT = 4;
     public static final int LINE_SENSOR_RIGHT = 5;

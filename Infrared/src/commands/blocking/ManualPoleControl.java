@@ -1,24 +1,23 @@
 package commands.blocking;
 
 import commands.CommandBase;
+import framework.OI;
 
 /**
  *
  * @author matthew
  */
-public class LauncherBlock extends CommandBase {
+public class ManualPoleControl extends CommandBase {
     
-    public static double power = 0.6;
-    public static double angle = 95;
-    
-    public LauncherBlock() {
-        requires(launcher);
+    public ManualPoleControl() {
+        requires(pole);
     }
 
     protected void initialize() {
     }
 
     protected void execute() {
+        pole.setMotor(OI.gamepad_aux.getTriggers());
     }
 
     protected boolean isFinished() {
@@ -29,7 +28,6 @@ public class LauncherBlock extends CommandBase {
     }
 
     protected void interrupted() {
-        end();
     }
 
 }

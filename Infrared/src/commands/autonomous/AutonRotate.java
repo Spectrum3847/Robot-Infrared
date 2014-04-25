@@ -8,33 +8,36 @@ import framework.Dashboard;
  * Drive forward until canceled
  * @author matthew
  */
-public class AutonDrive extends CommandBase {
+public class AutonRotate extends CommandBase {
 
-    private double speed;
-    private String key;
+    private double rot = 0.0;
+    private String key = "";
     private double inverse = 1;
     
-    public AutonDrive() {
+    public AutonRotate() {
         requires(CommandBase.drivebase);
-        speed = 0.0;
-        key = Dashboard.AUTON_SINGLE_LOW_DRIVE_FORWARD_SPEED;
+        rot = 0.0;
+        this.key = Dashboard.AUTON_AT_GOAL_ROTATION_ROT_R;
     }
     
-    public AutonDrive(double speed) {
+    public AutonRotate(double rotate) {
         requires(CommandBase.drivebase);
-        this.speed = speed;
-        key = Dashboard.AUTON_SINGLE_LOW_DRIVE_FORWARD_SPEED;
+        this.rot = rotate;
     }
     
-    public AutonDrive(String key) {
+    public AutonRotate(String key) {
         requires(CommandBase.drivebase);
-        speed = 0.0;
         this.key = key;
     }
     
-    public AutonDrive(String key, boolean invert) {
+    public AutonRotate(double rotate, boolean invert) {
         requires(CommandBase.drivebase);
-        speed = 0.0;
+        this.rot = rotate;
+        inverse = invert?-1:1;
+    }
+    
+    public AutonRotate(String key, boolean invert) {
+        requires(CommandBase.drivebase); 
         this.key = key;
         inverse = invert?-1:1;
     }
@@ -42,17 +45,15 @@ public class AutonDrive extends CommandBase {
     // Called just before this Command runs the first time
     protected void initialize() {
         drivebase.engageOmni();
-        //drivebase.enableTurnController();
-        System.out.println("Cheesydrive, GO!");
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
         drivebase.setCheesySensetivity(1.32);
-        if(speed != 0.0)
-            drivebase.setCheesyDrive(speed, 0, false);
+        if(rot != 0.0)
+            drivebase.setCheesyDrive(0, rot, true);
         else
-            drivebase.setCheesyDrive(inverse*SmartDashboard.getNumber(key), 0, false);
+            drivebase.setCheesyDrive(0, inverse*SmartDashboard.getNumber(key), true);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -71,4 +72,4 @@ public class AutonDrive extends CommandBase {
     protected void interrupted() {
         end();
     }
-}
+} 

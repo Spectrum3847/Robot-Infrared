@@ -1,10 +1,12 @@
 package framework;
 
 import commands.CommandBase;
+import commands.autonomous.AutonBlocking;
 import commands.autonomous.AutonDoubleBallHigh;
 import commands.autonomous.AutonMobility;
 import commands.autonomous.AutonSingleBallHigh;
 import commands.autonomous.AutonSingleBallLow;
+import driver.CheesyVisionServer;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -31,6 +33,9 @@ public class Autonomous {
             case 4:
                 (new AutonDoubleBallHigh()).start();
                 break;
+            case 5:
+                (new AutonBlocking()).start();
+                break;
         }
     }
 
@@ -40,6 +45,7 @@ public class Autonomous {
     }
 
     public static void cancel() {
+        CommandBase.cheesyvision.stop();
         Scheduler.getInstance().removeAll();
     }
 }

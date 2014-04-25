@@ -1,6 +1,5 @@
 package framework;
 
-import commands.CommandBase;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
 /**
@@ -8,17 +7,22 @@ import edu.wpi.first.wpilibj.command.Scheduler;
  * @author matthew
  */
 public class Teleop {
-
-    public static double max_angle = 0;
-    public static double speed_at = 0;
+    
+    public static boolean isPoleUp = false;
     
     public static void init() {
-        Autonomous.cancel();
+        Scheduler.getInstance().removeAll();
         Init.flashlighton.start();
         Init.runcompressor.start();
         Init.driveselect.start();
-        max_angle = 0;
-        speed_at = 0;
+        Init.manualpole.start();
+        /*
+        if(isPoleUp)
+        {
+            Init.poledrop.start();
+            isPoleUp = false;
+        }
+        */
     }
 
     public static void periodic() {

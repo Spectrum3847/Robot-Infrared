@@ -19,8 +19,9 @@ public class ButteryflyDrive extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        drivebase.engageAlt();
+        drivebase.engageOmni();
         System.out.println("Butteryflydrive, GO!");
+        drivebase.setCheesySensetivity(SmartDashboard.getNumber(Dashboard.BUTTERY_SENSITIVITY, 0.674));
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -29,16 +30,14 @@ public class ButteryflyDrive extends CommandBase {
         double wheel = Utilities.haloDeadBand(OI.gamepad.getRightX(), OI.gamepad.getLeftY(), .15, .17);
         boolean quickturn = OI.gamepad.getButton(Gamepad.RIGHT_CLICK);
 
-        drivebase.setCheesySensetivity(SmartDashboard.getNumber(Dashboard.BUTTERY_SENSITIVITY, 0.674));
-        
         double throttle = Utilities.expMap(raw_throttle);
         double quickTurnTriggers = -OI.gamepad.getTriggers();
-        
+
         if (quickTurnTriggers != 0) {
-            wheel = quickTurnTriggers != 0?quickTurnTriggers:wheel;
+            wheel = (quickTurnTriggers != 0 ? quickTurnTriggers : wheel);
             quickturn = true;
         }
-            drivebase.setCheesyDrive(throttle, wheel, quickturn);
+        drivebase.setCheesyDrive(throttle, wheel, quickturn);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -49,7 +48,7 @@ public class ButteryflyDrive extends CommandBase {
     // Called once after isFinished returns true
     protected void end() {
         drivebase.setArcade(0, 0);
-        drivebase.disableTurnController();
+        drivebase.setSetpoint(0);
     }
 
     // Called when another command which requires one or more of the same

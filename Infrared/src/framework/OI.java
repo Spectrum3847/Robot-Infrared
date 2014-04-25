@@ -35,7 +35,7 @@ public class OI {
         launch_catch.whileHeld(Init.launchercatch);
         launch_toss.whileHeld(Init.lauchertoss);
         launch.whenPressed(Init.lauch);
-        launch_alt.whenPressed(Init.lauch_alt);
+        launch_alt.whenPressed(Init.lauch_override);
         launch_line.whileHeld(Init.lauch_line);
         launch_forward.whenPressed(Init.lauch_forward);
     }

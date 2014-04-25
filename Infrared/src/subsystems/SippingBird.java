@@ -1,7 +1,9 @@
 package subsystems;
 
 import driver.IRSensor;
+import driver.UltrasonicAnalog;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -17,11 +19,13 @@ public class SippingBird extends Subsystem {
     private final Victor leftMotor, rightMotor;
     public double ballDetectDistance = 0.0; //This is the default ball detect distance
     final DoubleSolenoid collector;
-
+    final UltrasonicAnalog sonic;
+    
     public SippingBird() {
         collector = new DoubleSolenoid(HW.SIPPINGBIRD, HW.SIPPINGBIRD + 1);
         leftMotor = new Victor(HW.COLLECTOR_LEFT);
         rightMotor = new Victor(HW.COLLECTOR_RIGHT);
+        sonic = new UltrasonicAnalog(HW.SONIC);
     }
     protected void initDefaultCommand() {
     }
@@ -49,5 +53,9 @@ public class SippingBird extends Subsystem {
 
     public void collectorRetract() {
         collector.set(DoubleSolenoid.Value.kReverse);
+    }
+    
+    public double getBallDistance() {
+        return sonic.getDistance();
     }
 }

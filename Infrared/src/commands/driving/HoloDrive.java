@@ -17,7 +17,7 @@ public class HoloDrive extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        drivebase.engageAlt();
+        drivebase.engageOmni();
         drivebase.setHoloInversion(true);
         drivebase.enableTurnController();
         //drivebase.disableTurnController();

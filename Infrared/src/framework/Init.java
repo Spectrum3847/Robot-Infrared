@@ -1,7 +1,8 @@
 package framework;
 
 import commands.CommandBase;
-import commands.blocking.LauncherBlock;
+import commands.blocking.ManualPoleControl;
+import commands.blocking.PoleDrop;
 import commands.collection.SippingBirdAutoCatch;
 import commands.collection.SippingBirdCollect;
 import commands.collection.SippingBirdEject;
@@ -31,6 +32,9 @@ public class Init {
     
     public static FlashLightOn flashlighton = new FlashLightOn();
     
+    public static PoleDrop poledrop = new PoleDrop(Dashboard.AUTON_POLE_DROP_TIME);
+    public static ManualPoleControl manualpole = new ManualPoleControl();
+    
     public static RunCompressor runcompressor = new RunCompressor();
     
     public static SippingBirdCollect sippingbirdcollect = new SippingBirdCollect();
@@ -39,10 +43,9 @@ public class Init {
     public static SippingBirdKiss sippingbirdkiss = new SippingBirdKiss();
     
     public static LauncherLaunch lauch = new LauncherLaunch(Dashboard.LAUNCHER_PULSE_A);
-    public static LauncherLaunch lauch_alt = new LauncherLaunch(Dashboard.LAUNCHER_PULSE_B);
+    public static LauncherLaunch lauch_override = new LauncherLaunch(Dashboard.LAUNCHER_PULSE_A, false, true);
     public static LauncherLaunchLine lauch_line = new LauncherLaunchLine();
     public static LauncherCatch launchercatch = new LauncherCatch();
-    public static LauncherBlock laucherblock = new LauncherBlock();
     public static LauncherToss lauchertoss = new LauncherToss();
     public static LauncherLaunchForward lauch_forward = new LauncherLaunchForward(Dashboard.LAUNCHER_PULSE_A);
 

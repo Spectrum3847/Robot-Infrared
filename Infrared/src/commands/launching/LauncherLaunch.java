@@ -10,11 +10,16 @@ import framework.Dashboard;
  * @author matthew
  */
 public class LauncherLaunch extends CommandBase {
+
     private double wait;
-    private double delay;
-    private double time;
+    private double drop_delay;
+    private double start_time;
+    private double pulse_width;
     private String pulse;
-    
+    private boolean auton = false;
+    private boolean to_cancel = false;
+    private boolean override = false;
+
     public LauncherLaunch() {
         super();
         requires(launcher);
@@ -25,32 +30,49 @@ public class LauncherLaunch extends CommandBase {
         this();
         this.pulse = pulse;
     }
-    
+
+    public LauncherLaunch(String pulse, boolean a) {
+        this();
+        this.pulse = pulse;
+        this.auton = a;
+    }
+
+    public LauncherLaunch(String pulse, boolean a, boolean o) {
+        this();
+        this.pulse = pulse;
+        this.auton = a;
+        this.override = o;
+    }
+
     protected void initialize() {
         compress.stopCompressor();
-        time = Timer.getFPGATimestamp()*1000;
-        delay = SmartDashboard.getNumber(Dashboard.LAUNCHER_DROP_DELAY);
-        wait = Timer.getFPGATimestamp();
+        start_time = Timer.getFPGATimestamp();
+        drop_delay = SmartDashboard.getNumber(Dashboard.LAUNCHER_DROP_DELAY, 0.175);
+        pulse_width = SmartDashboard.getNumber(pulse)/1000.0;
         sippingbird.collectorDeploy();
-        if(compress.getPressureRaw() < 2.1) {
+        if (compress.getPressureRaw() < 2.1 && !auton && !override) {
             this.cancel();
         }
     }
 
     protected void execute() {
-        if (Timer.getFPGATimestamp() - wait > delay && compress.getPressureRaw() >= 2.1) {
-            compress.stopCompressor();
-            launcher.launcherUp();
+        if (Timer.getFPGATimestamp() - start_time > drop_delay 
+         && (compress.getPressureRaw() >= 2.1 || override)) {
+                compress.stopCompressor();
+                launcher.launcherUp();
         }
     }
 
     protected boolean isFinished() {
-            return Timer.getFPGATimestamp()*1000 - time > SmartDashboard.getNumber(pulse, 50) + delay*1000 || compress.getPressureRaw() < 2.1;
+        return Timer.getFPGATimestamp() - start_time > pulse_width + drop_delay
+            || (compress.getPressureRaw() < 2.1 && !(override));
     }
 
     protected void end() {
-         launcher.launcherDown();
-        sippingbird.collectorRetract();
+        launcher.launcherDown();
+        if (!auton) {
+            sippingbird.collectorRetract();
+        }
         compress.runCompressor();
     }
 

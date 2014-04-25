@@ -30,12 +30,13 @@ public class LauncherLaunchForward extends CommandBase {
         time = Timer.getFPGATimestamp()*1000;
         delay = SmartDashboard.getNumber(Dashboard.LAUNCHER_DROP_DELAY);
         wait = Timer.getFPGATimestamp();
-        sippingbird.collectorOUT();
     }
 
     protected void execute() {
         if (Timer.getFPGATimestamp() - wait > delay && compress.getPressureRaw() >= 2.1) {
             compress.stopCompressor();
+            sippingbird.collectorOUT();
+            sippingbird.collectorDeploy();
             launcher.launcherUp();
         }
     }

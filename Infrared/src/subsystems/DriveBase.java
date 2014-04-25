@@ -2,14 +2,13 @@ package subsystems;
 
 import driver.AnalogButton;
 import driver.SpectrumDrive;
+import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import framework.Dashboard;
 import framework.HW;
 import framework.Init;
 import framework.Utilities;
@@ -25,7 +24,8 @@ public class DriveBase extends PIDSubsystem {
     private Victor[] vic_arr;
     private final SpectrumDrive spectrumDrive;
     
-    private final AnalogButton rline, lline;
+    //private final AnalogButton rline, lline;
+    private final AnalogChannel rline, lline;
     private final Gyro gyro;
     private double turnControllerOut = 0;
     private final double tolerance = 0.5;
@@ -38,8 +38,10 @@ public class DriveBase extends PIDSubsystem {
         spectrumDrive = new SpectrumDrive(vic_1, vic_2, vic_3, vic_4);
         spectrumDrive.setMaxOutput(1.0);
         gyro = new Gyro(HW.GYRO);
-        lline = new AnalogButton(HW.LINE_SENSOR_LEFT, 3.35, AnalogButton.Direction.FALLING);
-        rline = new AnalogButton(HW.LINE_SENSOR_RIGHT, 4.3, AnalogButton.Direction.FALLING);
+        //lline = new AnalogButton(HW.LINE_SENSOR_LEFT, 3.35, AnalogButton.Direction.FALLING);
+        //rline = new AnalogButton(HW.LINE_SENSOR_RIGHT, 4.3, AnalogButton.Direction.FALLING);
+        lline = new AnalogChannel(HW.LINE_SENSOR_LEFT);
+        rline = new AnalogChannel(HW.LINE_SENSOR_RIGHT);
         
         this.getPIDController().setOutputRange(-1, 1);
         this.getPIDController().setInputRange(-250.0, 250);
@@ -231,7 +233,7 @@ public class DriveBase extends PIDSubsystem {
         return spectrumDrive;
     }
 
-    public void engageAlt() {
+    public void engageOmni() {
         mecanum.set(DoubleSolenoid.Value.kReverse);
     }
 
@@ -243,11 +245,11 @@ public class DriveBase extends PIDSubsystem {
         mecanum.set(DoubleSolenoid.Value.kForward);
     }
     
-    public AnalogButton getRightLine() {
+    public AnalogChannel getRightLine() {
         return rline;
     }
     
-    public AnalogButton getLeftLine() {
+    public AnalogChannel getLeftLine() {
         return lline;
     }
 }

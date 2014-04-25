@@ -1,5 +1,6 @@
 package commands;
 
+import driver.CheesyVisionServer;
 import edu.wpi.first.wpilibj.command.Command;
 import framework.OI;
 import subsystems.*;
@@ -16,6 +17,8 @@ public abstract class CommandBase extends Command {
     public static Compress compress = new Compress();
     public static SippingBird sippingbird = new SippingBird();
     public static Launcher launcher = new Launcher();
+    public static CheesyVisionServer cheesyvision;
+    public static Pole pole = new Pole();
 
     // Create a single static instance of all of your subsystems
     public static void init() {
@@ -25,6 +28,8 @@ public abstract class CommandBase extends Command {
         // yet. Thus, their requires() statements may grab null pointers. Bad
         // news. Don't move it.
         oi = new OI();
+        cheesyvision = CheesyVisionServer.getInstance();
+        cheesyvision.start();
     }
 
     public CommandBase(String name) {

@@ -1,21 +1,19 @@
-package commands.launching;
+package commands.collection;
 
 import commands.CommandBase;
-import framework.Dashboard;
+import framework.OI;
 
 /**
  *
  * @author matthew
  */
-public class LauncherToss extends CommandBase {
+public class SippingBirdManual extends CommandBase {
 
     protected void initialize() {
-        sippingbird.collectorOUT();
-        (new LauncherLaunch(Dashboard.LAUNCHER_PULSE_TOSS, false, true)).start();
     }
 
     protected void execute() {
-        sippingbird.collectorOUT();
+        sippingbird.setCollector(OI.gamepad_aux.getTriggers());
     }
 
     protected boolean isFinished() {
@@ -23,7 +21,7 @@ public class LauncherToss extends CommandBase {
     }
 
     protected void end() {
-        sippingbird.collectorOFF();
+        sippingbird.setCollector(0.0);
     }
 
     protected void interrupted() {
