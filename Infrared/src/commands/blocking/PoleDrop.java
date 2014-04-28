@@ -1,6 +1,7 @@
 package commands.blocking;
 
 import commands.CommandBase;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import framework.Dashboard;
 
@@ -10,13 +11,14 @@ import framework.Dashboard;
  */
 public class PoleDrop extends CommandBase {
     String timeout;
+    double time;
     
     public PoleDrop(String timeout) {
         this.timeout = timeout;
     }
 
     protected void initialize() {
-        setTimeout(SmartDashboard.getNumber(timeout));
+        time = Timer.getFPGATimestamp();
     }
 
     protected void execute() {
@@ -24,7 +26,7 @@ public class PoleDrop extends CommandBase {
     }
 
     protected boolean isFinished() {
-        return false;
+        return Timer.getFPGATimestamp() - time > SmartDashboard.getNumber(timeout);
     }
 
     protected void end() {

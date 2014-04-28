@@ -16,13 +16,11 @@ public class Teleop {
         Init.runcompressor.start();
         Init.driveselect.start();
         Init.manualpole.start();
-        /*
         if(isPoleUp)
         {
             Init.poledrop.start();
             isPoleUp = false;
         }
-        */
     }
 
     public static void periodic() {

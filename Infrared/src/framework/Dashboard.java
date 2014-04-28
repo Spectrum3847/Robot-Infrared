@@ -40,8 +40,6 @@ public class Dashboard {
     public static String AUTON_SINGLE_LOW_DRIVE_FORWARD_SPEED = "Autonomous Single Ball Low Goal Drive Speed";
     public static String AUTON_SINGLE_LOW_DELAY_FORWARD_SPEED = "Autonomous Single Ball Low Goal Delay Speed";
     
-    public static String CHEESY_INVERT = "Cheesy Invert";
-    
     public static String AUTON_BLOCKING_SPEED = "Autonomous Blocking Speed";
     public static String AUTON_BLOCKING_ANGLING = "Autonomous Blocking Angling";
     
@@ -92,20 +90,18 @@ public class Dashboard {
             SmartDashboard.putNumber(Dashboard.AUTON_SINGLE_LOW_DRIVE_FORWARD_TIME, 3.5);
             SmartDashboard.putNumber(Dashboard.AUTON_SINGLE_LOW_DRIVE_FORWARD_SPEED, 0.65);
             
-            SmartDashboard.putNumber(Dashboard.AUTON_SINGLE_LOW_DELAY_FORWARD_TIME, 0.3);
+            SmartDashboard.putNumber(Dashboard.AUTON_SINGLE_LOW_DELAY_FORWARD_TIME, 0.4);
             SmartDashboard.putNumber(Dashboard.AUTON_SINGLE_LOW_DELAY_FORWARD_SPEED, 0.2);
             
-            SmartDashboard.putNumber(Dashboard.AUTON_LAUNCHER_DELAY, 0.1);
-            
-            SmartDashboard.putBoolean(Dashboard.CHEESY_INVERT, false);
+            SmartDashboard.putNumber(Dashboard.AUTON_LAUNCHER_DELAY, 0.5);
             
             SmartDashboard.putNumber(Dashboard.AUTON_SELECT, 0);
             
-            SmartDashboard.putNumber(Dashboard.AUTON_BLOCKING_SPEED, 0.5);
+            SmartDashboard.putNumber(Dashboard.AUTON_BLOCKING_SPEED, 0.3);
             SmartDashboard.putNumber(Dashboard.AUTON_BLOCKING_ANGLING, 0.05);
             
-            SmartDashboard.putNumber(Dashboard.AUTON_POLE_DROP_SPEED, 0.3);
-            SmartDashboard.putNumber(Dashboard.AUTON_POLE_DROP_TIME, 0.4);
+            SmartDashboard.putNumber(Dashboard.AUTON_POLE_DROP_SPEED, 1 );
+            SmartDashboard.putNumber(Dashboard.AUTON_POLE_DROP_TIME, 1.1);
             
             SmartDashboard.putBoolean(Dashboard.AUTON_LEFT_GOAL, true);
             SmartDashboard.putNumber(Dashboard.AUTON_AT_GOAL_ROTATION_ROT_R, 0);
